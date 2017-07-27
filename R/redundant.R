@@ -1,10 +1,8 @@
 #' @export
-detect_redundant <- function(x, ...){
+detect_redundancy <- function(x, ...){
   mip <- errorlocate::miprules(x)
   mip$objective <- c(x=1)
   res <- mip$execute()
-  lpSolveAPI::get.bounds(res$lp)
-  lpSolveAPI::get.basis(res$lp)
 }
 
 

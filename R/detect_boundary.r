@@ -2,29 +2,39 @@
 detect_boundary_num <- function(x, ...){
   mip <- errorlocate::miprules(x)
   sapply(variables(x), function(v){
-    bounds <- list(lower=-Inf, upper=Inf)
+    bounds <- c(lower=-Inf, upper=Inf)
     
     mip$objective <- setNames(1, v)
     lp <- mip$to_lp()
     lpSolveAPI::lp.control(lp, presolve="none")
-    # TODO check if was succesfull
     res <- solve(lp)
-    i <- match(v, colnames(lp))
-    bounds$lower <- lpSolveAPI::get.variables(lp)[i]
-    #lpSolveAPI::delete.lp(lp)
-    
+
+    if (res %in% c(0,1,4,12)){ # succesful, TODO warn if failure...
+      i <- match(v, colnames(lp))
+      bounds[1] <- lpSolveAPI::get.variables(lp)[i]
+    }
+
     mip$objective <- setNames(-1, v)
     lp <- mip$to_lp()
     lpSolveAPI::lp.control(lp, presolve="none")
     # TODO check if was succesfull
+    
     res <- solve(lp)
     if (res %in% c(0,1,4,12)){
       i <- match(v, colnames(lp))
-      bounds$upper <- lpSolveAPI::get.variables(lp)[i]
+      bounds[2] <- lpSolveAPI::get.variables(lp)[i]
+    } else if (!(res %in% c(3,13))){
+      
     }
     #lpSolveAPI::delete.lp(lp)
     return(bounds)
-  }, simplify = FALSE)
+  }, simplify = TRUE)
+}
+
+
+#' @export
+detect_boundary_cat <- function(x, ...){
+  stop("To be implemented")
 }
 
 # x <- validate::validator(
