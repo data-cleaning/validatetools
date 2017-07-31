@@ -35,6 +35,7 @@ detect_boundary_num <- function(x, ...){
 #' @export
 detect_boundary_cat <- function(x, ...){
   stop("To be implemented")
+  # for each category detect bound
 }
 
 # x <- validate::validator(
