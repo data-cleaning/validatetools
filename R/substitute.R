@@ -1,5 +1,8 @@
 
 #' substitute a value in a rule set
+#' 
+#' Substitute values into expression, thereby simplifying the rule set.
+#' Rules that evaluate to TRUE because of the substition are removed.
 #' @export
 substitute_values <- function (x, .values = list(...), ...){
   vals <- lapply(x$exprs(), function(e) {
@@ -8,6 +11,29 @@ substitute_values <- function (x, .values = list(...), ...){
       e
     })
   })
+  
+  is_cond <- errorlocate::is_conditional(x)
+  vals[is_cond] <- lapply(vals[is_cond], function(cond){
+    clauses <- as_clause(cond)
+    # try to simplify clauses
+    s_clauses <- lapply(clauses, function(clause){
+      tryCatch(r <- eval(clause), error = function(x) {
+        clause
+      })
+    })
+    is_logi_clause <- sapply(s_clauses, is.logical)
+    if (any(unlist(s_clauses[is_logi_clause]))){
+      # one of the clause is TRUE so the whole statement is TRUE
+      TRUE
+    } else if (any(is_logi_clause)){
+      # remove parts that are FALSE
+      s_clauses <- s_clauses[!is_logi_clause]
+      as.expression(s_clauses, as_if = TRUE)[[1]] # turn into an expression
+    } else {
+      cond
+    }
+  })
+  
   is_logical <- sapply(vals, is.logical)
   if (any(is_logical)) {
     is_true <- unlist(vals[is_logical])
@@ -16,6 +42,7 @@ substitute_values <- function (x, .values = list(...), ...){
       warning("Invalid rule set: rule(s) '", x[broken]$exprs(), "' evaluate to FALSE", call. = FALSE)
     }
   }
+  
   vals <- vals[!is_logical]
   # TODO iterate all components of conditional statements
   do.call(validator, vals)
@@ -27,4 +54,6 @@ substitute_values <- function (x, .values = list(...), ...){
 # 
 # 
 # rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
-# substitute_values(rules, gender="female")
+# substitute_values(rules, gender="male")
+# x <- rules
+# x

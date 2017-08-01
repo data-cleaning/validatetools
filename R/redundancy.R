@@ -5,5 +5,4 @@ detect_redundancy <- function(x, ...){
   res <- mip$execute()
 }
 
-
 #x <- validator(x > 1, x  + y < 3, x > 2, y > 0)
