@@ -23,6 +23,7 @@ invert_or_negate <- function(e){
   }
 }
 
+
 normalize_conditional <- function(expr, ...){
   # assumes that the expression has been tested with is.conditional
   clauses <- list()
@@ -50,12 +51,14 @@ normalize_conditional <- function(expr, ...){
   structure(clauses, class="clause")
 }
 
-as.character.clause <- function(x, make_if = FALSE, ...){
+as_clause <- normalize_conditional
+
+as.character.clause <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
   x_s <- sapply(x, deparse)
   x_i <- sapply(x, invert_or_negate)
   x_i_s <- sapply(x_i, deparse)
-  if (make_if && length(x) > 1){
+  if (as_if && length(x) > 1){
     s <- paste(head(x_i_s, -1), collapse = " & ")
     paste0("if (",s,") ", tail(x_s, 1))
   } else {
@@ -63,12 +66,12 @@ as.character.clause <- function(x, make_if = FALSE, ...){
   }
 }
 
-print.clause <- function(x, make_if = FALSE, ...){
-  cat(as.character(x, make_if = make_if, ...))
+print.clause <- function(x, as_if = FALSE, ...){
+  cat(as.character(x, as_if = as_if, ...))
 }
 
-as.expression.clause <- function(x, make_if = FALSE, ...){
-  parse(text=as.character(x, make_if = make_if, ...))
+as.expression.clause <- function(x, as_if = FALSE, ...){
+  parse(text=as.character(x, as_if = as_if, ...))
 }
 
 # expr <- quote(if (x > 2 && A == 'a') y > 3 | B %in% c('b'))
@@ -76,4 +79,4 @@ as.expression.clause <- function(x, make_if = FALSE, ...){
 # cs <- normalize_conditional(expr)
 # cs[[2]] <- NULL
 # cs
-# as.expression(cs, make_if = T)
+# as.expression(cs, as_if = T)
