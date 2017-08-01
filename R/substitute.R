@@ -39,18 +39,17 @@ substitute_values <- function (x, .values = list(...), ...){
     is_true <- unlist(vals[is_logical])
     if (!all(is_true)) {
       broken <- names(is_true)[!is_true]
-      warning("Invalid rule set: rule(s) '", x[broken]$exprs(), "' evaluate to FALSE", call. = FALSE)
+      warning("Invalid rule set: rule(s) '", x[broken]$exprs(), "' evaluates to FALSE", call. = FALSE)
     }
   }
   
   vals <- vals[!is_logical]
-  # TODO iterate all components of conditional statements
   do.call(validator, vals)
 }
 
 # library(validate)
 # rules <- validator(rule1 = x > 1, rule2 = y > x)
-# substitute_values(rules, list(x=0)) 
+# substitute_values(rules, list(x=2)) 
 # 
 # 
 # rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)

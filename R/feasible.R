@@ -20,7 +20,7 @@ is_infeasible <- function(x, ...){
 #' If a system is infeasible 
 make_feasible <- function(x, ...){
   if (!is_infeasible(x)){
-    message("No infeasibility found, returning original system")
+    message("No infeasibility found, returning original rule set")
     return(x)
   }
   
