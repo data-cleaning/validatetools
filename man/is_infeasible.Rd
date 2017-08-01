@@ -12,10 +12,14 @@ is_infeasible(x, ...)
 \item{...}{not used}
 }
 \value{
-TRUE
+TRUE or FALSE
 }
 \description{
-This function checks if the linear, categorical and conditional rules have inconsistencies.
+This function checks if the linear, categorical and conditional rules are consistent. If not
+the system is said to be "infeasible" and it is not possible to validate any data with it, because
+there will be always a rule that is not obeyed.
+}
+\details{
 It works by translating these rules into a mixed integer problem and check this system of
 (in)equalities for feasibility.
 }

@@ -2,6 +2,7 @@
 
 export(detect_boundary_cat)
 export(detect_boundary_num)
+export(detect_fixed_values)
 export(detect_redundancy)
 export(is_infeasible)
 export(substitute_values)

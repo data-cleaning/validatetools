@@ -6,3 +6,14 @@ test_that("trivial example", {
   expect_equal(length(fixed_values), 1)
   expect_equal(fixed_values$x, 0)
 })
+
+
+test_that("a more complex example", {
+  rules <- validate::validator( x1 + x2 + x3 == 0
+                              , x1 + x2 >= 0
+                              , x3 >= 0
+                              )
+  expect_warning(fixed_values <- detect_fixed_values(rules))
+  expect_equal(length(fixed_values), 1)
+  expect_equal(fixed_values$x3, 0)
+})

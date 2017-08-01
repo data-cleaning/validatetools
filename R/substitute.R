@@ -3,6 +3,10 @@
 #' 
 #' Substitute values into expression, thereby simplifying the rule set.
 #' Rules that evaluate to TRUE because of the substition are removed.
+#' @example ./examples/substitute_values.R
+#' @param x \code{validator} object with rules
+#' @param .values (optional) named list with values for variables to substitute
+#' @param .add_constraints \code{logical}, should values be added as constraints to the resulting validator object?
 #' @export
 substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
   check_validator(x)

@@ -4,8 +4,32 @@
 \alias{substitute_values}
 \title{substitute a value in a rule set}
 \usage{
-substitute_values(x, .values = list(...), ...)
+substitute_values(x, .values = list(...), ..., .add_constraints = TRUE)
+}
+\arguments{
+\item{x}{\code{validator} object with rules}
+
+\item{.values}{(optional) named list with values for variables to substitute}
+
+\item{.add_constraints}{\code{logical}, should values be added as constraints to the resulting validator object?}
 }
 \description{
-substitute a value in a rule set
+Substitute values into expression, thereby simplifying the rule set.
+Rules that evaluate to TRUE because of the substition are removed.
+}
+\examples{
+library(validate)
+rules <- validator( rule1 = z > 1
+                  , rule2 = y > z
+                  )
+# rule1 is dropped, since it always is true
+substitute_values(rules, list(z=2))
+# you can also supply the values as separate parameters
+substitute_values(rules, z = 2)
+
+
+
+rules <- validator( rule1 = if (gender == "male") age >= 18 )
+substitute_values(rules, gender="male")
+substitute_values(rules, gender="female")
 }
