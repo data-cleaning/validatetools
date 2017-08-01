@@ -1,7 +1,8 @@
 #' @export
 detect_boundary_num <- function(x, ...){
+  check_validator(x)
   mip <- errorlocate::miprules(x)
-  sapply(variables(x), function(v){
+  bounds <- sapply(variables(x), function(v){
     bounds <- c(lower=-Inf, upper=Inf)
     
     mip$objective <- setNames(1, v)
@@ -29,6 +30,12 @@ detect_boundary_num <- function(x, ...){
     #lpSolveAPI::delete.lp(lp)
     return(bounds)
   }, simplify = TRUE)
+  
+  data.frame( variable = colnames(bounds)
+            , lowerbound = bounds[1,]
+            , upperbound = bounds[2,]
+            , stringsAsFactors = FALSE
+            )
 }
 
 

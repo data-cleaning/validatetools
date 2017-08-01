@@ -1,5 +1,6 @@
 #' @export
 detect_redundancy <- function(x, ...){
+  check_validator(x)
   mip <- errorlocate::miprules(x)
   mip$objective <- c(x=1)
   res <- mip$execute()

@@ -5,6 +5,8 @@
 #' Rules that evaluate to TRUE because of the substition are removed.
 #' @export
 substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
+  check_validator(x)
+  
   vals <- lapply(x$exprs(), function(e) {
     e <- substituteDirect(e, .values)
     tryCatch(r <- eval(e), error = function(x) {
@@ -54,12 +56,12 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
   do.call(validator, vals)
 }
 
-library(validate)
-rules <- validator(rule1 = x > 1, rule2 = y > x)
-substitute_values(rules, list(x=2))
-# 
-# 
-rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
-substitute_values(rules, gender="male")
-x <- rules
-x
+# library(validate)
+# rules <- validator(rule1 = x > 1, rule2 = y > x)
+# substitute_values(rules, list(x=2))
+# # 
+# # 
+# rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
+# substitute_values(rules, gender="male")
+# x <- rules
+# x
