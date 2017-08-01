@@ -4,7 +4,7 @@
 #' Substitute values into expression, thereby simplifying the rule set.
 #' Rules that evaluate to TRUE because of the substition are removed.
 #' @export
-substitute_values <- function (x, .values = list(...), ...){
+substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
   vals <- lapply(x$exprs(), function(e) {
     e <- substituteDirect(e, .values)
     tryCatch(r <- eval(e), error = function(x) {
@@ -44,15 +44,22 @@ substitute_values <- function (x, .values = list(...), ...){
   }
   
   vals <- vals[!is_logical]
+  if (isTRUE(.add_constraints)){
+    eq_ <- lapply(names(.values), function(v){
+      substitute(v == value, list(v=as.symbol(v), value=.values[[v]]))
+    })
+    names(eq_) <- paste0(".const_", names(.values))
+    vals <- c(vals, eq_)
+  }
   do.call(validator, vals)
 }
 
-# library(validate)
-# rules <- validator(rule1 = x > 1, rule2 = y > x)
-# substitute_values(rules, list(x=2)) 
+library(validate)
+rules <- validator(rule1 = x > 1, rule2 = y > x)
+substitute_values(rules, list(x=2))
 # 
 # 
-# rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
-# substitute_values(rules, gender="male")
-# x <- rules
-# x
+rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
+substitute_values(rules, gender="male")
+x <- rules
+x
