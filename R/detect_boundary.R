@@ -1,4 +1,17 @@
+#' Detect the range for numerical variables
+#' 
+#' Detect for each numerical variable in a validation rule set, what its maximum and minimum values are.
+#' This allows for manual rule set checking: does rule set \code{x} overly constrain numerical values?
+#' 
+#' This procedure only finds minimum and maximum values, but misses gaps.
+#' 
+#' @seealso \code{\link{detect_fixed_values}}
+#' @references Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
+#' @references Simplifying constraints in data editing (2015). Technical Report 2015|18, Statistics Netherlands, J. Daalmans
 #' @export
+#' @param x \code{\link{validator}} object, rule set to be checked
+#' @param ... currently not used
+#' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
 detect_boundary_num <- function(x, ...){
   check_validator(x)
   mip <- errorlocate::miprules(x)
@@ -44,22 +57,3 @@ detect_boundary_cat <- function(x, ...){
   stop("To be implemented")
   # for each category detect bound
 }
-
-# x <- validate::validator(
-#   x >= 1,
-#   x + y <= 10,
-#   y >= 5
-# )
-# 
-#detect_boundary_num(x)
-# 
-# mip <- errorlocate::miprules(x)
-# 
-# mip$objective <- c(y=-1)
-# r <- mip$execute()
-# r$lp
-# colnames(r$lp)
-# lpSolveAPI::get.bounds(r$lp)
-# r$lp
-# r$values
-# detect_boundary_num(x)

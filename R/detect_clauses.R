@@ -1,3 +1,7 @@
+#' Simplify conditional statements
+#' 
+#' Conditional rules may be constrained by the others rules in a validation rule set.
+#' This procedure tries to 
 #' @export
 simplify_conditional <- function(x){
   check_validator(x)
@@ -42,8 +46,8 @@ simplify_non_constraining <- function(clauses, vals){
 
 # check_infeais
 # 
-# x <- rules <- validate::validator( if (x > 1) y > 3
-#                        , y < 2
-#                        )
-# #
-# detect_clauses(rules)
+x <- rules <- validate::validator( if (x > 1) y > 3
+                       , y < 2
+                       )
+#
+simplify_conditional(rules)
