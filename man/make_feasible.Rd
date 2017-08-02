@@ -2,7 +2,7 @@
 % Please edit documentation in R/feasible.R
 \name{make_feasible}
 \alias{make_feasible}
-\title{If a system is infeasible}
+\title{Make an infeasible system feasible.}
 \usage{
 make_feasible(x, ...)
 }
@@ -10,9 +10,7 @@ make_feasible(x, ...)
 \item{x}{\code{\link{validator}} object with the validation rules.}
 
 \item{...}{not used.}
-
-\item{x}{\code{validator} object with validation rules.}
 }
 \description{
-If a system is infeasible
+Make an infeasible system feasible.
 }

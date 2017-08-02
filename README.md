@@ -10,7 +10,13 @@ validatetools
 Installation
 ------------
 
-You can install validatetools from github with:
+You can install a beta version of `validatetools` with
+
+``` r
+install.packages("validatetools", repos = "https://data-cleaning.github.io/drat")
+```
+
+The adventurous can install an (unstable) `validatetools` from github with:
 
 ``` r
 # install.packages("devtools")

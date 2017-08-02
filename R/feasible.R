@@ -23,7 +23,6 @@ is_infeasible <- function(x, ...){
 #' Make an infeasible system feasible.
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... not used.
-#' @param x \code{validator} object with validation rules.
 make_feasible <- function(x, ...){
   if (!is_infeasible(x)){
     message("No infeasibility found, returning original rule set")
