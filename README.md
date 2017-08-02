@@ -40,6 +40,7 @@ is_infeasible(rules)
 rules <- validator( rule1 = z > 1
                   , rule2 = y > z
                   , rule3 = if (gender == "male") w > 2
+                  , rule4 = gender %in% c("male", "female")
                   )
 substitute_values(rules, z = 3, gender = "male")
 #> Object of class 'validator' with 4 elements:
