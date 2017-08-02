@@ -24,7 +24,6 @@ invert_or_negate <- function(e){
   }
 }
 
-
 # convert an expression to its disjunctive normal form
 as_dnf <- function(expr, ...){
   # assumes that the expression has been tested with is.conditional
@@ -45,8 +44,10 @@ as_dnf <- function(expr, ...){
         cond <- left(cond)
       }
     }
-  } else {
-    stop("Invalid condition")
+  } else if (errorlocate:::is_cat_(expr) || errorlocate:::is_lin_(expr)){
+    return(structure(list(expr), class="dnf"))
+  } else{
+    stop("Invalid expression")
   }
   # build condition clauses
   if (!is.null(cond)){
@@ -70,13 +71,12 @@ as_dnf <- function(expr, ...){
     }
     clauses[[length(clauses) + 1]] <- cons
   }
-  
-  structure(clauses, class="clause")
+  structure(clauses, class="dnf")
 }
 
 as_clause <- as_dnf
 
-as.character.clause <- function(x, as_if = FALSE, ...){
+as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
   x_s <- sapply(x, deparse)
   x_i <- sapply(x, invert_or_negate)
@@ -89,11 +89,11 @@ as.character.clause <- function(x, as_if = FALSE, ...){
   }
 }
 
-print.clause <- function(x, as_if = FALSE, ...){
+print.dnf <- function(x, as_if = FALSE, ...){
   cat(as.character(x, as_if = as_if, ...))
 }
 
-as.expression.clause <- function(x, as_if = FALSE, ...){
+as.expression.dnf <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
 
