@@ -29,8 +29,8 @@ make_feasible <- function(x, ...){
     message("No infeasibility found, returning original rule set")
     return(x)
   }
-  mip_rules <- errorlocate::miprules(x)
-  mip_rules$._lin_rules
+  # mip_rules <- errorlocate::miprules(x)
+  # mip_rules$._lin_rules
   stop("to be implemented")
 }
 # x <- validator( x > 1, x < 0)

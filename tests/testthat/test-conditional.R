@@ -66,6 +66,10 @@ test_that("low level stuff works", {
   
   # to test for print (output is equal to previous test)
   expect_output(print(dnf), as.character(dnf))
+  
+  # invalid expression
+  expr <- quote(while(true){})
+  expect_error(as_dnf(expr), "Invalid expression")
 })
 
 
