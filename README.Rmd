@@ -33,6 +33,13 @@ devtools::install_github("data-cleaning/validatetools")
 
 ## Example
 
+### Checking feasibility
+
+```{r}
+
+```
+
+
 ### Value substitution
 
 ```{r}
@@ -51,10 +58,49 @@ rules <- validator( x >= 0, x <=0)
 detect_fixed_values(rules)
 simplify_fixed_values(rules)
 
-rules <- validator( x1 + x2 + x3 == 0
-                  , x1 + x2 >= 0
-                  , x3 >=0
+rules <- validator( rule1 = x1 + x2 + x3 == 0
+                  , rule2 = x1 + x2 >= 0
+                  , rule3 = x3 >=0
                   )
 simplify_fixed_values(rules)
+```
+
+### Simplifying conditional statements
+
+```{r}
+# non-relaxing clause
+rules <- validator( r1 = if (x > 1) y > 3
+                  , r2 = y < 2
+                  )
+# y > 3 is always FALSE so r1 can be simplified
+simplify_conditional(rules)
+
+
+# non-constraining clause
+rules <- validator( r1 = if (x > 0) y > 0
+                  , r2 = if (x < 1) y > 1
+                  )
+simplify_conditional(rules)
+```
+
+### Removing redundant rules
+
+```{r}
+rules <- validator( rule1 = x > 1
+                  , rule2 = x > 2
+                  )
+
+# rule1 is superfluous
+simplify_redundancy(rules)
+
+rules <- validator( rule1 = x > 2
+                  , rule2 = x > 2
+)
+
+# standout: rule1 and rule2, oldest rules wins
+simplify_redundancy(rules)
+
+# Note that detection signifies both rules!
+detect_redundancy(rules)
 ```
 

@@ -20,6 +20,8 @@ devtools::install_github("data-cleaning/validatetools")
 Example
 -------
 
+### Checking feasibility
+
 ### Value substitution
 
 ``` r
@@ -45,4 +47,70 @@ detect_fixed_values(rules)
 #> Warning: Currently only checking numerical values
 #> $x
 #> [1] 0
+simplify_fixed_values(rules)
+#> Warning: Currently only checking numerical values
+#> Object of class 'validator' with 1 elements:
+#>  .const_x: x == 0
+
+rules <- validator( rule1 = x1 + x2 + x3 == 0
+                  , rule2 = x1 + x2 >= 0
+                  , rule3 = x3 >=0
+                  )
+simplify_fixed_values(rules)
+#> Warning: Currently only checking numerical values
+#> Object of class 'validator' with 3 elements:
+#>  rule1    : abs(x1 + x2 + 0 - 0) < 1e-08
+#>  rule2    : x1 + x2 >= 0
+#>  .const_x3: x3 == 0
+```
+
+### Simplifying conditional statements
+
+``` r
+# non-relaxing clause
+rules <- validator( r1 = if (x > 1) y > 3
+                  , r2 = y < 2
+                  )
+# y > 3 is always FALSE so r1 can be simplified
+simplify_conditional(rules)
+#> Object of class 'validator' with 2 elements:
+#>  r1: x <= 1
+#>  r2: y < 2
+
+
+# non-constraining clause
+rules <- validator( r1 = if (x > 0) y > 0
+                  , r2 = if (x < 1) y > 1
+                  )
+simplify_conditional(rules)
+#> Object of class 'validator' with 2 elements:
+#>  r1: y > 0
+#>  r2: !(x < 1) | y > 1
+```
+
+### Removing redundant rules
+
+``` r
+rules <- validator( rule1 = x > 1
+                  , rule2 = x > 2
+                  )
+
+# rule1 is superfluous
+simplify_redundancy(rules)
+#> Object of class 'validator' with 1 elements:
+#>  rule2: x > 2
+
+rules <- validator( rule1 = x > 2
+                  , rule2 = x > 2
+)
+
+# standout: rule1 and rule2, oldest rules wins
+simplify_redundancy(rules)
+#> Object of class 'validator' with 1 elements:
+#>  rule1: x > 2
+
+# Note that detection signifies both rules!
+detect_redundancy(rules)
+#> rule1 rule2 
+#>  TRUE  TRUE
 ```
