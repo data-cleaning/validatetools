@@ -3,6 +3,11 @@
 language: R
 sudo: false
 cache: packages
+warnings_are_errors: false
+
+repos:
+  CRAN: https://cloud.r-project.org
+  data-cleaning: http://data-cleaning.github.io/drat
 
 after_success:
   - Rscript -e 'covr::codecov()'
