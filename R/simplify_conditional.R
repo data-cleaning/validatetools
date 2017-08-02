@@ -33,7 +33,7 @@ simplify_non_relaxing <- function(cond_expr, vals){
     }
     clause
   })
-  as.expression(clauses)[[1]]
+  as.expression(clauses, as_if = TRUE)[[1]]
 }
 
 simplify_non_constraining <- function(cond_expr, vals){
