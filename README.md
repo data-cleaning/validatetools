@@ -20,8 +20,6 @@ devtools::install_github("data-cleaning/validatetools")
 Example
 -------
 
-### Checking feasibility
-
 ### Value substitution
 
 ``` r
