@@ -11,6 +11,9 @@ detect_fixed_values <- function(x, ...){
   }
 }
 
+#' Simplify fixed values
+#' 
+#' Simplify fixed values
 #' @export
 #' @param x \code{\link{validator}} object with validation rules
 #' @param ... passed to \code{\link{substitute_values}}.
