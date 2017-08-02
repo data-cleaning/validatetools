@@ -8,9 +8,11 @@ Authors@R: c( person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role 
 Description: Rule sets with validation rule may contain redundancies or contradictions. 
   Functions for finding redundancies and problematic rules are provided, given a set a rules formulated with `validate`.
 Depends: validate
-License: GPL-2
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/data-cleaning/validatetools
+BugReports: https://github.com/data-cleaning/validatetools/issues
 Imports: errorlocate, methods, stats, utils, lpSolveAPI
 Suggests: testthat,
     covr
