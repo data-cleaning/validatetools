@@ -82,8 +82,8 @@ as.character.dnf <- function(x, as_if = FALSE, ...){
   x_i <- sapply(x, invert_or_negate)
   x_i_s <- sapply(x_i, deparse)
   if (as_if && length(x) > 1){
-    s <- paste(head(x_i_s, -1), collapse = " & ")
-    paste0("if (",s,") ", tail(x_s, 1))
+    s <- paste(utils::head(x_i_s, -1), collapse = " & ")
+    paste0("if (",s,") ", utils::tail(x_s, 1))
   } else {
     paste(x_s, collapse = ' | ')
   }

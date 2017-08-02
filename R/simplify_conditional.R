@@ -14,13 +14,9 @@ simplify_conditional <- function(x, ...){
   for (i in which(is_cond)){
     cond <- vals[[i]]
     cond <- simplify_non_constraining(cond, vals)
-    #cat("non_constraining:", as.expression(cond))
     vals[[i]] <- cond
-    if (errorlocate:::is_condition_(cond)){
-      cond <- simplify_non_relaxing(cond, vals)
-      vals[[i]] <- cond
-      #cat("non_relaxing:")
-    }
+    cond <- simplify_non_relaxing(cond, vals)
+    vals[[i]] <- cond
   }
   # TODO set meta data correctly for the resulting rule set
   do.call(validate::validator, vals)
