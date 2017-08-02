@@ -11,6 +11,20 @@ detect_fixed_values <- function(x, ...){
   }
 }
 
+#' @export
+#' @param x \code{\link{validator}} object with validation rules
+#' @param ... passed to \code{\link{substitute_values}}.
+#' @return \code{\link{validator}} object in which 
+simplify_fixed_values <- function(x, ...){
+  check_validator(x)
+  fv <- detect_fixed_values(x, ...)
+  if (length(fv)) {
+    substitute_values(x, .values = fv, ...)
+  } else {
+    message("No fixed values found.")
+    x
+  }
+}
 
 # rules <- x <- validator( x >= 0, x <= 0)
 # detect_fixed_values(rules)
