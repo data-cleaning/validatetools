@@ -11,8 +11,22 @@ left <- function(e){
   if (length(e) >= 2) e[[2]]
 }
 
+
 right <- function(e){
   if (length(e) >= 3) e[[3]]
+}
+
+# look ahead
+la <- function(e){
+  op_to_s(left(e))
+}
+
+# consume tokens, typically handy for brackets
+consume <- function(e, token = "("){
+  while(op_to_s(e) ==  token){
+    e = left(e)
+  }
+  e
 }
 
 #TODO move this to errorlocate
@@ -28,6 +42,7 @@ invert_or_negate <- function(e){
 as_dnf <- function(expr, ...){
   # assumes that the expression has been tested with is.conditional
   clauses <- list()
+  expr <- consume(expr)
   op_if <- op_to_s(expr)
   
   cond <- NULL
@@ -37,13 +52,13 @@ as_dnf <- function(expr, ...){
     cond <- left(expr)
     cons <- right(expr)
   } else if (op_if %in% c("|", "||")){
-    if (op_to_s(left(expr)) == "!"){ # this is a rewritten if statement
+    if (la(expr) == "!"){ # this is a rewritten if statement
       cons <- right(expr)
       cond <- left(left(expr))
-      if (op_to_s(cond) == "("){
-        cond <- left(cond)
-      }
     }
+  } else if(op_if == "!"){
+    cond <- left(expr)
+    cons <- NULL
   } else if (errorlocate:::is_cat_(expr) || errorlocate:::is_lin_(expr)){
     return(structure(list(expr), class="dnf"))
   } else{
@@ -51,11 +66,12 @@ as_dnf <- function(expr, ...){
   }
   # build condition clauses
   if (!is.null(cond)){
+    cond <- consume(cond)
     op_and <- op_to_s(cond)
   
     while(op_and %in% c("&", "&&")){
       clauses[[length(clauses) + 1]] <- invert_or_negate(left(cond))
-      cond <- right(cond)
+      cond <- consume(right(cond))
       op_and <- op_to_s(cond)
     }
     clauses[[length(clauses) + 1]] <- invert_or_negate(cond)
@@ -63,10 +79,11 @@ as_dnf <- function(expr, ...){
 
   # build consequent clauses
   if (!is.null(cons)){
+    cons <- consume(cons)
     op_or <- op_to_s(cons)
     while(op_or %in% c("|", "||")){
       clauses[[length(clauses) + 1]] <- left(cons)
-      cons <- right(cons)
+      cons <- consume(right(cons))
       op_or <- op_to_s(cons)
     }
     clauses[[length(clauses) + 1]] <- cons
