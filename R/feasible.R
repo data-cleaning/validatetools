@@ -18,7 +18,9 @@ is_infeasible <- function(x, ...){
 }
 
 
-#' If a system is infeasible 
+#' Make an infeasible system feasible.
+#' 
+#' Make an infeasible system feasible.
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... not used.
 #' @param x \code{validator} object with validation rules.
@@ -27,6 +29,9 @@ make_feasible <- function(x, ...){
     message("No infeasibility found, returning original rule set")
     return(x)
   }
-  
+  mip_rules <- errorlocate::miprules(x)
+  mip_rules$._lin_rules
   stop("to be implemented")
 }
+# x <- validator( x > 1, x < 0)
+# make_feasible(x)

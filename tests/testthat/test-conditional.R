@@ -55,4 +55,18 @@ test_that("simple clause works",{
   expect_equal(as.character(clause), "x <= 1")
 })
 
+test_that("low level stuff works", {
+  # to test for op edge case
+  expect_equal(op(quote(1)), 1)
+  
+  # to test for or statement
+  expr <- quote( x > 1 || y > 2)
+  dnf <- as_dnf(expr)
+  expect_equal(as.character(dnf), "x > 1 | y > 2")
+  
+  # to test for print (output is equal to previous test)
+  expect_output(print(dnf), as.character(dnf))
+})
+
+
 #as_dnf(quote( )
