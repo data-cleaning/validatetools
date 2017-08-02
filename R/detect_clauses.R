@@ -10,7 +10,7 @@ simplify_conditional <- function(x){
   vals <- x$exprs()
   vals[is_cond] <- 
     lapply(vals[is_cond], function(cond){
-      clauses <- as_clause(cond)
+      clauses <- as_dnf(cond)
       clauses <- simplify_non_constraining(clauses, vals)
       clauses <- simplify_non_restraining(clauses, vals)
       as.expression(clauses)[[1]]

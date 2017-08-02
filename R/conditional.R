@@ -25,7 +25,8 @@ invert_or_negate <- function(e){
 }
 
 
-normalize_conditional <- function(expr, ...){
+# convert an expression to its disjunctive normal form
+as_dnf <- function(expr, ...){
   # assumes that the expression has been tested with is.conditional
   clauses <- list()
   op_if <- op_to_s(expr)
@@ -73,7 +74,7 @@ normalize_conditional <- function(expr, ...){
   structure(clauses, class="clause")
 }
 
-as_clause <- normalize_conditional
+as_clause <- as_dnf
 
 as.character.clause <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
@@ -96,6 +97,6 @@ as.expression.clause <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
 
-#as_clause(quote(!(gender == male) | x > 6))
-#as_clause(quote( !(gender %in% "male" & y > 3) | x > 6))
+#as_dnf(quote(!(gender == male) | x > 6))
+#as_dnf(quote( !(gender %in% "male" & y > 3) | x > 6))
 

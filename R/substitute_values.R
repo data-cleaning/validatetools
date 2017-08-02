@@ -20,7 +20,7 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
   
   is_cond <- errorlocate::is_conditional(x)
   vals[is_cond] <- lapply(vals[is_cond], function(cond){
-    clauses <- as_clause(cond)
+    clauses <- as_dnf(cond)
     # try to simplify clauses
     s_clauses <- lapply(clauses, function(clause){
       tryCatch(r <- eval(clause), error = function(x) {
@@ -49,6 +49,8 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
     }
   }
   
+  
+  
   vals <- vals[!is_logical]
   if (isTRUE(.add_constraints)){
     eq_ <- lapply(names(.values), function(v){
@@ -57,6 +59,7 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
     names(eq_) <- paste0(".const_", names(.values))
     vals <- c(vals, eq_)
   }
+  # TODO improve the metadata of the resulting validator object!
   do.call(validator, vals)
 }
 
