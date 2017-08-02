@@ -6,8 +6,8 @@ cache: packages
 warnings_are_errors: false
 
 repos:
-  CRAN: https://cloud.r-project.org
   datacleaning: http://data-cleaning.github.io/drat
+  CRAN: https://cloud.r-project.org
 
 after_success:
   - Rscript -e 'covr::codecov()'
