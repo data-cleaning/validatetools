@@ -1,4 +1,4 @@
 library(testthat)
-library(validate.simplify)
+library(validatetools)
 
-test_check("validate.simplify")
+test_check("validatetools")

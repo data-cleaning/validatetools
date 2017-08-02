@@ -46,8 +46,8 @@ simplify_non_constraining <- function(clauses, vals){
 
 # check_infeais
 # 
-x <- rules <- validate::validator( if (x > 1) y > 3
-                       , y < 2
-                       )
-#
-simplify_conditional(rules)
+# x <- rules <- validate::validator( if (x > 1) y > 3
+#                        , y < 2
+#                        )
+# #
+# simplify_conditional(rules)

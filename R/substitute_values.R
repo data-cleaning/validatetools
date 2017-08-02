@@ -60,12 +60,12 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
   do.call(validator, vals)
 }
 
-library(validate)
-rules <- validator(rule1 = x > 1, rule2 = y > x)
-substitute_values(rules, list(x=2))
-#
-#
-rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
-substitute_values(rules, gender="female")
-x <- rules
-x
+# library(validate)
+# rules <- validator(rule1 = x > 1, rule2 = y > x)
+# substitute_values(rules, list(x=2))
+# #
+# #
+# rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
+# substitute_values(rules, gender="female")
+# x <- rules
+# x

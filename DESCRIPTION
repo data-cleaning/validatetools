@@ -1,11 +1,12 @@
-Package: validate.simplify
-Title: Simplify Validation Rule Sets
-Version: 0.0.0.9000
+Package: validatetools
+Title: Tools for Manipulating and Simplifying Validation Rule Sets
+Version: 0.0.1.9000
 Authors@R: c( person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role = c("aut", "cre"))
             , person("Mark", "van der Loo", email = "mark.vanderloo@gmail.com",role = c("aut"))
             , person("Jacco", "Daalmans", role = c("ctb"))
             )
-Description: Rule sets with validation rule may contain redundancies or contradictions. Functions for finding redundancies and problematic rules are provided, given a set a rules formulated with `validate`.
+Description: Rule sets with validation rule may contain redundancies or contradictions. 
+  Functions for finding redundancies and problematic rules are provided, given a set a rules formulated with `validate`.
 Depends: validate
 License: GPL-2
 Encoding: UTF-8

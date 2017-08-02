@@ -1,5 +1,5 @@
-#' validate.simplify.
+#' validatetools.
 #'
-#' @name validate.simplify
+#' @name validatetools
 #' @docType package
 NULL
