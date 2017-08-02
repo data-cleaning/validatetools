@@ -20,11 +20,23 @@ devtools::install_github("data-cleaning/validatetools")
 Example
 -------
 
+### Check for feasibility
+
+``` r
+rules <- validator( x > 0)
+is_infeasible(rules)
+#> [1] FALSE
+
+rules <- validator( x > 0
+                  , x < 0
+                  )
+is_infeasible(rules)
+#> [1] TRUE
+```
+
 ### Value substitution
 
 ``` r
-library(validatetools)
-#> Loading required package: validate
 rules <- validator( rule1 = z > 1
                   , rule2 = y > z
                   , rule3 = if (gender == "male") w > 2

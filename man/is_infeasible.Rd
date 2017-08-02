@@ -23,3 +23,14 @@ there will be always a rule that is not obeyed.
 It works by translating these rules into a mixed integer problem and check this system of
 (in)equalities for feasibility.
 }
+\examples{
+rules <- validator( x > 0)
+
+is_infeasible(rules)
+
+rules <- validator( x > 0
+                  , x < 0
+                  )
+
+is_infeasible(rules)
+}

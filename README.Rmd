@@ -4,12 +4,13 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
 )
+library(validatetools)
 ```
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/validatetools)](https://cran.r-project.org/package=validatetools)[![Travis-CI Build Status](https://travis-ci.org/data-cleaning/validatetools.svg?branch=master)](https://travis-ci.org/data-cleaning/validatetools)
@@ -33,10 +34,22 @@ devtools::install_github("data-cleaning/validatetools")
 
 ## Example
 
+### Check for feasibility
+
+```{r}
+rules <- validator( x > 0)
+is_infeasible(rules)
+
+rules <- validator( x > 0
+                  , x < 0
+                  )
+is_infeasible(rules)
+```
+
+
 ### Value substitution
 
 ```{r}
-library(validatetools)
 rules <- validator( rule1 = z > 1
                   , rule2 = y > z
                   , rule3 = if (gender == "male") w > 2
@@ -96,4 +109,3 @@ simplify_redundancy(rules)
 # Note that detection signifies both rules!
 detect_redundancy(rules)
 ```
-

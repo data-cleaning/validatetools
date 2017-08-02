@@ -6,6 +6,7 @@
 #' 
 #' It works by translating these rules into a mixed integer problem and check this system of
 #' (in)equalities for feasibility.
+#' @example ./examples/feasible.R
 #' @param x \code{validator} object with validation rules.
 #' @param ... not used
 #' @return TRUE or FALSE
