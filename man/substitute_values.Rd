@@ -11,6 +11,8 @@ substitute_values(x, .values = list(...), ..., .add_constraints = TRUE)
 
 \item{.values}{(optional) named list with values for variables to substitute}
 
+\item{...}{alternative way of supplying values for variables (see examples).}
+
 \item{.add_constraints}{\code{logical}, should values be added as constraints to the resulting validator object?}
 }
 \description{

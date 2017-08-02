@@ -6,6 +6,9 @@
 #' @references TODO non-constraining, non-relaxing
 #' @example ./examples/simplify_conditional.R
 #' @export
+#' @param x \code{\link{validator}} object with the validation rules.
+#' @param ... not used.
+#' @return \code{\link{validator}} simplified rule set.
 simplify_conditional <- function(x, ...){
   check_validator(x)
   

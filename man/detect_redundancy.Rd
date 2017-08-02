@@ -6,6 +6,11 @@
 \usage{
 detect_redundancy(x, ...)
 }
+\arguments{
+\item{x}{\code{\link{validator}} object with the validation rules.}
+
+\item{...}{not used.}
+}
 \description{
 Detect redundant rules without removing.
 }

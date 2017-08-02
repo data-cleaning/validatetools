@@ -7,7 +7,7 @@
 is_infeasible(x, ...)
 }
 \arguments{
-\item{x}{\code{validator} object with validation rules}
+\item{x}{\code{validator} object with validation rules.}
 
 \item{...}{not used}
 }

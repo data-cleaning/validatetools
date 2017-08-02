@@ -3,6 +3,8 @@
 #' Detect fixed values
 #' @example ./examples/detect_fixed_values.R
 #' @seealso \code{\link{simplify_fixed_values}}
+#' @param x \code{\link{validator}} object with the validation rules.
+#' @param ... not used.
 #' @export
 detect_fixed_values <- function(x, ...){
   check_validator(x)

@@ -6,6 +6,14 @@
 \usage{
 simplify_conditional(x, ...)
 }
+\arguments{
+\item{x}{\code{\link{validator}} object with the validation rules.}
+
+\item{...}{not used.}
+}
+\value{
+\code{\link{validator}} simplified rule set.
+}
 \description{
 Conditional rules may be constrained by the others rules in a validation rule set.
 This procedure tries to simplify conditional statements.

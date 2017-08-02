@@ -4,6 +4,8 @@
 #' 
 #' @note For removal of duplicate rules, simplify
 #' @example ./examples/redundancy.R
+#' @param x \code{\link{validator}} object with the validation rules.
+#' @param ... not used.
 #' @export
 detect_redundancy <- function(x, ...){
   check_validator(x)

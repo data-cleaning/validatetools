@@ -6,6 +6,13 @@
 \usage{
 make_feasible(x, ...)
 }
+\arguments{
+\item{x}{\code{\link{validator}} object with the validation rules.}
+
+\item{...}{not used.}
+
+\item{x}{\code{validator} object with validation rules.}
+}
 \description{
 If a system is infeasible
 }

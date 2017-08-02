@@ -6,6 +6,11 @@
 \usage{
 detect_fixed_values(x, ...)
 }
+\arguments{
+\item{x}{\code{\link{validator}} object with the validation rules.}
+
+\item{...}{not used.}
+}
 \description{
 Detect fixed values
 }
