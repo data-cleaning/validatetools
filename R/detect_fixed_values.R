@@ -1,3 +1,7 @@
+#' Detect fixed values
+#' 
+#' Detect fixed values
+#' @example ./examples/detect_fixed_values.R
 #' @export
 detect_fixed_values <- function(x, ...){
   check_validator(x)
