@@ -42,7 +42,7 @@ test_that("substitute_value works with components", {
   
   rules_s <- substitute_values(rules, gender="male")
   expect_equal(length(rules_s), 2)
-  expect_equal(rules_s$exprs()[[1]], quote(x > 6))
+  expect_equal(rules_s$exprs()[[1]], quote((x > 6)))
   
   rules_s <- substitute_values(rules, .values = list(x=7))
   # Nice! second rule always obeyed so removed...

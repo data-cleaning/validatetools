@@ -4,4 +4,3 @@ check_validator <- function(x){
   }
   invisible(TRUE)
 }
-
