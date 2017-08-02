@@ -1,8 +1,34 @@
+#' Detect redundant rules without removing.
+#' 
+#' Detect redundant rules without removing.
+#' 
+#' @note For removal of duplicate rules, simplify
+#' @example ./examples/redundancy.R
 #' @export
 detect_redundancy <- function(x, ...){
   check_validator(x)
+  can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
+  vals <- x$exprs()
+  dnf_set <- lapply(vals[can_be_checked], as_dnf)
+  are_redundant <- sapply(seq_along(dnf_set), function(i){
+    is_redundant(dnf_set, i)
+  })
+  idx <- which(can_be_checked)[are_redundant]
+  
+  ret <- logical(length = length(vals))
+  names(ret) <- names(vals)
+  ret[idx] <- TRUE
+  ret
 }
 
+#' Remove redundant rules
+#' 
+#' Simplify a rule set by removing redundant rules
+#' @export
+#' @example ./examples/redundancy.R
+#' @param x \code{\link{validator}} object with validation rules.
+#' @param ... not used
+#' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
 simplify_redundancy <- function(x, ...){
   check_validator(x)
   
@@ -35,6 +61,6 @@ is_redundant <- function(dnf_set, i, ...){
 
 # x <- validator( rule1 = x > 1
 #               , rule2 = x > 2
-#               , rule3 = x > 2
 #               )
 # simplify_redundancy(x)
+# detect_redundancy(x)

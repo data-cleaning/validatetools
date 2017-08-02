@@ -8,6 +8,7 @@
 #' @seealso \code{\link{detect_fixed_values}}
 #' @references Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
 #' @references Simplifying constraints in data editing (2015). Technical Report 2015|18, Statistics Netherlands, J. Daalmans
+#' @example ./examples/detect_boundary.R
 #' @export
 #' @param x \code{\link{validator}} object, rule set to be checked
 #' @param ... currently not used
@@ -15,7 +16,7 @@
 detect_boundary_num <- function(x, ...){
   check_validator(x)
   mip <- errorlocate::miprules(x)
-  bounds <- sapply(variables(x), function(v){
+  bounds <- sapply(validate::variables(x), function(v){
     bounds <- c(lower=-Inf, upper=Inf)
     
     mip$objective <- setNames(1, v)
@@ -52,6 +53,11 @@ detect_boundary_num <- function(x, ...){
 }
 
 
+#' Detect viable domains for categorical variables
+#' 
+#' Detect viable domains for categorical variables
+#' @param x \code{\link{validator}} object with rules
+#' @param ... not used
 #' @export
 detect_boundary_cat <- function(x, ...){
   stop("To be implemented")

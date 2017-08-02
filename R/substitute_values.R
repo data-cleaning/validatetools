@@ -60,7 +60,7 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
     vals <- c(vals, eq_)
   }
   # TODO improve the metadata of the resulting validator object!
-  do.call(validator, vals)
+  do.call(validate::validator, vals)
 }
 
 # library(validate)

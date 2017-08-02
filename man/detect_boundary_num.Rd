@@ -21,6 +21,15 @@ This allows for manual rule set checking: does rule set \code{x} overly constrai
 \details{
 This procedure only finds minimum and maximum values, but misses gaps.
 }
+\examples{
+rules <- validator(
+  x >= 1,
+  x + y <= 10,
+  y >= 6
+)
+
+detect_boundary_num(rules)
+}
 \references{
 Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
 
