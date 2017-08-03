@@ -7,6 +7,8 @@
 - `is_implied_by`: find out for a rule which other rules imply this rule.
 - add an argument to `detect_redundancy` to return the same rules as `simplify_redundancy`.
 
+- rearrange parts of validatetools and errorlocate (only exported functions used).
+
 
 # Rescaling of rule matrix
 

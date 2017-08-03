@@ -37,7 +37,8 @@ is_lin_eq <- function(e){
 invert_or_negate <- function(e){
   if (errorlocate:::is_lin_(e)){
     if (is_lin_eq(e)){
-      substitute( l < r | l > r, list(l = left(e), r = right(e)))
+      # Dirty Hack but it works for now. Ideally this should be split in two statements
+      substitute( l < r | l > r, list(l = left(e), r = right(e))) 
     } else {
       errorlocate:::invert_(e)
     }
@@ -96,6 +97,28 @@ as_dnf <- function(expr, ...){
     }
     clauses[[length(clauses) + 1]] <- cons
   }
+  
+  # the nasty case of negating equalities...
+  clauses <- unlist(lapply(clauses, function(clause){
+    if (op_to_s(clause) == "|"){
+      as_dnf(clause)
+    } else{
+      clause
+    }
+  }))
+  # unroll <- FALSE
+  # for (i in seq_along(clauses)){
+  #   clause <- clauses[[i]]
+  #   if (op_to_s(clause) == "|") { # got-ya
+  #     clauses[[i]] <- as_dnf(clause)
+  #     unroll <- TRUE
+  #   }
+  # }
+  # if (unroll){
+  #   clauses <- unlist(clauses)
+  # }
+  # forget about it
+  
   structure(clauses, class="dnf")
 }
 
@@ -122,9 +145,10 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
 
-#as_dnf(quote(!(gender == male) | x > 6))
-#as_dnf(quote( !(gender %in% "male" & y > 3) | x > 6))
+# as_dnf(quote(!(gender == "male") | x > 6))
+# as_dnf(quote(if (y == 1) x > 6))
+# as_dnf(quote( !(gender %in% "male" & y > 3) | x > 6))
 
-e <- quote( x == 1)
-invert_or_negate(e)
+# e <- quote( x == 1)
+# invert_or_negate(e)
 
