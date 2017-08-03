@@ -14,7 +14,7 @@
 #' @param ... currently not used
 #' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
 detect_boundary_num <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   mip <- errorlocate::miprules(x)
   bounds <- sapply(validate::variables(x), function(v){
     bounds <- c(lower=-Inf, upper=Inf)

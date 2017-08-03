@@ -8,7 +8,7 @@
 #' @param ... not used.
 #' @export
 detect_redundancy <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
   vals <- x$exprs()
   dnf_set <- lapply(vals[can_be_checked], as_dnf)
@@ -32,8 +32,8 @@ detect_redundancy <- function(x, ...){
 #' @param ... not used
 #' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
 simplify_redundancy <- function(x, ...){
-  check_validator(x)
-  
+  x <- check_validator(x)
+
   can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
   
   vals <- x$exprs()
@@ -51,7 +51,7 @@ simplify_redundancy <- function(x, ...){
 is_redundant <- function(dnf_set, i, ...){
   dnf <- dnf_set[[i]]
   negated_rules <- lapply(dnf, invert_or_negate)
-  
+
   # Note the single "[" to allow the injection of multiple rules (a negation of a disjunction are multiple rules!)
   dnf_set[i] <- negated_rules
   #names(dnf_set) <- make.unique(names(dnf_set))

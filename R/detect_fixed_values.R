@@ -7,7 +7,7 @@
 #' @param ... not used.
 #' @export
 detect_fixed_values <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   bounds_num <- detect_boundary_num(x)
   is_fixed_num <- (bounds_num$upperbound - bounds_num$lowerbound <= x$options("lin.eq.eps"))
   
@@ -27,7 +27,7 @@ detect_fixed_values <- function(x, ...){
 #' @param ... passed to \code{\link{substitute_values}}.
 #' @return \code{\link{validator}} object in which 
 simplify_fixed_values <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   fv <- detect_fixed_values(x, ...)
   if (length(fv)) {
     substitute_values(x, .values = fv, ...)

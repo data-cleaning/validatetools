@@ -10,7 +10,7 @@
 #' @param ... not used.
 #' @return \code{\link{validator}} simplified rule set.
 simplify_conditional <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   
   is_cond <- errorlocate::is_conditional(x)
   vals <- x$exprs()

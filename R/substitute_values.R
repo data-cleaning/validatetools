@@ -10,7 +10,7 @@
 #' @param ... alternative way of supplying values for variables (see examples).
 #' @export
 substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
-  check_validator(x)
+  x <- check_validator(x)
   
   vals <- lapply(x$exprs(), function(e) {
     e <- substituteDirect(e, .values)

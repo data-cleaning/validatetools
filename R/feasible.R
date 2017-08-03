@@ -12,7 +12,7 @@
 #' @return TRUE or FALSE
 #' @export
 is_infeasible <- function(x, ...){
-  check_validator(x)
+  x <- check_validator(x)
   mip <- errorlocate::miprules(x)
   mip$is_infeasible()
 }

@@ -29,10 +29,18 @@ consume <- function(e, token = "("){
   e
 }
 
+is_lin_eq <- function(e){
+  errorlocate:::is_lin_(e) && op_to_s(e) == "=="
+}
+
 #TODO move this to errorlocate
 invert_or_negate <- function(e){
   if (errorlocate:::is_lin_(e)){
-    errorlocate:::invert_(e)
+    if (is_lin_eq(e)){
+      substitute( l < r | l > r, list(l = left(e), r = right(e)))
+    } else {
+      errorlocate:::invert_(e)
+    }
   } else {
     errorlocate:::negate_(e)
   }
@@ -96,9 +104,9 @@ as_clause <- as_dnf
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
   x_s <- sapply(x, deparse)
-  x_i <- sapply(x, invert_or_negate)
-  x_i_s <- sapply(x_i, deparse)
   if (as_if && length(x) > 1){
+    x_i <- sapply(x, invert_or_negate)
+    x_i_s <- sapply(x_i, deparse)
     s <- paste(utils::head(x_i_s, -1), collapse = " & ")
     paste0("if (",s,") ", utils::tail(x_s, 1))
   } else {
@@ -116,4 +124,7 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
 
 #as_dnf(quote(!(gender == male) | x > 6))
 #as_dnf(quote( !(gender %in% "male" & y > 3) | x > 6))
+
+e <- quote( x == 1)
+invert_or_negate(e)
 
