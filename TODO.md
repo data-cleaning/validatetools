@@ -7,3 +7,7 @@
 - `is_implied_by`: find out for a rule which other rules imply this rule.
 - add an argument to `detect_redundancy` to return the same rules as `simplify_redundancy`.
 
+
+# Rescaling of rule matrix
+
+- Use data to determine a (sub) optimal scaling of the MIP matrix: ideally the entries of the matrix should have the same order (~1).
