@@ -7,8 +7,8 @@ test_that("non-relaxing clause works", {
   rules_s <- simplify_conditional(rules)
   skip_on_cran()
   
-  exprs <- rules$exprs()
-  exprs_s <- rules_s$exprs()
+  exprs <- to_exprs(rules)
+  exprs_s <- to_exprs(rules_s)
   
   skip_on_travis() 
   expect_equal(exprs_s[[1]], quote(x <= 1))
@@ -22,11 +22,11 @@ test_that("non-constraining clause works", {
                     , r2 = if (x < 1) y > 1
                     )
   rules_s <- simplify_conditional(rules)
-  exprs <- rules$exprs()
-  exprs_s <- rules_s$exprs()
+  exprs <- to_exprs(rules)
+  exprs_s <- to_exprs(rules_s)
   expect_equal(length(rules_s), 2)
 
   skip_on_travis()
   expect_equal(exprs_s[[1]], quote(y > 0))
-  expect_equal(exprs_s[[2]], quote(!(x < 1) | y > 1))
+  expect_equal(exprs_s[[2]], quote(if (x < 1)  y > 1))
 })

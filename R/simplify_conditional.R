@@ -13,7 +13,7 @@ simplify_conditional <- function(x, ...){
   x <- check_validator(x)
   
   is_cond <- errorlocate::is_conditional(x)
-  vals <- x$exprs()
+  vals <- to_exprs(x)
   for (i in which(is_cond)){
     cond <- vals[[i]]
     cond <- simplify_non_constraining(cond, vals)

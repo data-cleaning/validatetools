@@ -12,7 +12,7 @@
 substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
   x <- check_validator(x)
   
-  vals <- lapply(x$exprs(), function(e) {
+  vals <- lapply(to_exprs(x), function(e) {
     e <- substituteDirect(e, .values)
     tryCatch(r <- eval(e), error = function(x) {
       e
@@ -21,6 +21,9 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
   
   is_cond <- errorlocate::is_conditional(x)
   vals[is_cond] <- lapply(vals[is_cond], function(cond){
+    if (is.null(cond)){
+      return(TRUE)
+    }
     clauses <- as_dnf(cond)
     # try to simplify clauses
     s_clauses <- lapply(clauses, function(clause){
@@ -46,7 +49,7 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
     is_true <- unlist(vals[is_logical])
     if (!all(is_true)) {
       broken <- names(is_true)[!is_true]
-      warning("Invalid rule set: rule(s) '", x[broken]$exprs(), "' evaluates to FALSE", call. = FALSE)
+      warning("Invalid rule set: rule(s) '", to_exprs(x[broken]), "' evaluates to FALSE", call. = FALSE)
     }
   }
   

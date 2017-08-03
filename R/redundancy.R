@@ -10,7 +10,7 @@
 detect_redundancy <- function(x, ...){
   x <- check_validator(x)
   can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
-  vals <- x$exprs()
+  vals <- to_exprs(x)
   dnf_set <- lapply(vals[can_be_checked], as_dnf)
   are_redundant <- sapply(seq_along(dnf_set), function(i){
     is_redundant(dnf_set, i)
@@ -36,7 +36,7 @@ simplify_redundancy <- function(x, ...){
 
   can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
   
-  vals <- x$exprs()
+  vals <- to_exprs(x)
   dnf_set <- lapply(vals[can_be_checked], as_dnf)
   for (i in rev(seq_along(dnf_set))){  # remove later rules before older rules 
     if (is_redundant(dnf_set, i)){

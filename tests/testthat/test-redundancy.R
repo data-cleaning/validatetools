@@ -27,3 +27,19 @@ test_that("double rule detection works", {
   red <- detect_redundancy(rules)
   expect_equal(red, c(rule1 = TRUE, rule2 = TRUE))
 })
+
+
+test_that("equalities are allowed", {
+  
+  rules <- validator( profit == turnover - cost
+                    , turnover > 0
+                    , cost > 0
+                    , cost >= 0.6 * turnover
+  )
+  
+  rules_s <- simplify_redundancy(rules)
+  expect_equal(length(rules_s), 3)
+
+  red <- detect_redundancy(rules)
+  expect_equivalent(red, c(FALSE, FALSE, TRUE, FALSE))
+})

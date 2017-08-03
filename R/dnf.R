@@ -69,7 +69,7 @@ as_dnf <- function(expr, ...){
     cons <- NULL
   } else if (errorlocate:::is_cat_(expr) || errorlocate:::is_lin_(expr)){
     return(structure(list(expr), class="dnf"))
-  } else{
+  } else {
     stop("Invalid expression")
   }
   # build condition clauses
