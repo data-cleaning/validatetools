@@ -12,6 +12,10 @@
 substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
   x <- check_validator(x)
   
+  if (length(.values) == 0){
+    return(x)
+  }
+  
   vals <- lapply(to_exprs(x), function(e) {
     e <- substituteDirect(e, .values)
     tryCatch(r <- eval(e), error = function(x) {

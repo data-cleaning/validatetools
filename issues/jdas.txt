@@ -1,0 +1,107 @@
+1:      de functie validator werkt niet goed bij negatieve waarden in de rhs.
+		validator(x< -10,x< -11)
+			Object of class 'validator' with 0 elements:
+			Warning message:
+			In ini_validator(.self, ..., .file = .file, .data = .data) :
+			Invalid syntax detected, the following expressions have been ignored:
+			[001] x <- 10
+			[002] x <- 11
+
+2:     de functies detect_boundary_num, detect_fixed_values en detect_redundancy geven gewoon output voor een infeasible probleem. Dat lijkt me niet wenselijk.
+               detect_fixed_values (validator(x > 1, x <= 1, y>=0, y<0))
+		       Warning message:
+	               Currently only checking numerical values 
+ 	       NB: de fixed-value voor y wordt nu niet weergegeven.
+       In onderstaand geval is het resultaat onjuist
+	      	detect_redundancy(validator(x==0, y==1, x<1))
+    			V1    V2    V3 
+			FALSE FALSE  TRUE 		
+
+
+3 (flauw): Functie detect_boundary_num geeft een upper bound van 1.00e+07 voor een variabele die in een if-then constraint voorkomt. Als de conditionele regel wordt weggelaten dan is de upper bound "INF".	
+		detect_boundary_num(validator(myrule1 = x > 1, myrule2 = y<1 , myrule3= if(x>0) y>0 ))
+			   variable  lowerbound upperbound
+			    x        x 1.001000000   1.00e+07
+			    y        y 0.001000001   9.99e-01
+
+4:	 Functie detect_fixed_values geeft foutieve output voor een conditionele regel
+		detect_fixed_values( validator( m4= if(z>0)y<=2, m5 = if(z>0)y>=2, m6= z>4)) 
+			geen output. Ik verwacht echter dat y=2 een fixed value is.
+
+5:	 Functie detect_fixed_values geeft een foutmelding voor een conditionele regel
+		simplify_fixed_values(validator(if (z==0) y==0, z==0))
+	        	Error in invert_(e) : == not supported
+
+6:      Functie Detect_redundancy geeft een foutief resultaat bij conditionele regels en een warning
+		detect_redundancy (validator(x > 1,  y > 3,  if(x>0) y>2))
+			 V1    V2    V3 
+			FALSE  TRUE FALSE 
+			Warning message:
+			In dnf_set[i] <- negated_rules :  number of items to replace is not a multiple of replacement length
+		De tweede regel is niet overbodig, maar de derde wel
+
+7:     Detect_redundancy werkt niet voor constraints van het type "<="  and ">=" 
+		detect_redundancy(validator(x<=1))
+			Error in FUN(X[[i]], ...) : Invalid expression
+		detect_redundancy(validator(x>=1))
+			Error in FUN(X[[i]], ...) : Invalid expression  
+
+8:    Detect_redundancy werkt niet voor conditional constraints
+		detect_redundancy(validator(if (z==0) z==10))
+ 			Error in A[, v] : subscript out of bounds
+			In addition: Warning message:
+			In dnf_set[i] <- negated_rules :
+			number of items to replace is not a multiple of replacement length
+	       detect_redundancy(validator(if (z<0) y<0))
+   			V1 
+			FALSE 
+			Warning message:
+			In dnf_set[i] <- negated_rules :
+			number of items to replace is not a multiple of replacement length
+
+9:   Substitute_values werkt niet altijd zonder list als tweede argument
+	 substitute_values(validator(x<10),x=1)
+     		Error: This method needs a 'validator' object, but was given a 'numeric'.
+         substitute_values(validator(x<10),list(x=1))
+     		Object of class 'validator' with 1 elements:
+     		.const_x: x == 1  
+
+10. subsitute_value geeft geen goede foutmelding als je vergeet te melden wat je wilt substitueren.
+	  substitute_values(validator(x>0))
+  		Error in names(eq_) <- paste0(".const_", names(.values)) : 
+		'names' attribute [1] must be the same length as the vector [0]
+
+11. Subsititute_values geeft foutief resultaat
+	 substitute_values(validator(if (x>0) y==4),list(x=1))
+		Object of class 'validator' with 2 elements:
+		V1      : abs(y - 4) < 0
+		.const_x: x == 1
+
+12. Subsititute_values geeft foutief resultaat
+	substitute_values(validator(if (x>0) y==4),list(y=4))
+  		Object of class 'validator' with 2 elements:
+		V1      : x <= 0
+		.const_y: y == 4
+
+13.  simplify_conditional geeft een foutief resultaat
+         simplify_conditional(validator(if (x<0) y==2,y==2))
+	    Object of class 'validator' with 2 elements:
+  		V1: !(x < 0) | (abs(y - 2) < 0)
+	        V2: y == 2 
+     nb: in 11) krijgen we een vergelijkbaar abs-statement.
+
+14. simplify_conditional geeft een foutmelding
+  	simplify_conditional(validator(if (x<0) y==2,y<=2))
+  		Error in A[, v] : subscript out of bounds
+
+15. simplify_conditional doet niet waar het voor bedoeld is
+	simplify_conditional(validator(if (z<10) x<2,z<=3))
+		Object of class 'validator' with 2 elements:
+ 		V1: !(z < 10) | (x < 2)
+		V2: (z - 3) <= 0
+
+16. simplify_conditional doet niet waar het voor bedoeld is
+	simplify_conditional(validator(if (z<0) x<2,x<=1))
+		Object of class 'validator' with 2 elements:
+		V1: !(z < 0) | (x < 2)
+		V2: (x - 1) <= 0
