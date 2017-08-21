@@ -31,6 +31,12 @@ test_that("non-constraining clause works", {
 })
 
 test_that("equality constraints work", {
-  rules <-validator(if (z==0) y==0, z==0)
-  simplify_conditional(rules)
+  rules <- validator( if (z == 0) y == 0
+                    , z == 0
+                    )
+  rules_s <- simplify_conditional(rules)
+  exprs <- to_exprs(rules)
+  exprs_s <- to_exprs(rules_s)
+  expect_equal(exprs_s[[1]], quote(y == 0))
+  expect_equal(exprs_s[[2]], quote(z == 0))
 })
