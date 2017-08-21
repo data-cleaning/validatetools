@@ -123,7 +123,7 @@ Dit ga ik toevoegen, maar daarvoor moet ik het omzetten van regels naar het MIP 
 
 ```
 Functie Detect_redundancy geeft een foutief resultaat bij conditionele regels en een warning
-		detect_redundancy (validator(x > 1,  y > 3,  if(x>0) y>2))
+		detect_redundancy(validator(x > 1,  y > 3,  if(x>0) y>2))
 			 V1    V2    V3 
 			FALSE  TRUE FALSE 
 			Warning message:
@@ -261,7 +261,7 @@ simplify_conditional geeft een foutmelding
 ```
 
 ```{r}
-simplify_conditional(validator(if (x<0) y==2, y <= 2))
+simplify_conditional(validator(if (x < 0) y == 2, y <= 2))
 ```
 **bug** laatste versie geeft wel een resultaat, maar niet het correcte: heeft te maken met de gelijkheid.
 

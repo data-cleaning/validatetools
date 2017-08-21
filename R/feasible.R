@@ -12,9 +12,11 @@
 #' @return TRUE or FALSE
 #' @export
 is_infeasible <- function(x, ...){
-  x <- check_validator(x, check_infeasible = FALSE)
-  mip <- errorlocate::miprules(x)
-  mip$is_infeasible()
+  lp <- to_lp(x) # TODO find out how to treat eps for linear inequalities...
+  res <- solve(lp)
+  # any of the following means that there is a solution found by lpSolveAPI:
+  # TODO generate errors if the lpSolveAPI gives other return values...
+  !(res %in% c(0,1,4,12))
 }
 
 

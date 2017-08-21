@@ -30,7 +30,7 @@ test_that("substitute wrong value gives warning", {
   rules <- validator(rule1 = x > 1)
   expect_warning(
     substitute_values(rules, list(x=0))
-  ) 
+  )
 })
 
 

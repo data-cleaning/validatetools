@@ -6,10 +6,6 @@ check_validator <- function(x, copy = TRUE, check_infeasible = TRUE){
   if (isTRUE(check_infeasible) && is_infeasible(x)){
     stop("This rule set is infeasible. Please fix and repair the rule set before continuing.", call. = FALSE)
   }
-  # if (copy){
-  #   x <- x$copy()
-  #   x$options(lin.eq.eps = 0)
-  # }
   invisible(x)
 }
 

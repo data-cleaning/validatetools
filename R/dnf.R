@@ -51,6 +51,7 @@ invert_or_negate <- function(e){
 as_dnf <- function(expr, ...){
   # assumes that the expression has been tested with is.conditional
   clauses <- list()
+  # remove "("
   expr <- consume(expr)
   op_if <- op_to_s(expr)
   
@@ -145,6 +146,78 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
 
+dnf_to_mip_rule <- function(d, name = "", ...){
+  #TODO take care of pure numerical 
+  islin <- sapply(d, errorlocate:::is_lin_)
+  d_l <- d[islin]
+  if (any(islin)){
+    if (length(d) == 1){ # pure numerical
+      return(list(errorlocate:::lin_mip_rule_(d[[1]], name=name)))
+    }
+    names(d_l) <- paste0(name, "._lin", seq_along(d_l))
+    
+    # replace linear parts with a negated symbol.
+    d[islin] <- sapply(names(d_l), function(n){
+      substitute(!V, list(V=as.name(n)))
+    })
+    
+    # turn into mip_rules
+    d_l <- lapply(names(d_l), function(name){
+      e <- d_l[[name]]
+      mr <- errorlocate:::lin_mip_rule_(e = e, name = name)
+    })
+    
+    # replace "==" with two statements
+    is_eq <- sapply(d_l, function(mr) mr$op == "==")
+    #print(list(is_eq = is_eq, d_l = d_l))
+    d_l[is_eq] <- lapply(d_l[is_eq], function(mr){
+      mr$op = "<="
+      mr
+    })
+    
+    d_l2 <- lapply(d_l[is_eq], function(mr){
+      mr$op = ">="
+      mr
+    })
+    
+    #print(list(d_l = d_l, d_l2 = d_l2))
+    d_l <- lapply(c(d_l, d_l2), function(mr){
+      mr <- errorlocate:::rewrite_mip_rule(mr)
+      mr <- errorlocate:::soft_lin_rule(mr, prefix = "")
+      mr
+    })
+    
+    c( list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name=name))
+     , d_l
+    )
+  } else {
+    list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name=name))
+  }
+}
+
+# translates the validator rules into mip rules, TODO rearrange errorlocate and validatetools
+to_miprules <- function(x, ...){
+  check_validator(x, check_infeasible = FALSE)
+  can_translate <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
+  if (!all(can_translate)){
+    warning("Ignoring rules: ", paste(names(x)[!can_translate], collapse = ", "))
+  }
+  x <- x[can_translate]
+  exprs <- to_exprs(x)
+  mr <- lapply(names(exprs), function(name){
+    e <- exprs[[name]]
+    d <- as_dnf(e)
+    lapply(dnf_to_mip_rule(d, name=name), errorlocate:::rewrite_mip_rule)
+  })
+  unlist(mr, recursive = F)
+}
+
+to_lp <- function(x, objective = NULL, eps = 0.001){
+  check_validator(x, check_infeasible = FALSE)
+  rules <- to_miprules(x)
+  errorlocate:::translate_mip_lp(rules = rules, objective = objective, eps = eps)
+}
+
 # as_dnf(quote(!(gender == "male") | x > 6))
 # as_dnf(quote(if (y == 1) x > 6))
 # as_dnf(quote( !(gender %in% "male" & y > 3) | x > 6))
@@ -152,3 +225,25 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
 # e <- quote( x == 1)
 # invert_or_negate(e)
 
+print.mip_rule <- function(x, ...){
+  s <- paste(x$a, "*", names(x$a), collapse = " + ")
+  cat(paste0("[", x$rule, "]: ", s, " ", x$op, " ",x$b))
+}
+
+# e <- quote(if (A %in% "a" && x >= 0) y == 0)
+# d <- as_dnf(e)
+# dnf_to_mip_rule(d, name="rule1")
+# 
+# e <- quote(if (A == "a") B == "b")
+# d <- as_dnf(e)
+# dnf_to_mip_rule(d, name="rule2")
+# 
+# e <- quote(x + 2*y > 1 - x)
+# d <- as_dnf(e)
+# dnf_to_mip_rule(d, name="rule3")
+
+# rules <- validator( rule1 = x + 2*y > 1, rule2 = A %in% c("a1", "a2"), rule3 = if(A == "a1") x > 2)
+# rules
+# lp <- to_lp(rules)
+# solve(lp)
+# lp

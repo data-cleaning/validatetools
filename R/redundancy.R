@@ -48,6 +48,7 @@ simplify_redundancy <- function(x, ...){
   do.call(validate::validator, vals)
 }
 
+# utility function for checking if rule i is redundant.
 is_redundant <- function(dnf_set, i, ...){
   dnf <- dnf_set[[i]]
   negated_rules <- lapply(dnf, invert_or_negate)

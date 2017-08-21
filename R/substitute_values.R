@@ -9,21 +9,21 @@
 #' @param .add_constraints \code{logical}, should values be added as constraints to the resulting validator object?
 #' @param ... alternative way of supplying values for variables (see examples).
 #' @export
-substitute_values <- function (x, .values = list(...), ..., .add_constraints = TRUE){
-  x <- check_validator(x)
+substitute_values <- function (.x, .values = list(...), ..., .add_constraints = TRUE){
+  .x <- check_validator(.x)
   
   if (length(.values) == 0){
-    return(x)
+    return(.x)
   }
   
-  vals <- lapply(to_exprs(x), function(e) {
+  vals <- lapply(to_exprs(.x), function(e){
     e <- substituteDirect(e, .values)
-    tryCatch(r <- eval(e), error = function(x) {
+    tryCatch(r <- eval(e), error = function(x){
       e
     })
   })
   
-  is_cond <- errorlocate::is_conditional(x)
+  is_cond <- errorlocate::is_conditional(.x)
   vals[is_cond] <- lapply(vals[is_cond], function(cond){
     if (is.null(cond)){
       return(TRUE)
@@ -53,11 +53,9 @@ substitute_values <- function (x, .values = list(...), ..., .add_constraints = T
     is_true <- unlist(vals[is_logical])
     if (!all(is_true)) {
       broken <- names(is_true)[!is_true]
-      warning("Invalid rule set: rule(s) '", to_exprs(x[broken]), "' evaluates to FALSE", call. = FALSE)
+      warning("Invalid rule set: rule(s) '", to_exprs(.x[broken]), "' evaluates to FALSE", call. = FALSE)
     }
   }
-  
-  
   
   vals <- vals[!is_logical]
   if (isTRUE(.add_constraints)){
