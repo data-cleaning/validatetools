@@ -47,5 +47,5 @@ test_that("equalities are allowed", {
 test_that("conditional statements are allowed", {
   rules <- validator(x > 1,  y > 1,  if(x > 0) y > 0)
   are_redundant <- detect_redundancy(rules)
-  expect_equivalent(are_redundant, c(FALSE, FALSE, TRUE))
+  expect_equivalent(are_redundant, c(FALSE, TRUE, TRUE))
 })

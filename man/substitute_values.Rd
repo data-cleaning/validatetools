@@ -7,13 +7,13 @@
 substitute_values(.x, .values = list(...), ..., .add_constraints = TRUE)
 }
 \arguments{
+\item{.x}{\code{validator} object with rules}
+
 \item{.values}{(optional) named list with values for variables to substitute}
 
 \item{...}{alternative way of supplying values for variables (see examples).}
 
 \item{.add_constraints}{\code{logical}, should values be added as constraints to the resulting validator object?}
-
-\item{x}{\code{validator} object with rules}
 }
 \description{
 Substitute values into expression, thereby simplifying the rule set.

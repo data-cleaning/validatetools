@@ -9,16 +9,18 @@ simplify_rules(.x, .values = list(...), ...)
 \arguments{
 \item{.x}{\code{\link{validator}} object with the rules to be simplified.}
 
-\item{...}{named parameters that will be used to substitute values.}
+\item{.values}{optional named list with values that will be substituted.}
+
+\item{...}{parameters that will be used to substitute values.}
 }
 \description{
 Simplifies a rule set set by applying different simplification methods. This is a convenience function that 
 works in common cases. The following simplification methods are executed:
 \itemize{
- \code{\link{substitute_values}}: filling in any parameters that are supplied via \code{.values} or \code{...}.
- \code{\link{simplify_fixed_values}}: find out if there are fixed values. If this is the case, they are substituted.
- \code{\link{simplify_conditional}}: Simplify conditional statements, by removing clauses that are superfluous.
- \code{\link{simplify_redundancy}}: remove redundant rules.
+ \item \code{\link{substitute_values}}: filling in any parameters that are supplied via \code{.values} or \code{...}.
+ \item \code{\link{simplify_fixed_values}}: find out if there are fixed values. If this is the case, they are substituted.
+ \item \code{\link{simplify_conditional}}: Simplify conditional statements, by removing clauses that are superfluous.
+ \item \code{\link{simplify_redundancy}}: remove redundant rules.
 }
 For more control, these methods can be called separately.
 }
