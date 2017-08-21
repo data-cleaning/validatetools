@@ -11,12 +11,13 @@
 #' @example ./examples/detect_boundary.R
 #' @export
 #' @param x \code{\link{validator}} object, rule set to be checked
+#' @param eps detected fixed values will have this precission.
 #' @param ... currently not used
 #' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
-detect_boundary_num <- function(x, ...){
+detect_boundary_num <- function(x, eps = 1e-8, ...){
   x <- check_validator(x)
-  #mip <- errorlocate::miprules(x)
-  bounds <- sapply(validate::variables(x), function(v){
+  prec <- -log(eps, 10)
+  bounds <- sapply(get_variables_num(x), function(v){
     bounds <- c(lower=-Inf, upper=Inf)
     
     objective <- setNames(1, v)
@@ -46,8 +47,8 @@ detect_boundary_num <- function(x, ...){
   }, simplify = TRUE)
   
   data.frame( variable = colnames(bounds)
-            , lowerbound = bounds[1,]
-            , upperbound = bounds[2,]
+            , lowerbound = round(bounds[1,], prec)
+            , upperbound = round(bounds[2,], prec)
             , stringsAsFactors = FALSE
             )
 }

@@ -13,6 +13,13 @@ to_exprs <- function(x, ...){
   x$exprs(lin_eq_eps = 0, lin_ineq_eps = 0, vectorize = F)
 }
 
+
+get_variables_num <- function(x){
+  var_num <- sapply(to_miprules(x), function(mr){
+    names(mr$type)[mr$type == "double"]
+  })
+  unique(unlist(var_num))
+}
 # x <- validator( x == y + 2, if (x > 1)  y == 0 )
 # to_exprs(x)
 # x$exprs()

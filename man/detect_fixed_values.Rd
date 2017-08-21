@@ -4,15 +4,17 @@
 \alias{detect_fixed_values}
 \title{Detect fixed values}
 \usage{
-detect_fixed_values(x, ...)
+detect_fixed_values(x, eps = 1e-08, ...)
 }
 \arguments{
 \item{x}{\code{\link{validator}} object with the validation rules.}
 
+\item{eps}{detected fixed values will have this precission.}
+
 \item{...}{not used.}
 }
 \description{
-Detect fixed values
+Detects fixed values in the rule set. To simplify a rule set, these fixed values can be substituted.
 }
 \examples{
 \dontrun{

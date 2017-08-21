@@ -4,10 +4,12 @@
 \alias{detect_boundary_num}
 \title{Detect the range for numerical variables}
 \usage{
-detect_boundary_num(x, ...)
+detect_boundary_num(x, eps = 1e-08, ...)
 }
 \arguments{
 \item{x}{\code{\link{validator}} object, rule set to be checked}
+
+\item{eps}{detected fixed values will have this precission.}
 
 \item{...}{currently not used}
 }

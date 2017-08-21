@@ -4,10 +4,12 @@
 \alias{simplify_fixed_values}
 \title{Simplify fixed values}
 \usage{
-simplify_fixed_values(x, ...)
+simplify_fixed_values(x, eps = 1e-08, ...)
 }
 \arguments{
 \item{x}{\code{\link{validator}} object with validation rules}
+
+\item{eps}{detected fixed values will have this precission.}
 
 \item{...}{passed to \code{\link{substitute_values}}.}
 }
