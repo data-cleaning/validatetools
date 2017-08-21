@@ -56,7 +56,7 @@ test_that("substitute_value works with components", {
 })
 
 
-test_that("reported issues",{
+test_that("reported issues are solved",{
   rules <- validator(if (x>0) y==4)
   rules_s <- substitute_values(rules, list(y=4))
   expect_equal(length(rules_s), 1)

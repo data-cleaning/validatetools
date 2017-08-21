@@ -53,8 +53,8 @@ is_redundant <- function(dnf_set, i, ...){
   dnf <- dnf_set[[i]]
   negated_rules <- lapply(dnf, invert_or_negate)
 
-  # Note the single "[" to allow the injection of multiple rules (a negation of a disjunction are multiple rules!)
-  dnf_set[i] <- negated_rules
+  # We allow the injection of multiple rules (a negation of a disjunction are multiple rules!)
+  dnf_set <- c(dnf_set[-i], negated_rules)
   #names(dnf_set) <- make.unique(names(dnf_set))
   
   exprs <- unlist(lapply(dnf_set, as.expression))
