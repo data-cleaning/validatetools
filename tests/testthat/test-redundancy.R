@@ -43,3 +43,5 @@ test_that("equalities are allowed", {
   red <- detect_redundancy(rules)
   expect_equivalent(red, c(FALSE, FALSE, TRUE, FALSE))
 })
+
+

@@ -15,12 +15,12 @@
 #' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
 detect_boundary_num <- function(x, ...){
   x <- check_validator(x)
-  mip <- errorlocate::miprules(x)
+  #mip <- errorlocate::miprules(x)
   bounds <- sapply(validate::variables(x), function(v){
     bounds <- c(lower=-Inf, upper=Inf)
     
-    mip$objective <- setNames(1, v)
-    lp <- mip$to_lp()
+    objective <- setNames(1, v)
+    lp <- to_lp(x, objective = objective)
     lpSolveAPI::lp.control(lp, presolve="none")
     res <- solve(lp)
 
@@ -29,8 +29,8 @@ detect_boundary_num <- function(x, ...){
       bounds[1] <- lpSolveAPI::get.variables(lp)[i]
     }
 
-    mip$objective <- setNames(-1, v)
-    lp <- mip$to_lp()
+    objective <- setNames(-1, v)
+    lp <- to_lp(x, objective = objective)
     lpSolveAPI::lp.control(lp, presolve="none")
     # TODO check if was succesfull
     

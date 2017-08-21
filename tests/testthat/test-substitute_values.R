@@ -34,6 +34,7 @@ test_that("substitute wrong value gives warning", {
 })
 
 
+
 test_that("substitute_value works with components", {
   rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
   rules_s <- substitute_values(rules, gender="female")
@@ -53,3 +54,12 @@ test_that("substitute_value works with components", {
   expect_equal(length(rules_s), 3) 
   expect_equal(to_exprs(rules_s)[[2]], quote(!(gender == "male")))
 })
+
+
+test_that("reported issues",{
+  rules <- validator(if (x>0) y==4)
+  rules_s <- substitute_values(rules, list(y=4))
+  expect_equal(length(rules_s), 1)
+  expect_equal(as.character(to_exprs(rules_s)), "y == 4")
+})
+  
