@@ -4,7 +4,7 @@
 \alias{detect_fixed_values}
 \title{Detect fixed values}
 \usage{
-detect_fixed_values(x, eps = 1e-08, ...)
+detect_fixed_values(x, eps = x$options("lin.eq.eps"), ...)
 }
 \arguments{
 \item{x}{\code{\link{validator}} object with the validation rules.}
