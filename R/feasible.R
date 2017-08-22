@@ -24,15 +24,74 @@ is_infeasible <- function(x, ...){
 #' 
 #' Make an infeasible system feasible.
 #' @param x \code{\link{validator}} object with the validation rules.
-#' @param ... not used.
+#' @param ... passed to \code{\link{detect_infeasible_rules}}
 make_feasible <- function(x, ...){
   if (!is_infeasible(x)){
     message("No infeasibility found, returning original rule set")
     return(x)
   }
-  # mip_rules <- errorlocate::miprules(x)
-  # mip_rules$._lin_rules
-  stop("to be implemented")
+  dropping <- detect_infeasible_rules(x, ...) # TODO promote weights
+  message("Dropping rule(s): ", paste0('"', dropping, '"', collapse=", "))
+  x[-match(dropping, names(x))]
 }
-# x <- validator( x > 1, x < 0)
-# make_feasible(x)
+
+#' Detect which rules cause infeasibility
+#' 
+#' Detect which rules cause infeasibility. This methods tries to remove the minimum number of rules to make the system
+#' mathematically feasible. Note that this may not give you the desired system, because some rules may be more important
+#' to you than others. This can be mitigated by supplying weights for the rules.
+#' @export
+#' @param x \code{\link{validator}} object with rules
+#' @param weight optional named \code{\link{numeric}} with weights. The names
+#' @param ... not used
+#' @return \code{character} with the names of the rules that are causing infeasibility.
+detect_infeasible_rules <- function(x, weight = numeric(), ...){
+  if (!is_infeasible(x)){
+    return(NULL)
+  }
+  
+  mr <- to_miprules(x)
+  
+  # make all rules soft rules
+  objective <- numeric()
+  
+  mr <- lapply(mr , function(r){
+    is_lin <- all(r$type == "double")
+    is_cat <- all(r$type == "binary")
+    if (is_lin){
+      r <- errorlocate:::soft_lin_rule(r, prefix = ".delta_")
+    } else if (is_cat){
+      r <- errorlocate:::soft_cat_rule(r, prefix = ".delta_")
+    }
+    r$weight <- 1
+    objective[[paste0(".delta_", r$rule)]] <<- r$weight
+    r
+  })
+  
+  # set the weights to the weights supplied by the user
+  if (!is.null(names(weight))){
+    names(weight) <- paste0(".delta_", names(weight))
+    objective[names(weight)] <- weight
+  }
+  
+  lp <- errorlocate:::translate_mip_lp(mr, objective = objective) #TODO figure out "eps" param
+  res <- solve(lp)
+  
+  if (res %in% c(0,1,4,12)){
+    vars <- lpSolveAPI::get.variables(lp)
+    names(vars) <- colnames(lp)
+    idx <- grep("^\\.delta_", names(vars))
+    rules <- vars[idx]
+    names(rules) <- sub("^\\.delta_", "", names(rules))
+    
+    dropping <- names(rules)[rules == 1]
+    dropping
+  } else {
+    stop("No solution found to make system feasible.", call. = FALSE)
+  }
+}
+
+# x <- validator( x > 1, r2 = x < 0, x > 2)
+# detect_infeasible_rules(x, weight = c(r2=10))
+# make_feasible(x, weight = c(r2=10))
+
