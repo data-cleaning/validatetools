@@ -1,8 +1,11 @@
 #' Find out for a contradicting 
 #' 
+#' Find out for a contradicting 
 #' @export
+#' @example ./examples/feasible.R
 #' @param x \code{\link{validator}} object with rules.
 #' @param rule_name \code{character} with the names of the rules that are causing infeasibility.
+#' @return \code{character} with conflicting rules.
 is_contradicted_by <- function(x, rule_name){
   N <- length(x)
   weight <- rep(N, length(rule_name))

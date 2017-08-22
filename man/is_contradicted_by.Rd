@@ -11,6 +11,26 @@ is_contradicted_by(x, rule_name)
 
 \item{rule_name}{\code{character} with the names of the rules that are causing infeasibility.}
 }
+\value{
+\code{character} with conflicting rules.
+}
 \description{
 Find out for a contradicting
+}
+\examples{
+rules <- validator( x > 0)
+
+is_infeasible(rules)
+
+rules <- validator( rule1 = x > 0
+                  , rule2 = x < 0
+                  )
+
+is_infeasible(rules)
+
+detect_infeasible_rules(rules)
+make_feasible(rules)
+
+# find out the conflict with this rule
+is_contradicted_by(rules, "rule1")
 }

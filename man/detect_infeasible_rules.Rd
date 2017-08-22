@@ -21,3 +21,20 @@ Detect which rules cause infeasibility. This methods tries to remove the minimum
 mathematically feasible. Note that this may not give you the desired system, because some rules may be more important
 to you than others. This can be mitigated by supplying weights for the rules.
 }
+\examples{
+rules <- validator( x > 0)
+
+is_infeasible(rules)
+
+rules <- validator( rule1 = x > 0
+                  , rule2 = x < 0
+                  )
+
+is_infeasible(rules)
+
+detect_infeasible_rules(rules)
+make_feasible(rules)
+
+# find out the conflict with this rule
+is_contradicted_by(rules, "rule1")
+}

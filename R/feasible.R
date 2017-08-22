@@ -25,6 +25,8 @@ is_infeasible <- function(x, ...){
 #' Make an infeasible system feasible.
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... passed to \code{\link{detect_infeasible_rules}}
+#' @example ./examples/feasible.R
+#' @return \code{\link{validator}} object with feasible rules.
 make_feasible <- function(x, ...){
   dropping <- detect_infeasible_rules(x, ...) 
   
@@ -43,6 +45,7 @@ make_feasible <- function(x, ...){
 #' mathematically feasible. Note that this may not give you the desired system, because some rules may be more important
 #' to you than others. This can be mitigated by supplying weights for the rules.
 #' @export
+#' @example ./examples/feasible.R
 #' @param x \code{\link{validator}} object with rules
 #' @param weight optional named \code{\link{numeric}} with weights. The names
 #' @param ... not used
