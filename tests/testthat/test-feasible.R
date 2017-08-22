@@ -25,3 +25,18 @@ test_that("trivial feasible works", {
 test_that("errorring works",{
   expect_error(is_infeasible("A"), "This method needs a 'validator'")
 })
+
+test_that("make_feasible works", {
+  rules <- validator( x > 1, r2 = x < 0, x > 2)
+  expect_message(rules_f <- make_feasible(rules))
+  exprs_f <- to_exprs(rules_f)
+  expect_equal(exprs_f[[1]], quote(x > 1))
+  expect_equal(exprs_f[[2]], quote(x > 2))
+})
+
+test_that("make_feasible works with weights", {
+  rules <- validator( x > 1, r2 = x < 0, x > 2)
+  expect_message(rules_f <- make_feasible(rules, weight = c(r2=10)))
+  exprs_f <- to_exprs(rules_f)
+  expect_equal(exprs_f[[1]], quote(x < 0))
+})

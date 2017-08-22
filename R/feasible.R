@@ -91,6 +91,8 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   }
 }
 
+
+
 # x <- validator( x > 1, r2 = x < 0, x > 2)
 # detect_infeasible_rules(x, weight = c(r2=10))
 # make_feasible(x, weight = c(r2=10))
