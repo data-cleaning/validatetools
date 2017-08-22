@@ -61,6 +61,44 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 #' @param ... not used
 #' @export
 detect_boundary_cat <- function(x, ...){
-  stop("To be implemented")
+  var_cat <- get_variables_cat(x)
+  bounds <- sapply(seq_len(nrow(var_cat)), function(i){
+    bounds <- c(min=0L, max=1L)
+    v <- var_cat$bin_variable[i]
+    
+    objective <- setNames(1, v)
+    lp <- to_lp(x, objective = objective)
+    lpSolveAPI::lp.control(lp, presolve="none")
+    res <- solve(lp)
+    
+    if (res %in% c(0,1,4,12)){ # succesful, TODO warn if failure...
+      i <- match(v, colnames(lp))
+      bounds[1] <- lpSolveAPI::get.variables(lp)[i]
+    }
+    
+    objective <- setNames(-1, v)
+    lp <- to_lp(x, objective = objective)
+    lpSolveAPI::lp.control(lp, presolve="none")
+    res <- solve(lp)
+    
+    if (res %in% c(0,1,4,12)){ # succesful, TODO warn if failure...
+      i <- match(v, colnames(lp))
+      bounds[2] <- lpSolveAPI::get.variables(lp)[i]
+    }
+    bounds
+  })
+  #stop("To be implemented")
   # for each category detect bound
+  if (length(bounds)){
+    cbind(var_cat[-1], t(bounds))
+  } else{
+    NULL
+  }
 }
+
+# rules <- x <-  validator( x > 1
+#                         , if (x > 0) A == 'a1'
+#                         , B %in% c("b1", "b2")
+#                         )
+# detect_boundary_cat(rules)
+

@@ -76,7 +76,7 @@ rules <- validator( rule1 = x1 + x2 + x3 == 0
 simplify_fixed_values(rules)
 #> Warning: Currently only checking numerical values
 #> Object of class 'validator' with 3 elements:
-#>  rule1    : x1 + x2 + 0 == 0
+#>  rule1    : abs(x1 + x2 + 0 - 0) < 1e-08
 #>  rule2    : x1 + x2 >= 0
 #>  .const_x3: x3 == 0
 ```
