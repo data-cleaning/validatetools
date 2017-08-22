@@ -123,7 +123,7 @@ as_dnf <- function(expr, ...){
   structure(clauses, class="dnf")
 }
 
-as_clause <- as_dnf
+#as_clause <- as_dnf
 
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
