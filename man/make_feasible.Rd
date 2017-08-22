@@ -9,7 +9,7 @@ make_feasible(x, ...)
 \arguments{
 \item{x}{\code{\link{validator}} object with the validation rules.}
 
-\item{...}{not used.}
+\item{...}{passed to \code{\link{detect_infeasible_rules}}}
 }
 \description{
 Make an infeasible system feasible.

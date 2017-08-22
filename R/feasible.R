@@ -26,11 +26,13 @@ is_infeasible <- function(x, ...){
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... passed to \code{\link{detect_infeasible_rules}}
 make_feasible <- function(x, ...){
-  if (!is_infeasible(x)){
+  dropping <- detect_infeasible_rules(x, ...) 
+  
+  if (length(dropping) == 0){
     message("No infeasibility found, returning original rule set")
     return(x)
   }
-  dropping <- detect_infeasible_rules(x, ...) # TODO promote weights
+  
   message("Dropping rule(s): ", paste0('"', dropping, '"', collapse=", "))
   x[-match(dropping, names(x))]
 }
@@ -47,7 +49,7 @@ make_feasible <- function(x, ...){
 #' @return \code{character} with the names of the rules that are causing infeasibility.
 detect_infeasible_rules <- function(x, weight = numeric(), ...){
   if (!is_infeasible(x)){
-    return(NULL)
+    return(character())
   }
   
   mr <- to_miprules(x)
@@ -90,8 +92,6 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
     stop("No solution found to make system feasible.", call. = FALSE)
   }
 }
-
-
 
 # x <- validator( x > 1, r2 = x < 0, x > 2)
 # detect_infeasible_rules(x, weight = c(r2=10))
