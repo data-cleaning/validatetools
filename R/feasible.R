@@ -23,6 +23,7 @@ is_infeasible <- function(x, ...){
 #' Make an infeasible system feasible.
 #' 
 #' Make an infeasible system feasible.
+#' @export
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... passed to \code{\link{detect_infeasible_rules}}
 #' @example ./examples/feasible.R
