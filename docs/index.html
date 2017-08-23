@@ -29,12 +29,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
@@ -92,6 +86,22 @@ rules &lt;-<span class="st"> </span><span class="kw">validator</span>( x &gt;<sp
 <span class="kw"><a href="reference/is_infeasible.html">is_infeasible</a></span>(rules)
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
+<div id="simplifying" class="section level3">
+<h3 class="hasAnchor">
+<a href="#simplifying" class="anchor"></a>Simplifying</h3>
+<p>The function <code>simplify_rules</code> combines most simplification methods in <code>validatetools</code> to simplify a rule set. For example, it reduces the following rule set to a simpler form:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rules &lt;-<span class="st"> </span><span class="kw">validator</span>( x &gt;<span class="st"> </span><span class="dv">0</span>
+                  , if (x &gt;<span class="st"> </span><span class="dv">0</span>) y ==<span class="st"> </span><span class="dv">1</span>
+                  , A %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"a1"</span>, <span class="st">"a2"</span>)
+                  , if (A ==<span class="st"> "a1"</span>) y &gt;<span class="st"> </span><span class="dv">1</span>
+                  )
+
+<span class="kw"><a href="reference/simplify_rules.html">simplify_rules</a></span>(rules)
+<span class="co">#&gt; Object of class 'validator' with 3 elements:</span>
+<span class="co">#&gt;  V1      : x &gt; 0</span>
+<span class="co">#&gt;  .const_y: y == 1</span>
+<span class="co">#&gt;  .const_A: A == "a2"</span></code></pre></div>
+</div>
 <div id="value-substitution" class="section level3">
 <h3 class="hasAnchor">
 <a href="#value-substitution" class="anchor"></a>Value substitution</h3>
@@ -112,11 +122,9 @@ rules &lt;-<span class="st"> </span><span class="kw">validator</span>( x &gt;<sp
 <a href="#finding-fixed-values" class="anchor"></a>Finding fixed values</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rules &lt;-<span class="st"> </span><span class="kw">validator</span>( x &gt;=<span class="st"> </span><span class="dv">0</span>, x &lt;=<span class="dv">0</span>)
 <span class="kw"><a href="reference/detect_fixed_values.html">detect_fixed_values</a></span>(rules)
-<span class="co">#&gt; Warning: Currently only checking numerical values</span>
 <span class="co">#&gt; $x</span>
 <span class="co">#&gt; [1] 0</span>
 <span class="kw"><a href="reference/simplify_fixed_values.html">simplify_fixed_values</a></span>(rules)
-<span class="co">#&gt; Warning: Currently only checking numerical values</span>
 <span class="co">#&gt; Object of class 'validator' with 1 elements:</span>
 <span class="co">#&gt;  .const_x: x == 0</span>
 
@@ -125,7 +133,6 @@ rules &lt;-<span class="st"> </span><span class="kw">validator</span>( <span cla
                   , <span class="dt">rule3 =</span> x3 &gt;=<span class="dv">0</span>
                   )
 <span class="kw"><a href="reference/simplify_fixed_values.html">simplify_fixed_values</a></span>(rules)
-<span class="co">#&gt; Warning: Currently only checking numerical values</span>
 <span class="co">#&gt; Object of class 'validator' with 3 elements:</span>
 <span class="co">#&gt;  rule1    : x1 + x2 + 0 == 0</span>
 <span class="co">#&gt;  rule2    : x1 + x2 &gt;= 0</span>

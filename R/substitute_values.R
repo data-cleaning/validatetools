@@ -18,7 +18,14 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
   
   vals <- lapply(to_exprs(.x), function(e){
     e <- substituteDirect(e, .values)
-    tryCatch(r <- eval(e), error = function(x){
+    tryCatch({
+      r <- eval(e)
+      # to deal with non-mip translatable rules
+      if (is.null(r) || is.na(r)){
+        r <- TRUE
+      }
+      r
+    }, error = function(x){
       e
     })
   })

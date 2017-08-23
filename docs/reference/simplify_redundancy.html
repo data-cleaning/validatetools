@@ -52,12 +52,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -115,6 +109,8 @@
 <span class='co'># rule1 is superfluous</span>
 <span class='fu'>simplify_redundancy</span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
 #&gt;  rule2: x &gt; 2</div><div class='input'>
+<span class='co'># rule 1 is implied by rule 2</span>
+<span class='fu'><a href='is_implied_by.html'>is_implied_by</a></span>(<span class='no'>rules</span>, <span class='st'>"rule1"</span>)</div><div class='output co'>#&gt; [1] "rule2"</div><div class='input'>
 <span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'>validator</span>( <span class='kw'>rule1</span> <span class='kw'>=</span> <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>
                   , <span class='kw'>rule2</span> <span class='kw'>=</span> <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>
 )
@@ -124,7 +120,9 @@
 #&gt;  rule1: x &gt; 2</div><div class='input'>
 <span class='co'># Note that detection signifies both rules!</span>
 <span class='fu'><a href='detect_redundancy.html'>detect_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; rule1 rule2 
-#&gt;  TRUE  TRUE </div></pre>
+#&gt;  TRUE  TRUE </div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

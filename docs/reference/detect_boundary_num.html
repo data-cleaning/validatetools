@@ -52,12 +52,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -88,7 +82,7 @@
 This allows for manual rule set checking: does rule set <code>x</code> overly constrain numerical values?</p>
     
 
-    <pre class="usage"><span class='fu'>detect_boundary_num</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>detect_boundary_num</span>(<span class='no'>x</span>, <span class='kw'>eps</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -96,6 +90,10 @@ This allows for manual rule set checking: does rule set <code>x</code> overly co
     <tr>
       <th>x</th>
       <td><p><code>validator</code> object, rule set to be checked</p></td>
+    </tr>
+    <tr>
+      <th>eps</th>
+      <td><p>detected fixed values will have this precission.</p></td>
     </tr>
     <tr>
       <th>...</th>

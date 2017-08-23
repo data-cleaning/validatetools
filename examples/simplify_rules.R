@@ -5,3 +5,4 @@ rules <- validator( x > 0
                   )
 
 simplify_rules(rules)
+
