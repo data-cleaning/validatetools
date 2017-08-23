@@ -149,7 +149,7 @@ rules <- validator( rule1 = x > 2
                   , rule2 = x > 2
 )
 
-# standout: rule1 and rule2, oldest rules wins
+# standout: rule1 and rule2, first rule wins
 simplify_redundancy(rules)
 #> Object of class 'validator' with 1 elements:
 #>  rule1: x > 2
