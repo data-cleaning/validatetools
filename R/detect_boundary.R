@@ -42,7 +42,6 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
     } else if (!(res %in% c(3,13))){
       
     }
-    #lpSolveAPI::delete.lp(lp)
     return(bounds)
   }, simplify = TRUE)
   

@@ -20,6 +20,14 @@ get_variables_num <- function(x){
   })
   unique(unlist(var_num))
 }
+
+get_variables_cat <- function(x){
+  var_cat <- sapply(to_miprules(x), function(mr){
+    nms <- names(mr$type)
+    nms[mr$type == "binary" & grepl(":", nms)]
+  })
+  unique(unlist(var_cat))
+}
 # x <- validator( x == y + 2, if (x > 1)  y == 0 )
 # to_exprs(x)
 # x$exprs()
