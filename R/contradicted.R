@@ -1,6 +1,7 @@
 #' Find out for a contradicting 
 #' 
-#' Find out for a contradicting 
+#' Find out for a contradicting rule which rules are conflicting. This helps in determining and assessing conflicts in rule sets. Which
+#' of the rules should stay and which should go? 
 #' @export
 #' @example ./examples/feasible.R
 #' @param x \code{\link{validator}} object with rules.

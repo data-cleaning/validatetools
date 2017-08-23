@@ -15,7 +15,8 @@ is_contradicted_by(x, rule_name)
 \code{character} with conflicting rules.
 }
 \description{
-Find out for a contradicting
+Find out for a contradicting rule which rules are conflicting. This helps in determining and assessing conflicts in rule sets. Which
+of the rules should stay and which should go?
 }
 \examples{
 rules <- validator( x > 0)
