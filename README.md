@@ -33,11 +33,24 @@ rules <- validator( x > 0)
 is_infeasible(rules)
 #> [1] FALSE
 
-rules <- validator( x > 0
-                  , x < 0
+rules <- validator( rule1 = x > 0
+                  , rule2 = x < 0
                   )
 is_infeasible(rules)
 #> [1] TRUE
+
+detect_infeasible_rules(rules)
+#> [1] "rule1"
+make_feasible(rules)
+#> Dropping rule(s): "rule1"
+#> Object of class 'validator' with 1 elements:
+#>  rule2: x < 0
+#> Options:
+#> raise: none; lin.eq.eps: 1e-08; na.value: NA; sequential: TRUE; na.condition: FALSE
+
+# find out the conflict with this rule
+is_contradicted_by(rules, "rule1")
+#> [1] "rule2"
 ```
 
 ### Simplifying
