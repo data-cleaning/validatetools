@@ -9,7 +9,8 @@ detect_infeasible_rules(x, weight = numeric(), ...)
 \arguments{
 \item{x}{\code{\link{validator}} object with rules}
 
-\item{weight}{optional named \code{\link{numeric}} with weights. The names}
+\item{weight}{optional named \code{\link{numeric}} with weights. Unnamed variables in the weight are given the default
+weight \code{1}.}
 
 \item{...}{not used}
 }
@@ -18,8 +19,8 @@ detect_infeasible_rules(x, weight = numeric(), ...)
 }
 \description{
 Detect which rules cause infeasibility. This methods tries to remove the minimum number of rules to make the system
-mathematically feasible. Note that this may not give you the desired system, because some rules may be more important
-to you than others. This can be mitigated by supplying weights for the rules.
+mathematically feasible. Note that this may not result in your desired system, because some rules may be more important
+to you than others. This can be mitigated by supplying weights for the rules. Default weight is 1.
 }
 \examples{
 rules <- validator( x > 0)

@@ -15,7 +15,9 @@ make_feasible(x, ...)
 \code{\link{validator}} object with feasible rules.
 }
 \description{
-Make an infeasible system feasible.
+Make an infeasible system feasible, by removing the minimum (weighted) number of rules, such that the remaining
+rules are not conflicting.
+This function uses \code{\link{detect_infeasible_rules}} for determining the rules to be removed.
 }
 \examples{
 rules <- validator( x > 0)

@@ -22,7 +22,9 @@ is_infeasible <- function(x, ...){
 
 #' Make an infeasible system feasible.
 #' 
-#' Make an infeasible system feasible.
+#' Make an infeasible system feasible, by removing the minimum (weighted) number of rules, such that the remaining
+#' rules are not conflicting.
+#' This function uses \code{\link{detect_infeasible_rules}} for determining the rules to be removed.
 #' @export
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... passed to \code{\link{detect_infeasible_rules}}
@@ -43,12 +45,13 @@ make_feasible <- function(x, ...){
 #' Detect which rules cause infeasibility
 #' 
 #' Detect which rules cause infeasibility. This methods tries to remove the minimum number of rules to make the system
-#' mathematically feasible. Note that this may not give you the desired system, because some rules may be more important
-#' to you than others. This can be mitigated by supplying weights for the rules.
+#' mathematically feasible. Note that this may not result in your desired system, because some rules may be more important
+#' to you than others. This can be mitigated by supplying weights for the rules. Default weight is 1.
 #' @export
 #' @example ./examples/feasible.R
 #' @param x \code{\link{validator}} object with rules
-#' @param weight optional named \code{\link{numeric}} with weights. The names
+#' @param weight optional named \code{\link{numeric}} with weights. Unnamed variables in the weight are given the default
+#' weight \code{1}.
 #' @param ... not used
 #' @return \code{character} with the names of the rules that are causing infeasibility.
 detect_infeasible_rules <- function(x, weight = numeric(), ...){

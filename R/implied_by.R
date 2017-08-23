@@ -1,6 +1,8 @@
 #' Find which rule(s) make rule_name redundant
 #' 
 #' Find out which rules are causing rule_name(s) to be redundant.
+#' @example ./examples/redundancy.R
+#' @export
 #' @param x \code{\link{validator}} object with rule
 #' @param rule_name \code{character} with the names of the rules to be checked
 #' @param ... not used
@@ -13,24 +15,26 @@ is_implied_by <- function(x, rule_name, ...){
   if (length(x_r) == 0){
     return(character())
   }
-  N <- length(x)
-  
+
   exprs_org <- to_exprs(x_org)
   # TODO check if x_r can be transformed into mixed integer problem
   exprs_r <- to_exprs(x_r)
   
-  negated_rules <- lapply(exprs_r, as_dnf)
-  #negated_rules <- lapply(negated_rules, inverse.)
-
-  negated_rules <- lapply(dnf, invert_or_negate)
+  negated_rules <- lapply(exprs_r, function(e){
+    dnf <- as_dnf(e)
+    neg_dnf <- lapply(dnf, invert_or_negate)
+    #neg_expr <- lapply(neg_dnf, as.expression)
+    neg_dnf
+  })
   
-  # We allow the injection of multiple rules (a negation of a disjunction are multiple rules!)
-  dnf_set <- c(dnf_set[-i], negated_rules)
-  #names(dnf_set) <- make.unique(names(dnf_set))
+  negated_rules <- unlist(negated_rules, recursive = FALSE)
+  names(negated_rules) <- paste0(".negated_", names(negated_rules))
+  test_rules <- do.call(validate::validator, c(exprs_org, negated_rules))
   
-  exprs <- unlist(lapply(dnf_set, as.expression))
-  test_rules <- do.call(validate::validator, exprs)
-  test_rules
+  # set the weights for the negated rules to a large enough value
+  weight <- rep(length(x), length(negated_rules))
+  names(weight) <- names(negated_rules)
+  detect_infeasible_rules(test_rules, weight)
 }
 
 # rules <- x <- validator(r1 = x > 1, r2 = x > 2)
