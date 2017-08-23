@@ -1,7 +1,6 @@
 ---
 title: "Bevindingen JDAS"
 author: "Edwin de Jonge"
-date: "August 17, 2017"
 output:
   pdf_document: default
   html_document: default
@@ -114,10 +113,8 @@ Functie detect_fixed_values geeft een foutmelding voor een conditionele regel
 
 Dit wordt op dit moment nog niet ondersteund in deze syntax, maar kan wel op de volgende wijze geschreven worden:
 ```{r}
-simplify_fixed_values(validator(if (z >= 0 && z <= 0) y==0, z==0))
+simplify_fixed_values(validator(if (z == 0) y==0, z==0))
 ```
-Dit ga ik toevoegen, maar daarvoor moet ik het omzetten van regels naar het MIP probleem aanpassen. (volgende week of zo).
-**Enhancement**
 
 ### 6
 
@@ -131,7 +128,10 @@ Functie Detect_redundancy geeft een foutief resultaat bij conditionele regels en
 		De tweede regel is niet overbodig, maar de derde wel
 ```
 
-Ah, dit is een regelrechte **bug**: hier ga ik naar kijken.
+```{r}
+detect_redundancy(validator(x > 1,  y > 3,  if(x>0) y > 2))
+simplify_redundancy(validator(x > 1,  y > 3,  if(x>0) y > 2))
+```
 
 ### 7
 
@@ -169,7 +169,7 @@ detect_redundancy(validator(x >= 1))
 Deze regel strand nu (met feasiblity check) op dezelfde fout als 5 en 8. Is in essentie dezelfde fout als 8.
 
 ```{r}
-detect_redundancy(validator(if (z >= 0 && z <= 0) z==10))
+detect_redundancy(validator(if (z == 0) z==10))
 ```
 
 ### 9 
