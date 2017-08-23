@@ -123,7 +123,7 @@ as_dnf <- function(expr, ...){
   structure(clauses, class="dnf")
 }
 
-as_clause <- as_dnf
+#as_clause <- as_dnf
 
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
@@ -147,12 +147,11 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
 }
 
 dnf_to_mip_rule <- function(d, name = "", ...){
-  #TODO take care of pure numerical 
   islin <- sapply(d, errorlocate:::is_lin_)
   d_l <- d[islin]
   if (any(islin)){
     if (length(d) == 1){ # pure numerical
-      return(list(errorlocate:::lin_mip_rule_(d[[1]], name=name)))
+      return(list(errorlocate:::lin_mip_rule_(d[[1]], name = name)))
     }
     names(d_l) <- paste0(name, "._lin", seq_along(d_l))
     
@@ -169,7 +168,7 @@ dnf_to_mip_rule <- function(d, name = "", ...){
     
     # replace "==" with two statements
     is_eq <- sapply(d_l, function(mr) mr$op == "==")
-    #print(list(is_eq = is_eq, d_l = d_l))
+   
     d_l[is_eq] <- lapply(d_l[is_eq], function(mr){
       mr$op = "<="
       mr
@@ -179,20 +178,19 @@ dnf_to_mip_rule <- function(d, name = "", ...){
       mr$op = ">="
       mr
     })
+    ##
     
-    #print(list(d_l = d_l, d_l2 = d_l2))
+    # turn all linear subclauses into soft constraints.
     d_l <- lapply(c(d_l, d_l2), function(mr){
       mr <- errorlocate:::rewrite_mip_rule(mr)
       mr <- errorlocate:::soft_lin_rule(mr, prefix = "")
       mr
     })
-    
-    c( list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name=name))
-     , d_l
-    )
-  } else {
-    list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name=name))
+    ##
   }
+  c( list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name = name))
+   , d_l # for pure categorical this is list()
+   )
 }
 
 # translates the validator rules into mip rules, TODO rearrange errorlocate and validatetools
@@ -207,7 +205,9 @@ to_miprules <- function(x, ...){
   mr <- lapply(names(exprs), function(name){
     e <- exprs[[name]]
     d <- as_dnf(e)
-    lapply(dnf_to_mip_rule(d, name=name), errorlocate:::rewrite_mip_rule)
+    lapply( dnf_to_mip_rule(d, name = name)
+          , errorlocate:::rewrite_mip_rule
+          )
   })
   unlist(mr, recursive = F)
 }

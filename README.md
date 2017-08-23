@@ -40,6 +40,24 @@ is_infeasible(rules)
 #> [1] TRUE
 ```
 
+### Simplifying
+
+The function `simplify_rules` combines most simplification methods in `validatetools` to simplify a rule set. For example, it reduces the following rule set to a simpler form:
+
+``` r
+rules <- validator( x > 0
+                  , if (x > 0) y == 1
+                  , A %in% c("a1", "a2")
+                  , if (A == "a1") y > 1
+                  )
+
+simplify_rules(rules)
+#> Object of class 'validator' with 3 elements:
+#>  V1      : x > 0
+#>  .const_y: y == 1
+#>  .const_A: A == "a2"
+```
+
 ### Value substitution
 
 ``` r
@@ -61,11 +79,9 @@ substitute_values(rules, z = 3, gender = "male")
 ``` r
 rules <- validator( x >= 0, x <=0)
 detect_fixed_values(rules)
-#> Warning: Currently only checking numerical values
 #> $x
 #> [1] 0
 simplify_fixed_values(rules)
-#> Warning: Currently only checking numerical values
 #> Object of class 'validator' with 1 elements:
 #>  .const_x: x == 0
 
@@ -74,7 +90,6 @@ rules <- validator( rule1 = x1 + x2 + x3 == 0
                   , rule3 = x3 >=0
                   )
 simplify_fixed_values(rules)
-#> Warning: Currently only checking numerical values
 #> Object of class 'validator' with 3 elements:
 #>  rule1    : x1 + x2 + 0 == 0
 #>  rule2    : x1 + x2 >= 0

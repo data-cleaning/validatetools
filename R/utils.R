@@ -26,8 +26,20 @@ get_variables_cat <- function(x){
     nms <- names(mr$type)
     nms[mr$type == "binary" & grepl(":", nms)]
   })
-  unique(unlist(var_cat))
+  var_cat <- unique(unlist(var_cat))
+  if (length(var_cat) == 0){
+    return(
+      data.frame( bin_variable = character(0)
+                , variable     = character(0)
+                , value        = character(0)
+                , stringsAsFactors = FALSE
+      )
+    )
+  }
+
+  data.frame( bin_variable = var_cat
+            , variable     = sub(":.*", "", var_cat)
+            , value        = sub("*.:", "", var_cat)
+            , stringsAsFactors = FALSE
+            )
 }
-# x <- validator( x == y + 2, if (x > 1)  y == 0 )
-# to_exprs(x)
-# x$exprs()
