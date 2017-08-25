@@ -10,7 +10,7 @@
 #' @param ... not used.
 #' @return \code{\link{validator}} simplified rule set.
 simplify_conditional <- function(x, ...){
-  x <- check_validator(x)
+  check_validator(x)
   
   is_cond <- errorlocate::is_conditional(x)
   vals <- to_exprs(x)
@@ -22,7 +22,8 @@ simplify_conditional <- function(x, ...){
     vals[[i]] <- cond
   }
   # TODO set meta data correctly for the resulting rule set
-  do.call(validate::validator, vals)
+  x_new <- do.call(validate::validator, vals)
+  decorate_validator(x, x_new, description = "validatetools::simplify_conditional")
 }
 
 

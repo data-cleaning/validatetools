@@ -32,7 +32,7 @@ detect_redundancy <- function(x, ...){
 #' @param ... not used
 #' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
 simplify_redundancy <- function(x, ...){
-  x <- check_validator(x)
+  check_validator(x)
 
   can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
   
@@ -45,7 +45,8 @@ simplify_redundancy <- function(x, ...){
   }
   vals[can_be_checked] <- lapply(dnf_set, as.expression)
   vals <- unlist(vals) # this removes empty expressions
-  do.call(validate::validator, vals)
+  x_new <- do.call(validate::validator, vals)
+  decorate_validator(x, x_new)
 }
 
 # utility function for checking if rule i is redundant.

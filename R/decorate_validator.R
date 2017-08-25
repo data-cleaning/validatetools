@@ -6,30 +6,32 @@ decorate_validator <- function(x_old, x_new, description = "simplified"){
   idx <- match(names(x_old), names(x_new))
   
   # newly created rules
-  origin(x_new)[-idx] <- "validatetools"
-  description(x_new)[-idx] <- description
+  if (length(idx) < length(x_new)){
+    origin(x_new)[-idx] <- "validatetools"
+    description(x_new)[-idx] <- description
+  }
   
   # reuse all meta data
-  label(x_new)[idx] <- label(x_old)[]
-  created(x_new)[idx] <- created(x_old)[]
-  origin(x_new)[idx] <- origin(x_old)[]
-  description(x_new)[idx] <- description(x_old)[]
-
-  # update meta data for changed expressions
-  exprs_old <- to_exprs(x_old)
-  exprs_new <- to_exprs(x_new[idx])
-  changed <- sapply(seq_along(exprs_old), function(i){
-    exprs_new[[i]] != exprs_old[[i]]
-  })
-  idx <- idx[changed]
   if (length(idx)){
-    origin(x_new)[idx] <- "validatetools"
-    description(x_new)[idx] <- paste0( description
-                                     , " from '"
-                                     , exprs_old[idx]
-                                     , "'\n"
-                                     , description(x_new)[idx]
-                                     )
+    label(x_new)[idx] <- label(x_old)[]
+    created(x_new)[idx] <- created(x_old)[]
+    origin(x_new)[idx] <- origin(x_old)[]
+    description(x_new)[idx] <- description(x_old)[]
+  
+    # update meta data for changed expressions
+    exprs_old <- as.character(to_exprs(x_old))
+    exprs_new <- as.character(to_exprs(x_new[idx]))
+    changed <- exprs_new != exprs_old
+    if (any(changed)){
+      idx <- idx[changed]
+      origin(x_new)[idx] <- "validatetools"
+      description(x_new)[idx] <- paste0( description
+                                       , " from '"
+                                       , exprs_old[idx]
+                                       , "'\n"
+                                       , description(x_new)[idx]
+                                       )
+    }
   }
   
   x_new
