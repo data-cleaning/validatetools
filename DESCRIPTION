@@ -1,6 +1,6 @@
 Package: validatetools
 Title: Tools for Manipulating and Simplifying Validation Rule Sets
-Version: 0.3.1.9000
+Version: 0.3.2
 Authors@R: c( person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role = c("aut", "cre"))
             , person("Mark", "van der Loo", email = "mark.vanderloo@gmail.com",role = c("aut"))
             , person("Jacco", "Daalmans", role = c("ctb"))
