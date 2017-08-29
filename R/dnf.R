@@ -125,6 +125,7 @@ as_dnf <- function(expr, ...){
 
 #as_clause <- as_dnf
 
+#' @export
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
   x_s <- sapply(x, deparse)
@@ -138,10 +139,12 @@ as.character.dnf <- function(x, as_if = FALSE, ...){
   }
 }
 
+#' @export
 print.dnf <- function(x, as_if = FALSE, ...){
   cat(as.character(x, as_if = as_if, ...))
 }
 
+#' @export
 as.expression.dnf <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
@@ -225,6 +228,7 @@ to_lp <- function(x, objective = NULL, eps = 0.001){
 # e <- quote( x == 1)
 # invert_or_negate(e)
 
+#' @export
 print.mip_rule <- function(x, ...){
   s <- paste(x$a, "*", names(x$a), collapse = " + ")
   cat(paste0("[", x$rule, "]: ", s, " ", x$op, " ",x$b))

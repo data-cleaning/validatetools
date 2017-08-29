@@ -59,6 +59,12 @@ is_redundant <- function(dnf_set, i, ...){
   
   exprs <- unlist(lapply(dnf_set, as.expression))
   test_rules <- do.call(validate::validator, exprs)
+  # if (i == 2){
+  #   for (n in ls()){
+  #     cat(n, ': \n')
+  #     print(get(n))
+  #   }
+  # }
   is_infeasible(test_rules)
 }
 
