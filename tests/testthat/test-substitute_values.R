@@ -61,5 +61,13 @@ test_that("reported issues are solved",{
   rules_s <- substitute_values(rules, list(y=4))
   expect_equal(length(rules_s), 1)
   expect_equal(as.character(to_exprs(rules_s)), "y == 4")
+  
+  
+  a <- 1
+  rules <- validator( x > a)
+  rules_s <- substitute_values(rules, x = 0)
+  
+  exprs_s <- to_exprs(rules_s)
+  expect_equal(exprs_s[[1]], quote( 0 > a))
 })
   

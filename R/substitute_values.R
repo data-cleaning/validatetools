@@ -19,10 +19,10 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
   vals <- lapply(to_exprs(.x), function(e){
     e <- substituteDirect(e, .values)
     tryCatch({
-      r <- eval(e)
+      r <- eval(e, envir = list(), enclos = NULL)
       # to deal with non-mip translatable rules
-      if (is.null(r) || is.na(r)){
-        r <- TRUE
+      if (!is.logical(r)){
+        r <- e
       }
       r
     }, error = function(x){
@@ -60,7 +60,7 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
     is_true <- unlist(vals[is_logical])
     if (!all(is_true)) {
       broken <- names(is_true)[!is_true]
-      warning("Invalid rule set: rule(s) '", to_exprs(.x[broken]), "' evaluates to FALSE", call. = FALSE)
+      warning("Invalid substition/rule set: rule(s) '", to_exprs(.x[broken]), "' evaluate to FALSE", call. = FALSE)
     }
   }
   
