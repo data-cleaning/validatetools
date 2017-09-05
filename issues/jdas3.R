@@ -29,7 +29,7 @@ detect_infeasible_rules( validator( if ( x > 1 ) y < 0
                         )
 #' #3
 #' 
-#' Terechte opmerking: ga kijken of ik deze kan toevoegen.
+#' Terechte opmerking: is gefixed in volgende versie
 rules <- validator( rule1 = x > 0
                   , rule2 = y > 0
                   , rule3 = x + y == -1

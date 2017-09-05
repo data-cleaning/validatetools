@@ -11,7 +11,15 @@ is_contradicted_by <- function(x, rule_name){
   N <- length(x)
   weight <- rep(N, length(rule_name))
   names(weight) <- rule_name
-  detect_infeasible_rules(x, weight = weight)
+  
+  res <- character()
+  contra <- detect_infeasible_rules(x, weight = weight)
+  while (length(contra) && !any(contra %in% names(weight))){
+    res <- c(res, contra)
+    weight[contra] <- N
+    contra <- detect_infeasible_rules(x, weight = weight)
+  }
+  res
 }
 
 # x <- validator( x > 1, r2 = x < 0, x > 2)

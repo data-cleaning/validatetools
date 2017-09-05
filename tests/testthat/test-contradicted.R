@@ -16,3 +16,15 @@ test_that("is_contradicted_by works for non-contradicting rule", {
   rules_cd <- is_contradicted_by(rules, "r2")
   expect_equal(rules_cd, character())
 })
+
+test_that("is_contradicted_by works for multiple rules (IIS)", {
+  rules <- validator( r1 = x > 0
+                    , r2 = y > 0
+                    , r3 = x + y == -1
+                    )
+  
+  rules_cd <- is_contradicted_by(rules,"r3")
+  expect_equal(rules_cd, c("r2","r1"))
+})
+
+
