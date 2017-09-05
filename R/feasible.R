@@ -89,6 +89,8 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
       r <- errorlocate:::soft_lin_rule(r, prefix = ".delta_")
     } else if (is_cat){
       r <- errorlocate:::soft_cat_rule(r, prefix = ".delta_")
+    } else {
+      return(r)
     }
     r$weight <- 1
     objective[[paste0(".delta_", r$rule)]] <<- r$weight
