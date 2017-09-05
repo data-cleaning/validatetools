@@ -28,3 +28,19 @@ test_that("is_contradicted_by works for multiple rules (IIS)", {
 })
 
 
+test_that("is_contradicted_by works for empty rule", {
+  rules <- validator( r1 = x > 1
+                    , r2 = y > 2
+  )
+  rules_cd <- is_contradicted_by(rules, NULL)
+  expect_equal(rules_cd, character())
+})
+
+
+test_that("is_contradicted_by works on wrong rule", {
+  rules <- validator( r1 = x > 1
+                    , r2 = y > 2
+  )
+  expect_warning(rules_cd <- is_contradicted_by(rules, "r3"))
+  expect_equal(rules_cd, character())
+})

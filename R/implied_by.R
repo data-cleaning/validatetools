@@ -9,7 +9,11 @@
 #' @return \code{character} with the names of the rule that cause the implication.
 is_implied_by <- function(x, rule_name, ...){
   check_validator(x)
-  idx <- match(rule_name, names(x))
+  idx <- match(rule_name, names(x), 0)
+  if (any(idx == 0L)){
+    nms <- paste0('"', rule_name[idx==0L],'"', collapse = ", ")
+    warning("Rule(s) ", nms, " not found in 'x'", call. = FALSE)
+  }
   x_org <- x[-idx]
   x_r <- x[idx] # contains the set of rules that are redundant
   if (length(x_r) == 0){

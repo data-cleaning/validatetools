@@ -18,3 +18,14 @@ test_that("is_implied_by with equality constraint", {
   expect_equal(res, "r1")
 })
 
+test_that("is_implied_by with no rule name", {
+  rules <- validator(r1 = x == 12, r2 = x > 6)
+  res <- is_implied_by(rules, rule_name = NULL)
+  expect_equal(res, character())
+})
+
+test_that("is_implied_by with wrong rule name", {
+  rules <- validator(r1 = x == 12, r2 = x > 6)
+  expect_warning(res <- is_implied_by(rules, rule_name = "r3"), regexp = "not found")
+  expect_equal(res, character())
+})
