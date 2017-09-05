@@ -11,3 +11,10 @@ test_that("is_implied_by works for non-redundant rules", {
   res <- is_implied_by(rules, rule_name = "r1")
   expect_equal(res, character())
 })
+
+test_that("is_implied_by with equality constraint", {
+  rules <- validator(r1 = x == 12, r2 = x > 6)
+  res <- is_implied_by(rules, rule_name = "r2")
+  expect_equal(res, "r1")
+})
+

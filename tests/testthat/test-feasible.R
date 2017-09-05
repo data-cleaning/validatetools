@@ -48,3 +48,13 @@ test_that("detect_infeasible_rules with equality constraint works",{
   res <- detect_infeasible_rules(rules)
   expect_equal(res, "r1")
 })
+
+
+test_that("detect_infeasible_rules with equality constraint works",{
+  rules <- validator( r1 = if ( x > 1) y < 0
+                    , r2 = x > 2
+                    , r3 = y > 1
+                    )
+  res <- detect_infeasible_rules(rules)
+  expect_equal(res, "r3")
+})
