@@ -61,6 +61,24 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   
   mr <- to_miprules(x)
   
+  is_equality <- sapply(mr, function(m){
+    m$op == "==" && all(m$type == "double")
+  })
+  
+  # replace each equality with two inequalities
+  if (any(is_equality)){
+    mr[is_equality] <- lapply(mr[is_equality], function(m){
+      m$op <- "<="
+      m
+    })
+    
+    mr <- c(mr, lapply(mr[is_equality], function(m){
+      m$a <- -m$a
+      m$b <- -m$b
+      m
+    }))
+  }
+  
   # make all rules soft rules
   objective <- numeric()
   

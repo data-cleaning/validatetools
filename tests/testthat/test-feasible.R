@@ -40,3 +40,11 @@ test_that("make_feasible works with weights", {
   exprs_f <- to_exprs(rules_f)
   expect_equal(exprs_f[[1]], quote(x < 0))
 })
+
+test_that("detect_infeasible_rules with equality constraint works",{
+  rules <- validator( r1 = x == 0
+                    , r2 = x == 1
+                    )
+  res <- detect_infeasible_rules(rules)
+  expect_equal(res, "r1")
+})
