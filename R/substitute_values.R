@@ -38,7 +38,7 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
     clauses <- as_dnf(cond)
     # try to simplify clauses
     s_clauses <- lapply(clauses, function(clause){
-      tryCatch(r <- eval(clause), error = function(x) {
+      tryCatch(r <- eval(clause, envir = list(), enclos = NULL), error = function(x) {
         clause
       })
     })
