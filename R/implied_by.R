@@ -34,11 +34,13 @@ is_implied_by <- function(x, rule_name, ...){
   negated_rules <- unlist(negated_rules, recursive = FALSE)
   names(negated_rules) <- paste0(".negated_", names(negated_rules))
   test_rules <- do.call(validate::validator, c(exprs_org, negated_rules))
-  
+
   # set the weights for the negated rules to a large enough value
-  weight <- rep(length(x), length(negated_rules))
-  names(weight) <- names(negated_rules)
-  detect_infeasible_rules(test_rules, weight)
+  # weight <- rep(length(x), length(negated_rules))
+  # names(weight) <- names(negated_rules)
+  # detect_infeasible_rules(test_rules, weight)
+  
+  is_contradicted_by(test_rules, names(negated_rules))
 }
 
 # rules <- x <- validator(r1 = x > 1, r2 = x > 2)

@@ -29,3 +29,20 @@ test_that("is_implied_by with wrong rule name", {
   expect_warning(res <- is_implied_by(rules, rule_name = "r3"), regexp = "not found")
   expect_equal(res, character())
 })
+
+
+test_that("is_implied_by works with multiple implicators", {
+  rules <- validator( r1 = x + y >= 0
+                    , r2 = x >= 0
+                    , r3 = y >= 0
+                    )
+  res <- is_implied_by(rules, rule_name = "r1")
+  expect_equal(res, c("r2","r3"))
+  
+  rules <- validator( r1 = x >= 0
+                    , r2 = x >= 1
+                    , r3 = x >= 2
+                    )
+  res <- is_implied_by(rules, rule_name = "r1")
+  expect_equal(res, c("r2","r3"))
+})
