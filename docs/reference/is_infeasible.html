@@ -52,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -119,8 +125,7 @@ there will be always a rule that is not obeyed.</p>
 <span class='fu'>is_infeasible</span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'><a href='detect_infeasible_rules.html'>detect_infeasible_rules</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; [1] "rule1"</div><div class='input'><span class='fu'><a href='make_feasible.html'>make_feasible</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; <span class='message'>Dropping rule(s): "rule1"</span></div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
 #&gt;  rule2: x &lt; 0
-#&gt; Options:
-#&gt; raise: none; lin.eq.eps: 1e-08; na.value: NA; sequential: TRUE; na.condition: FALSE</div><div class='input'>
+#&gt; Rules are evaluated using locally defined options</div><div class='input'>
 <span class='co'># find out the conflict with this rule</span>
 <span class='fu'><a href='is_contradicted_by.html'>is_contradicted_by</a></span>(<span class='no'>rules</span>, <span class='st'>"rule1"</span>)</div><div class='output co'>#&gt; [1] "rule2"</div></pre>
   </div>

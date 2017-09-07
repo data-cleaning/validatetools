@@ -52,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -99,7 +105,7 @@ This procedure tries to simplify conditional statements.</p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>validator</code> simplified rule set.</p>
+    <p><code><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></code> simplified rule set.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -123,14 +129,14 @@ This procedure tries to simplify conditional statements.</p>
                   )
 <span class='fu'>simplify_conditional</span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 2 elements:
 #&gt;  r1: y &gt; 0
-#&gt;  r2: !(x &lt; 1) | y &gt; 1</div><div class='input'>
+#&gt;  r2: !(x &lt; 1) | (y &gt; 1)</div><div class='input'>
 <span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='kw'>r1</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='no'>A</span> <span class='kw'>==</span> <span class='st'>"a1"</span>) <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>
                   , <span class='kw'>r2</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='no'>A</span> <span class='kw'>==</span> <span class='st'>"a2"</span>) <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>
                   , <span class='kw'>r3</span> <span class='kw'>=</span> <span class='no'>A</span> <span class='kw'>==</span> <span class='st'>"a1"</span>
                   )
 <span class='fu'>simplify_conditional</span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 3 elements:
 #&gt;  r1: x &gt; 0
-#&gt;  r2: !((A == "a2")) | x &gt; 1
+#&gt;  r2: !((A == "a2")) | (x &gt; 1)
 #&gt;  r3: A == "a1"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -52,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -106,20 +112,20 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='fu'>library</span>(<span class='no'>validate</span>)
-  <span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='no'>x</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
-                    , <span class='no'>x</span> <span class='kw'>&lt;=</span> <span class='fl'>0</span>
-                    )
-  <span class='fu'>detect_fixed_values</span>(<span class='no'>rules</span>)
-  <span class='fu'><a href='simplify_fixed_values.html'>simplify_fixed_values</a></span>(<span class='no'>rules</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>validate</span>)
+<span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='no'>x</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
+                  , <span class='no'>x</span> <span class='kw'>&lt;=</span> <span class='fl'>0</span>
+                  )
+<span class='fu'>detect_fixed_values</span>(<span class='no'>rules</span>)
+<span class='fu'><a href='simplify_fixed_values.html'>simplify_fixed_values</a></span>(<span class='no'>rules</span>)
 
-  <span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='no'>x1</span> + <span class='no'>x2</span> + <span class='no'>x3</span> <span class='kw'>==</span> <span class='fl'>0</span>
-                    , <span class='no'>x1</span> + <span class='no'>x2</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
-                    , <span class='no'>x3</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
-                    )
-  <span class='fu'><a href='simplify_fixed_values.html'>simplify_fixed_values</a></span>(<span class='no'>rules</span>)
-})</div></pre>
+<span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='no'>x1</span> + <span class='no'>x2</span> + <span class='no'>x3</span> <span class='kw'>==</span> <span class='fl'>0</span>
+                  , <span class='no'>x1</span> + <span class='no'>x2</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
+                  , <span class='no'>x3</span> <span class='kw'>&gt;=</span> <span class='fl'>0</span>
+                  )
+<span class='fu'><a href='simplify_fixed_values.html'>simplify_fixed_values</a></span>(<span class='no'>rules</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

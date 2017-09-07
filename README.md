@@ -45,8 +45,7 @@ make_feasible(rules)
 #> Dropping rule(s): "rule1"
 #> Object of class 'validator' with 1 elements:
 #>  rule2: x < 0
-#> Options:
-#> raise: none; lin.eq.eps: 1e-08; na.value: NA; sequential: TRUE; na.condition: FALSE
+#> Rules are evaluated using locally defined options
 
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1")
@@ -130,7 +129,7 @@ rules <- validator( r1 = if (x > 0) y > 0
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
 #>  r1: y > 0
-#>  r2: !(x < 1) | y > 1
+#>  r2: !(x < 1) | (y > 1)
 ```
 
 ### Removing redundant rules
