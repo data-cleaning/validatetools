@@ -27,6 +27,12 @@ test_that("trivial example", {
   expect_equal(rules_s$rules[[1]]@expr, quote(x == 0))
 })
 
+test_that("no fixed values generates a message", {
+  rules <- validate::validator( x >=0 )
+  rules_s <- expect_message(simplify_fixed_values(rules))
+  expect_equal(to_exprs(rules), to_exprs(rules_s))
+})
+
 
 test_that("a more complex example", {
   rules <- validate::validator( x1 + x2 + x3 == 0
