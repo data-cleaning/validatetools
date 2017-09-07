@@ -29,7 +29,7 @@ test_that("trivial example", {
 
 test_that("no fixed values generates a message", {
   rules <- validate::validator( x >=0 )
-  rules_s <- expect_message(simplify_fixed_values(rules))
+  rules_s <- simplify_fixed_values(rules)
   expect_equal(to_exprs(rules), to_exprs(rules_s))
 })
 
