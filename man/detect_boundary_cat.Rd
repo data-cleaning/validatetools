@@ -11,6 +11,27 @@ detect_boundary_cat(x, ...)
 
 \item{...}{not used}
 }
+\value{
+\code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 
+category/value of a categorical variable.
+}
 \description{
 Detect viable domains for categorical variables
+}
+\examples{
+rules <- validator(
+  x >= 1,
+  x + y <= 10,
+  y >= 6
+)
+
+detect_boundary_num(rules)
+
+rules <- validator(
+  job \%in\% c("yes", "no"),
+  if (job == "no") income == 0,
+  income > 0
+)
+
+detect_boundary_cat(rules)
 }

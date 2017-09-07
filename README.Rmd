@@ -63,12 +63,11 @@ The function `simplify_rules` combines most simplification methods in `validatet
 For example, it reduces the following rule set to a simpler form:
 
 ```{r}
-rules <- validator( x > 0
-                  , if (x > 0) y == 1
-                  , A %in% c("a1", "a2")
-                  , if (A == "a1") y > 1
+rules <- validator( age < 16
+                  , if (age < 16) income == 0
+                  , job %in% c("yes", "no")
+                  , if (job == "yes") income > 0
                   )
-
 simplify_rules(rules)
 ```
 

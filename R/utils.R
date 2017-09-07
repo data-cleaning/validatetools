@@ -38,8 +38,8 @@ get_variables_cat <- function(x){
   }
 
   data.frame( bin_variable = var_cat
-            , variable     = sub(":.*", "", var_cat)
-            , value        = sub("*.:", "", var_cat)
+            , variable     = sub(":.*$", "", var_cat)
+            , value        = sub("^.*:", "", var_cat)
             , stringsAsFactors = FALSE
             )
 }

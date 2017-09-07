@@ -31,6 +31,14 @@ rules <- validator(
 )
 
 detect_boundary_num(rules)
+
+rules <- validator(
+  job \%in\% c("yes", "no"),
+  if (job == "no") income == 0,
+  income > 0
+)
+
+detect_boundary_cat(rules)
 }
 \references{
 Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
