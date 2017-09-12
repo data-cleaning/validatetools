@@ -63,10 +63,10 @@ The function `simplify_rules` combines most simplification methods in `validatet
 For example, it reduces the following rule set to a simpler form:
 
 ```{r}
-rules <- validator( age < 16
-                  , if (age < 16) income == 0
+rules <- validator( if (age < 16) income == 0
                   , job %in% c("yes", "no")
                   , if (job == "yes") income > 0
+                  , age < 13
                   )
 simplify_rules(rules)
 ```
@@ -75,12 +75,12 @@ simplify_rules(rules)
 ### Value substitution
 
 ```{r}
-rules <- validator( rule1 = z > 1
-                  , rule2 = y > z
-                  , rule3 = if (gender == "male") w > 2
+rules <- validator( rule1 = height > 5
+                  , rule2 = max_height >= height
+                  , rule3 = if (gender == "male") weight > 100
                   , rule4 = gender %in% c("male", "female")
                   )
-substitute_values(rules, z = 3, gender = "male")
+substitute_values(rules, height = 6, gender = "male")
 ```
 
 ### Finding fixed values
@@ -101,8 +101,8 @@ simplify_fixed_values(rules)
 
 ```{r}
 # non-relaxing clause
-rules <- validator( r1 = if (x > 1) y > 3
-                  , r2 = y < 2
+rules <- validator( r1 = if (income > 0) age >= 16
+                  , r2 = age < 12
                   )
 # y > 3 is always FALSE so r1 can be simplified
 simplify_conditional(rules)
@@ -118,15 +118,15 @@ simplify_conditional(rules)
 ### Removing redundant rules
 
 ```{r}
-rules <- validator( rule1 = x > 1
-                  , rule2 = x > 2
+rules <- validator( rule1 = age > 12
+                  , rule2 = age > 18
                   )
 
 # rule1 is superfluous
 simplify_redundancy(rules)
 
-rules <- validator( rule1 = x > 2
-                  , rule2 = x > 2
+rules <- validator( rule1 = age > 12
+                  , rule2 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins

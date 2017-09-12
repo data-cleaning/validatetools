@@ -5,7 +5,7 @@
 validatetools
 =============
 
-`validatetools` is a utility package for managing validation rule sets that can be defined with `validate`. In production systems validation rule sets tend to grow organically and accumulate redundant or (partial) contradictory rules. `validatetools` helps to identify problems with large rule sets and includes simplification methods for resolving issues.
+`validatetools` is a utility package for managing validation rule sets that are defined with `validate`. In production systems validation rule sets tend to grow organically and accumulate redundant or (partially) contradictory rules. `validatetools` helps to identify problems with large rule sets and includes simplification methods for resolving issues.
 
 Installation
 ------------
@@ -57,32 +57,31 @@ is_contradicted_by(rules, "rule1")
 The function `simplify_rules` combines most simplification methods in `validatetools` to simplify a rule set. For example, it reduces the following rule set to a simpler form:
 
 ``` r
-rules <- validator( x > 0
-                  , if (x > 0) y == 1
-                  , A %in% c("a1", "a2")
-                  , if (A == "a1") y > 1
+rules <- validator( if (age < 16) income == 0
+                  , job %in% c("yes", "no")
+                  , if (job == "yes") income > 0
+                  , age < 13
                   )
-
 simplify_rules(rules)
 #> Object of class 'validator' with 3 elements:
-#>  V1      : x > 0
-#>  .const_y: y == 1
-#>  .const_A: A == "a2"
+#>  V4           : age < 13
+#>  .const_income: income == 0
+#>  .const_job   : job == "no"
 ```
 
 ### Value substitution
 
 ``` r
-rules <- validator( rule1 = z > 1
-                  , rule2 = y > z
-                  , rule3 = if (gender == "male") w > 2
+rules <- validator( rule1 = height > 5
+                  , rule2 = max_height >= height
+                  , rule3 = if (gender == "male") weight > 100
                   , rule4 = gender %in% c("male", "female")
                   )
-substitute_values(rules, z = 3, gender = "male")
+substitute_values(rules, height = 6, gender = "male")
 #> Object of class 'validator' with 4 elements:
-#>  rule2        : y > 3
-#>  rule3        : w > 2
-#>  .const_z     : z == 3
+#>  rule2        : max_height >= 6
+#>  rule3        : weight > 100
+#>  .const_height: height == 6
 #>  .const_gender: gender == "male"
 ```
 
@@ -112,14 +111,14 @@ simplify_fixed_values(rules)
 
 ``` r
 # non-relaxing clause
-rules <- validator( r1 = if (x > 1) y > 3
-                  , r2 = y < 2
+rules <- validator( r1 = if (income > 0) age >= 16
+                  , r2 = age < 12
                   )
 # y > 3 is always FALSE so r1 can be simplified
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
-#>  r1: x <= 1
-#>  r2: y < 2
+#>  r1: income <= 0
+#>  r2: age < 12
 
 
 # non-constraining clause
@@ -135,23 +134,23 @@ simplify_conditional(rules)
 ### Removing redundant rules
 
 ``` r
-rules <- validator( rule1 = x > 1
-                  , rule2 = x > 2
+rules <- validator( rule1 = age > 12
+                  , rule2 = age > 18
                   )
 
 # rule1 is superfluous
 simplify_redundancy(rules)
 #> Object of class 'validator' with 1 elements:
-#>  rule2: x > 2
+#>  rule2: age > 18
 
-rules <- validator( rule1 = x > 2
-                  , rule2 = x > 2
+rules <- validator( rule1 = age > 12
+                  , rule2 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins
 simplify_redundancy(rules)
 #> Object of class 'validator' with 1 elements:
-#>  rule1: x > 2
+#>  rule1: age > 12
 
 # Note that detection signifies both rules!
 detect_redundancy(rules)
