@@ -52,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -114,12 +120,14 @@ Rules that evaluate to TRUE because of the substition are removed.</p>
 <span class='co'># rule1 is dropped, since it always is true</span>
 <span class='fu'>substitute_values</span>(<span class='no'>rules</span>, <span class='fu'>list</span>(<span class='kw'>z</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt; Object of class 'validator' with 2 elements:
 #&gt;  rule2   : y &gt; 2
-#&gt;  .const_z: z == 2</div><div class='input'><span class='co'># you can also supply the values as separate parameters</span>
+#&gt;  .const_z: z == 2</div><div class='input'>
+<span class='co'># you can also supply the values as separate parameters</span>
 <span class='fu'>substitute_values</span>(<span class='no'>rules</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 2 elements:
 #&gt;  rule2   : y &gt; 2
 #&gt;  .const_z: z == 2</div><div class='input'>
-
-
+<span class='co'># you can choose to not add substituted values as a constraint</span>
+<span class='fu'>substitute_values</span>(<span class='no'>rules</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>.add_constraints</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
+#&gt;  rule2: y &gt; 2</div><div class='input'>
 <span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/validate/topics/validator'>validator</a></span>( <span class='kw'>rule1</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='no'>gender</span> <span class='kw'>==</span> <span class='st'>"male"</span>) <span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>18</span> )
 <span class='fu'>substitute_values</span>(<span class='no'>rules</span>, <span class='kw'>gender</span><span class='kw'>=</span><span class='st'>"male"</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 2 elements:
 #&gt;  rule1        : age &gt;= 18

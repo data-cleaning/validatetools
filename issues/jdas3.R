@@ -3,6 +3,7 @@
 #' author: Edwin de Jonge
 #' date: ""
 #' output:
+#'    cbsmarkdown::cbs_pdf_document: default
 #'    pdf_document: default
 #' ---
 #+ include=FALSE

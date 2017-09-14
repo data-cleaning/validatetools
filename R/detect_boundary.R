@@ -56,8 +56,11 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 #' Detect viable domains for categorical variables
 #' 
 #' Detect viable domains for categorical variables
+#' @example ./examples/detect_boundary.R
 #' @param x \code{\link{validator}} object with rules
 #' @param ... not used
+#' @return \code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 
+#' category/value of a categorical variable.
 #' @export
 detect_boundary_cat <- function(x, ...){
   var_cat <- get_variables_cat(x)

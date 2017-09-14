@@ -31,3 +31,16 @@ test_that("detect cat boundary works", {
   expect_equal(as.list(cat_bounds[2,]), list(variable="B", value="b1", min=0, max=1))
   expect_equal(as.list(cat_bounds[3,]), list(variable="B", value="b2", min=0, max=1))
 })
+
+test_that("detect cat boundary works for longer named variables", {
+  rules <- validator(
+    job %in% c("yes", "no"),
+    if (job == "no") income == 0,
+    income > 0
+  )
+  
+  cat_bounds <- detect_boundary_cat(rules)
+  expect_equal(as.list(cat_bounds[1,]), list(variable="job", value="yes", min=1, max=1))
+  expect_equal(as.list(cat_bounds[2,]), list(variable="job", value="no", min=0, max=0))
+})
+
