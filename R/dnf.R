@@ -128,10 +128,10 @@ as_dnf <- function(expr, ...){
 #' @export
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
-  x_s <- sapply(x, deparse)
+  x_s <- sapply(x, deparse, width.cutoff = 500L)
   if (as_if && length(x) > 1){
     x_i <- sapply(x, invert_or_negate)
-    x_i_s <- sapply(x_i, deparse)
+    x_i_s <- sapply(x_i, deparse, width.cutoff = 500L)
     s <- paste(utils::head(x_i_s, -1), collapse = " & ")
     paste0("if (",s,") ", utils::tail(x_s, 1))
   } else {
