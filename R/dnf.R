@@ -124,14 +124,22 @@ as_dnf <- function(expr, ...){
 }
 
 #as_clause <- as_dnf
+deparse_all <- function(x, width.cutoff = 500L, ...){
+  text <- deparse(x, width.cutoff = width.cutoff, ...)
+  if (length(text) == 1){
+    return(text)
+  }
+  text <- sub("^\\s+", "", text)
+  paste0(text, collapse = "")
+}
 
 #' @export
 as.character.dnf <- function(x, as_if = FALSE, ...){
   x <- x[] # removes NULL entries
-  x_s <- sapply(x, deparse, width.cutoff = 500L)
+  x_s <- sapply(x, deparse_all)
   if (as_if && length(x) > 1){
     x_i <- sapply(x, invert_or_negate)
-    x_i_s <- sapply(x_i, deparse, width.cutoff = 500L)
+    x_i_s <- sapply(x_i, deparse_all)
     s <- paste(utils::head(x_i_s, -1), collapse = " & ")
     paste0("if (",s,") ", utils::tail(x_s, 1))
   } else {

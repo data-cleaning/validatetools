@@ -72,5 +72,14 @@ test_that("low level stuff works", {
   expect_error(as_dnf(expr), "Invalid expression")
 })
 
+test_that("long statement works", {
+  long_sum <- paste0("x", 1:100, collapse = " + ")
+  text <- paste0(long_sum, " == 0")
+  expr <- parse(text = text)[[1]]
+  dnf <- as_dnf(expr)
+  s <- as.character(dnf)
+  expect_equal(s, text)
+})
+
 
 #as_dnf(quote( )
