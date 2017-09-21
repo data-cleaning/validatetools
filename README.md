@@ -52,22 +52,30 @@ is_contradicted_by(rules, "rule1")
 #> [1] "rule2"
 ```
 
-### Simplifying
+Simplifying
+-----------
 
-The function `simplify_rules` combines most simplification methods in `validatetools` to simplify a rule set. For example, it reduces the following rule set to a simpler form:
+The function `simplify_rules` combines most simplification methods of `validatetools` to simplify a rule set. For example, it reduces the following rule set to a simpler form:
 
 ``` r
 rules <- validator( if (age < 16) income == 0
                   , job %in% c("yes", "no")
                   , if (job == "yes") income > 0
-                  , age < 13
                   )
-simplify_rules(rules)
+simplify_rules(rules, age = 13)
 #> Object of class 'validator' with 3 elements:
-#>  V4           : age < 13
 #>  .const_income: income == 0
+#>  .const_age   : age == 13
 #>  .const_job   : job == "no"
+#or 
+simplify_rules(rules, job = "yes")
+#> Object of class 'validator' with 3 elements:
+#>  V1        : age >= 16
+#>  V3        : income > 0
+#>  .const_job: job == "yes"
 ```
+
+`simplify_rules` combines the following simplification and substitution methods:
 
 ### Value substitution
 
@@ -114,7 +122,7 @@ simplify_fixed_values(rules)
 rules <- validator( r1 = if (income > 0) age >= 16
                   , r2 = age < 12
                   )
-# y > 3 is always FALSE so r1 can be simplified
+# age > 16 is always FALSE so r1 can be simplified
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
 #>  r1: income <= 0
@@ -122,13 +130,13 @@ simplify_conditional(rules)
 
 
 # non-constraining clause
-rules <- validator( r1 = if (x > 0) y > 0
-                  , r2 = if (x < 1) y > 1
+rules <- validator( if (age  < 16) income == 0
+                  , if (age >=16) income >= 0
                   )
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
-#>  r1: y > 0
-#>  r2: !(x < 1) | (y > 1)
+#>  V1: !(age < 16) | (income == 0)
+#>  V2: income >= 0
 ```
 
 ### Removing redundant rules
