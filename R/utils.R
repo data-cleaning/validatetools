@@ -4,7 +4,7 @@ check_validator <- function(x, copy = TRUE, check_infeasible = TRUE){
     stop("This method needs a 'validator' object, but was given a '", class(x), "'.",call. = FALSE)
   }
   if (isTRUE(check_infeasible) && is_infeasible(x)){
-    stop("This rule set is infeasible. Please fix and repair the rule set before continuing.", call. = FALSE)
+    stop("This rule set is infeasible. Please fix and repair the rule set with `make_feasible` before continuing.", call. = FALSE)
   }
   invisible(x)
 }

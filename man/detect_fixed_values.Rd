@@ -17,7 +17,6 @@ detect_fixed_values(x, eps = x$options("lin.eq.eps"), ...)
 Detects fixed values in the rule set. To simplify a rule set, these fixed values can be substituted.
 }
 \examples{
-\dontrun{
 library(validate)
 rules <- validator( x >= 0
                   , x <= 0
@@ -30,7 +29,6 @@ rules <- validator( x1 + x2 + x3 == 0
                   , x3 >= 0
                   )
 simplify_fixed_values(rules)
-}
 }
 \seealso{
 \code{\link{simplify_fixed_values}}

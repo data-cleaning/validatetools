@@ -21,7 +21,6 @@ Detect variables of which the values are restricted to a single value by the
 rule set. Simplify the rule set by replacing fixed variables with these values.
 }
 \examples{
-\dontrun{
 library(validate)
 rules <- validator( x >= 0
                   , x <= 0
@@ -34,7 +33,6 @@ rules <- validator( x1 + x2 + x3 == 0
                   , x3 >= 0
                   )
 simplify_fixed_values(rules)
-}
 }
 \seealso{
 Other redundancy: \code{\link{detect_fixed_values}},

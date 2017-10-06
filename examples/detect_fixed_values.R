@@ -1,4 +1,3 @@
-\dontrun{
 library(validate)
 rules <- validator( x >= 0
                   , x <= 0
@@ -11,4 +10,3 @@ rules <- validator( x1 + x2 + x3 == 0
                   , x3 >= 0
                   )
 simplify_fixed_values(rules)
-}

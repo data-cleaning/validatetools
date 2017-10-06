@@ -18,6 +18,10 @@ is_infeasible <- function(x, ...){
   !(res %in% c(0,1,4,12))
 }
 
+is_feasible <- function(x, ...){
+  !is_infeasible(x, ...)
+}
+
 
 #' Make an infeasible system feasible.
 #' 

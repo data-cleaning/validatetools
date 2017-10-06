@@ -7,9 +7,9 @@
 \title{Tools for validation rules}
 \description{
 \code{validatetools} is a utility package for managing validation rule sets
-that can be defined with \code{\link{validate}}. In production systems
+that are defined with \code{\link{validate}}. In production systems
 validation rule sets tend to grow organically and accumulate redundant or
-(partial) contradictory rules. `validatetools` helps to identify problems
+(partially) contradictory rules. `validatetools` helps to identify problems
 with large rule sets and includes simplification methods for resolving
 issues.
 }
