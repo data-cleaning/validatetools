@@ -15,13 +15,9 @@ is_infeasible(x, ...)
 TRUE or FALSE
 }
 \description{
-This function checks if the linear, categorical and conditional rules are consistent. If not
-the system is said to be "infeasible" and it is not possible to validate any data with it, because
-there will be always a rule that is not obeyed.
-}
-\details{
-It works by translating these rules into a mixed integer problem and check this system of
-(in)equalities for feasibility.
+An infeasible rule set cannot be satisfied by any data because of internal 
+contradictions. This function checks whether the record-wise linear,
+categorical and conditional rules in a rule set are consistent.
 }
 \examples{
 rules <- validator( x > 0)
@@ -39,4 +35,11 @@ make_feasible(rules)
 
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1")
+}
+\seealso{
+Other feasibility: \code{\link{detect_boundary_cat}},
+  \code{\link{detect_boundary_num}},
+  \code{\link{detect_infeasible_rules}},
+  \code{\link{is_contradicted_by}},
+  \code{\link{make_feasible}}
 }

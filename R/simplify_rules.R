@@ -14,6 +14,7 @@
 #' @param .x \code{\link{validator}} object with the rules to be simplified.
 #' @param .values optional named list with values that will be substituted. 
 #' @param ... parameters that will be used to substitute values.
+#' @family redundancy
 simplify_rules <- function(.x, .values = list(...), ...){
   .x <- substitute_values(.x, .values)
   .x <- simplify_fixed_values(.x)

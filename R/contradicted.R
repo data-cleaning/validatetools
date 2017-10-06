@@ -6,6 +6,7 @@
 #' @example ./examples/feasible.R
 #' @param x \code{\link{validator}} object with rules.
 #' @param rule_name \code{character} with the names of the rules that are causing infeasibility.
+#' @family feasibility
 #' @return \code{character} with conflicting rules.
 is_contradicted_by <- function(x, rule_name){
   rn <- rule_name %in% names(x)

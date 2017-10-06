@@ -39,3 +39,9 @@ make_feasible(rules)
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1")
 }
+\seealso{
+Other feasibility: \code{\link{detect_boundary_cat}},
+  \code{\link{detect_boundary_num}},
+  \code{\link{is_contradicted_by}},
+  \code{\link{is_infeasible}}, \code{\link{make_feasible}}
+}

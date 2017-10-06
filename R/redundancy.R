@@ -1,11 +1,14 @@
 #' Detect redundant rules without removing.
 #' 
-#' Detect redundant rules without removing.
+#' Detect redundancies in a rule set. 
 #' 
 #' @note For removal of duplicate rules, simplify
 #' @example ./examples/redundancy.R
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... not used.
+#' 
+#' @family redundancy
+#' 
 #' @export
 detect_redundancy <- function(x, ...){
   x <- check_validator(x)
@@ -30,6 +33,9 @@ detect_redundancy <- function(x, ...){
 #' @example ./examples/redundancy.R
 #' @param x \code{\link{validator}} object with validation rules.
 #' @param ... not used
+#' 
+#' @family redundancy
+#' 
 #' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
 simplify_redundancy <- function(x, ...){
   x <- check_validator(x)

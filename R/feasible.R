@@ -1,14 +1,13 @@
 #' Check the feasibility of a rule set
 #' 
-#' This function checks if the linear, categorical and conditional rules are consistent. If not
-#' the system is said to be "infeasible" and it is not possible to validate any data with it, because
-#' there will be always a rule that is not obeyed. 
-#' 
-#' It works by translating these rules into a mixed integer problem and check this system of
-#' (in)equalities for feasibility.
+#' An infeasible rule set cannot be satisfied by any data because of internal 
+#' contradictions. This function checks whether the record-wise linear,
+#' categorical and conditional rules in a rule set are consistent.
+#'  
 #' @example ./examples/feasible.R
 #' @param x \code{validator} object with validation rules.
 #' @param ... not used
+#' @family feasibility
 #' @return TRUE or FALSE
 #' @export
 is_infeasible <- function(x, ...){
@@ -28,6 +27,7 @@ is_infeasible <- function(x, ...){
 #' @export
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param ... passed to \code{\link{detect_infeasible_rules}}
+#' @family feasibility
 #' @example ./examples/feasible.R
 #' @return \code{\link{validator}} object with feasible rules.
 make_feasible <- function(x, ...){
@@ -52,6 +52,7 @@ make_feasible <- function(x, ...){
 #' @param x \code{\link{validator}} object with rules
 #' @param weight optional named \code{\link{numeric}} with weights. Unnamed variables in the weight are given the default
 #' weight \code{1}.
+#' @family feasibility
 #' @param ... not used
 #' @return \code{character} with the names of the rules that are causing infeasibility.
 detect_infeasible_rules <- function(x, weight = numeric(), ...){

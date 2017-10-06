@@ -13,6 +13,7 @@
 #' @param x \code{\link{validator}} object, rule set to be checked
 #' @param eps detected fixed values will have this precission.
 #' @param ... currently not used
+#' @family feasibility
 #' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
 detect_boundary_num <- function(x, eps = 1e-8, ...){
   x <- check_validator(x)
@@ -59,6 +60,7 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 #' @example ./examples/detect_boundary.R
 #' @param x \code{\link{validator}} object with rules
 #' @param ... not used
+#' @family feasibility
 #' @return \code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 
 #' category/value of a categorical variable.
 #' @export

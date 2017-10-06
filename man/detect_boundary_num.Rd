@@ -47,4 +47,9 @@ Simplifying constraints in data editing (2015). Technical Report 2015|18, Statis
 }
 \seealso{
 \code{\link{detect_fixed_values}}
+
+Other feasibility: \code{\link{detect_boundary_cat}},
+  \code{\link{detect_infeasible_rules}},
+  \code{\link{is_contradicted_by}},
+  \code{\link{is_infeasible}}, \code{\link{make_feasible}}
 }

@@ -34,3 +34,10 @@ rules <- validator( x > 0
 simplify_rules(rules)
 
 }
+\seealso{
+Other redundancy: \code{\link{detect_fixed_values}},
+  \code{\link{detect_redundancy}},
+  \code{\link{is_implied_by}},
+  \code{\link{simplify_fixed_values}},
+  \code{\link{simplify_redundancy}}
+}

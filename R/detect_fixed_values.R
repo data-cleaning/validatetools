@@ -6,6 +6,7 @@
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param eps detected fixed values will have this precission.
 #' @param ... not used.
+#' @family redundancy
 #' @export
 detect_fixed_values <- function(x, eps = x$options("lin.eq.eps"), ...){
   x <- check_validator(x)
@@ -28,14 +29,18 @@ detect_fixed_values <- function(x, eps = x$options("lin.eq.eps"), ...){
   c(fixed_num, fixed_cat)
 }
 
-#' Simplify fixed values
+#' Simplify fixed variables
 #' 
-#' Simplify fixed values
+#' Detect variables of which the values are restricted to a single value by the
+#' rule set. Simplify the rule set by replacing fixed variables with these values.
+#' 
+#'   
 #' @export
 #' @example ./examples/detect_fixed_values.R
 #' @param x \code{\link{validator}} object with validation rules
 #' @param eps detected fixed values will have this precission.
 #' @param ... passed to \code{\link{substitute_values}}.
+#' @family redundancy
 #' @return \code{\link{validator}} object in which 
 simplify_fixed_values <- function(x, eps = 1e-8, ...){
   x <- check_validator(x)

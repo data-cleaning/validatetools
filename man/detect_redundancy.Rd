@@ -12,7 +12,7 @@ detect_redundancy(x, ...)
 \item{...}{not used.}
 }
 \description{
-Detect redundant rules without removing.
+Detect redundancies in a rule set.
 }
 \note{
 For removal of duplicate rules, simplify
@@ -39,4 +39,11 @@ simplify_redundancy(rules)
 detect_redundancy(rules)
 
 
+}
+\seealso{
+Other redundancy: \code{\link{detect_fixed_values}},
+  \code{\link{is_implied_by}},
+  \code{\link{simplify_fixed_values}},
+  \code{\link{simplify_redundancy}},
+  \code{\link{simplify_rules}}
 }

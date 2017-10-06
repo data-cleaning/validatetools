@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_fixed_values.R
 \name{simplify_fixed_values}
 \alias{simplify_fixed_values}
-\title{Simplify fixed values}
+\title{Simplify fixed variables}
 \usage{
 simplify_fixed_values(x, eps = 1e-08, ...)
 }
@@ -17,7 +17,8 @@ simplify_fixed_values(x, eps = 1e-08, ...)
 \code{\link{validator}} object in which
 }
 \description{
-Simplify fixed values
+Detect variables of which the values are restricted to a single value by the
+rule set. Simplify the rule set by replacing fixed variables with these values.
 }
 \examples{
 \dontrun{
@@ -34,4 +35,11 @@ rules <- validator( x1 + x2 + x3 == 0
                   )
 simplify_fixed_values(rules)
 }
+}
+\seealso{
+Other redundancy: \code{\link{detect_fixed_values}},
+  \code{\link{detect_redundancy}},
+  \code{\link{is_implied_by}},
+  \code{\link{simplify_redundancy}},
+  \code{\link{simplify_rules}}
 }

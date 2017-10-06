@@ -42,3 +42,10 @@ detect_redundancy(rules)
 
 
 }
+\seealso{
+Other redundancy: \code{\link{detect_fixed_values}},
+  \code{\link{detect_redundancy}},
+  \code{\link{simplify_fixed_values}},
+  \code{\link{simplify_redundancy}},
+  \code{\link{simplify_rules}}
+}

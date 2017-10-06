@@ -6,15 +6,17 @@
 \alias{validatetools-package}
 \title{Tools for validation rules}
 \description{
-\code{validatetools} is a utility package for managing validation rule sets that can be defined with \code{\link{validate}}.
-In production systems validation rule sets tend to grow organically and accumulate redundant or (partial)
-contradictory rules. `validatetools` helps to identify problems with large rule sets and includes simplification
-methods for resolving issues.
+\code{validatetools} is a utility package for managing validation rule sets
+that can be defined with \code{\link{validate}}. In production systems
+validation rule sets tend to grow organically and accumulate redundant or
+(partial) contradictory rules. `validatetools` helps to identify problems
+with large rule sets and includes simplification methods for resolving
+issues.
 }
 \section{Problem detection}{
 
 
-A rule set may have evolved and can have problems. The following methods allow for problem detection:
+The following methods allow for problem detection:
 
 \itemize{
   \item \code{\link{is_infeasible}} checks a rule set for feasibility. An infeasible system must be corrected to be useful.
