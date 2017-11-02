@@ -97,10 +97,10 @@ substitute_values(rules, height = 6, gender = "male")
 
 ``` r
 rules <- validator( x >= 0, x <=0)
-detect_fixed_values(rules)
+detect_fixed_variables(rules)
 #> $x
 #> [1] 0
-simplify_fixed_values(rules)
+simplify_fixed_variables(rules)
 #> Object of class 'validator' with 1 elements:
 #>  .const_x: x == 0
 
@@ -108,7 +108,7 @@ rules <- validator( rule1 = x1 + x2 + x3 == 0
                   , rule2 = x1 + x2 >= 0
                   , rule3 = x3 >=0
                   )
-simplify_fixed_values(rules)
+simplify_fixed_variables(rules)
 #> Object of class 'validator' with 3 elements:
 #>  rule1    : x1 + x2 + 0 == 0
 #>  rule2    : x1 + x2 >= 0
