@@ -126,14 +126,14 @@ rules <- validator( rule1 = age > 12
                   )
 
 # rule1 is superfluous
-simplify_redundancy(rules)
+remove_redundancy(rules)
 
 rules <- validator( rule1 = age > 12
                   , rule2 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins
-simplify_redundancy(rules)
+remove_redundancy(rules)
 
 # Note that detection signifies both rules!
 detect_redundancy(rules)

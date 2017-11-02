@@ -147,7 +147,7 @@ rules <- validator( rule1 = age > 12
                   )
 
 # rule1 is superfluous
-simplify_redundancy(rules)
+remove_redundancy(rules)
 #> Object of class 'validator' with 1 elements:
 #>  rule2: age > 18
 
@@ -156,7 +156,7 @@ rules <- validator( rule1 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins
-simplify_redundancy(rules)
+remove_redundancy(rules)
 #> Object of class 'validator' with 1 elements:
 #>  rule1: age > 12
 

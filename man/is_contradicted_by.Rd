@@ -2,7 +2,7 @@
 % Please edit documentation in R/contradicted.R
 \name{is_contradicted_by}
 \alias{is_contradicted_by}
-\title{Find out for a contradicting}
+\title{Find out which rules are conflicting}
 \usage{
 is_contradicted_by(x, rule_name)
 }

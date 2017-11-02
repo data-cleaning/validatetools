@@ -20,7 +20,7 @@ works in common cases. The following simplification methods are executed:
  \item \code{\link{substitute_values}}: filling in any parameters that are supplied via \code{.values} or \code{...}.
  \item \code{\link{simplify_fixed_values}}: find out if there are fixed values. If this is the case, they are substituted.
  \item \code{\link{simplify_conditional}}: Simplify conditional statements, by removing clauses that are superfluous.
- \item \code{\link{simplify_redundancy}}: remove redundant rules.
+ \item \code{\link{remove_redundancy}}: remove redundant rules.
 }
 For more control, these methods can be called separately.
 }
@@ -38,6 +38,6 @@ simplify_rules(rules)
 Other redundancy: \code{\link{detect_fixed_values}},
   \code{\link{detect_redundancy}},
   \code{\link{is_implied_by}},
-  \code{\link{simplify_fixed_values}},
-  \code{\link{simplify_redundancy}}
+  \code{\link{remove_redundancy}},
+  \code{\link{simplify_fixed_values}}
 }

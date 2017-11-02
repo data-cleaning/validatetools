@@ -69,7 +69,7 @@ Volgens mij niet: de derde regel is redundant: hij wordt geimpliceerd door de sp
 ```{r}
 rules <- validator(x == 0, y == 1, x < 1)
 detect_redundancy(rules)
-simplify_redundancy(rules)
+remove_redundancy(rules)
 ```
 
 Kortom: check for feasiblity is toegevoegd, andere twee issues zijn volgens mij correct gedrag.
@@ -130,7 +130,7 @@ Functie Detect_redundancy geeft een foutief resultaat bij conditionele regels en
 
 ```{r}
 detect_redundancy(validator(x > 1,  y > 3,  if(x>0) y > 2))
-simplify_redundancy(validator(x > 1,  y > 3,  if(x>0) y > 2))
+remove_redundancy(validator(x > 1,  y > 3,  if(x>0) y > 2))
 ```
 
 ### 7

@@ -35,7 +35,7 @@ simplify_fixed_values(rules)
 
 Other redundancy: \code{\link{detect_redundancy}},
   \code{\link{is_implied_by}},
+  \code{\link{remove_redundancy}},
   \code{\link{simplify_fixed_values}},
-  \code{\link{simplify_redundancy}},
   \code{\link{simplify_rules}}
 }

@@ -6,7 +6,7 @@
 #'  \item \code{\link{substitute_values}}: filling in any parameters that are supplied via \code{.values} or \code{...}.
 #'  \item \code{\link{simplify_fixed_values}}: find out if there are fixed values. If this is the case, they are substituted.
 #'  \item \code{\link{simplify_conditional}}: Simplify conditional statements, by removing clauses that are superfluous.
-#'  \item \code{\link{simplify_redundancy}}: remove redundant rules.
+#'  \item \code{\link{remove_redundancy}}: remove redundant rules.
 #' }
 #' For more control, these methods can be called separately.
 #' @example ./examples/simplify_rules.R
@@ -19,7 +19,7 @@ simplify_rules <- function(.x, .values = list(...), ...){
   .x <- substitute_values(.x, .values)
   .x <- simplify_fixed_values(.x)
   .x <- simplify_conditional(.x)
-  .x <- simplify_redundancy(.x)
+  .x <- remove_redundancy(.x)
   .x
 }
 

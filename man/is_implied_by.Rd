@@ -25,7 +25,7 @@ rules <- validator( rule1 = x > 1
                   )
 
 # rule1 is superfluous
-simplify_redundancy(rules)
+remove_redundancy(rules)
 
 # rule 1 is implied by rule 2
 is_implied_by(rules, "rule1")
@@ -35,7 +35,7 @@ rules <- validator( rule1 = x > 2
 )
 
 # standout: rule1 and rule2, oldest rules wins
-simplify_redundancy(rules)
+remove_redundancy(rules)
 
 # Note that detection signifies both rules!
 detect_redundancy(rules)
@@ -45,7 +45,7 @@ detect_redundancy(rules)
 \seealso{
 Other redundancy: \code{\link{detect_fixed_values}},
   \code{\link{detect_redundancy}},
+  \code{\link{remove_redundancy}},
   \code{\link{simplify_fixed_values}},
-  \code{\link{simplify_redundancy}},
   \code{\link{simplify_rules}}
 }

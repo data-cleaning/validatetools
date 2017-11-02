@@ -37,7 +37,7 @@ detect_redundancy <- function(x, ...){
 #' @family redundancy
 #' 
 #' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
-simplify_redundancy <- function(x, ...){
+remove_redundancy <- function(x, ...){
   x <- check_validator(x)
 
   can_be_checked <- is_linear(x) | is_categorical(x) | is_conditional(x)
@@ -77,5 +77,5 @@ is_redundant <- function(dnf_set, i, ...){
 # x <- validator( rule1 = x > 1
 #               , rule2 = x > 2
 #               )
-# simplify_redundancy(x)
+# remove_redundancy(x)
 # detect_redundancy(x)

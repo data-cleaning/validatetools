@@ -6,7 +6,7 @@ test_that("trivial example works", {
                     )
   
   # rule1 is superfluous
-  rules_s <- simplify_redundancy(rules)
+  rules_s <- remove_redundancy(rules)
   expect_equal(length(rules_s), 1)
   expect_equal(rules_s$rules[[1]]@expr, quote( x > 2))
   
@@ -20,7 +20,7 @@ test_that("double rule detection works", {
                     , rule2 = x > 2
   )
   
-  rules_s <- simplify_redundancy(rules)
+  rules_s <- remove_redundancy(rules)
   expect_equal(length(rules_s), 1)
   expect_equal(names(rules_s), "rule1")
 
@@ -37,7 +37,7 @@ test_that("equalities are allowed", {
                     , cost >= 0.6 * turnover
   )
   
-  rules_s <- simplify_redundancy(rules)
+  rules_s <- remove_redundancy(rules)
   expect_equal(length(rules_s), 3)
 
   red <- detect_redundancy(rules)

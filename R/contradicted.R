@@ -1,4 +1,4 @@
-#' Find out for a contradicting 
+#' Find out which rules are conflicting 
 #' 
 #' Find out for a contradicting rule which rules are conflicting. This helps in determining and assessing conflicts in rule sets. Which
 #' of the rules should stay and which should go? 
