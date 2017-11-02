@@ -46,7 +46,7 @@ Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
 Simplifying constraints in data editing (2015). Technical Report 2015|18, Statistics Netherlands, J. Daalmans
 }
 \seealso{
-\code{\link{detect_fixed_values}}
+\code{\link{detect_fixed_variables}}
 
 Other feasibility: \code{\link{detect_boundary_cat}},
   \code{\link{detect_infeasible_rules}},

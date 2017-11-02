@@ -15,7 +15,7 @@
 #'   \item \code{\link{is_infeasible}} checks a rule set for feasibility. An infeasible system must be corrected to be useful.
 #'   \item \code{\link{detect_boundary_num}} shows for each numerical variable the allowed range of values.
 #'   \item \code{\link{detect_boundary_cat}} shows for each categorical variable the allowed range of values.
-#'   \item \code{\link{detect_fixed_values}} shows variables whose value is fixated by the rule set.
+#'   \item \code{\link{detect_fixed_variables}} shows variables whose value is fixated by the rule set.
 #'   \item \code{\link{detect_redundancy}} shows which rules are already implied by other rules.
 #' }
 #' 
@@ -25,7 +25,7 @@
 #' 
 #' \itemize{
 #'   \item \code{\link{substitute_values}}: replace variables with constants. 
-#'   \item \code{\link{simplify_fixed_values}}: substitute the fixed values of a rule set.
+#'   \item \code{\link{simplify_fixed_variables}}: substitute the fixed variables with their values in a rule set.
 #'   \item \code{\link{simplify_conditional}}: remove redundant (parts of) conditional rules.
 #'   \item \code{\link{remove_redundancy}}: remove redundant rules.
 #' }

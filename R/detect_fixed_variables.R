@@ -1,14 +1,14 @@
-#' Detect fixed values
+#' Detect fixed variables
 #' 
-#' Detects fixed values in the rule set. To simplify a rule set, these fixed values can be substituted. 
-#' @example ./examples/detect_fixed_values.R
-#' @seealso \code{\link{simplify_fixed_values}}
+#' Detects variables that have a fixed value in the rule set. To simplify a rule set, these variables can be substituted with their value.
+#' @example ./examples/detect_fixed_variables.R
+#' @seealso \code{\link{simplify_fixed_variables}}
 #' @param x \code{\link{validator}} object with the validation rules.
 #' @param eps detected fixed values will have this precission.
 #' @param ... not used.
 #' @family redundancy
 #' @export
-detect_fixed_values <- function(x, eps = x$options("lin.eq.eps"), ...){
+detect_fixed_variables <- function(x, eps = x$options("lin.eq.eps"), ...){
   x <- check_validator(x)
   bounds_num <- detect_boundary_num(x, eps = eps)
   is_fixed_num <- (bounds_num$upperbound - bounds_num$lowerbound <= eps)
@@ -36,15 +36,15 @@ detect_fixed_values <- function(x, eps = x$options("lin.eq.eps"), ...){
 #' 
 #'   
 #' @export
-#' @example ./examples/detect_fixed_values.R
+#' @example ./examples/detect_fixed_variables.R
 #' @param x \code{\link{validator}} object with validation rules
 #' @param eps detected fixed values will have this precission.
 #' @param ... passed to \code{\link{substitute_values}}.
 #' @family redundancy
 #' @return \code{\link{validator}} object in which 
-simplify_fixed_values <- function(x, eps = 1e-8, ...){
+simplify_fixed_variables <- function(x, eps = 1e-8, ...){
   x <- check_validator(x)
-  fv <- detect_fixed_values(x, eps = eps, ...)
+  fv <- detect_fixed_variables(x, eps = eps, ...)
   if (length(fv)) {
     substitute_values(x, .values = fv, ...)
   } else {
@@ -57,4 +57,4 @@ simplify_fixed_values <- function(x, eps = 1e-8, ...){
 #                         , if (x > 0) A == 'a1'
 #                         , B %in% c("b1", "b2")
 #                         )
-# detect_fixed_values(x)
+# detect_fixed_variables(x)

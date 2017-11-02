@@ -5,7 +5,7 @@
 #' 
 #' This procedure only finds minimum and maximum values, but misses gaps.
 #' 
-#' @seealso \code{\link{detect_fixed_values}}
+#' @seealso \code{\link{detect_fixed_variables}}
 #' @references Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
 #' @references Simplifying constraints in data editing (2015). Technical Report 2015|18, Statistics Netherlands, J. Daalmans
 #' @example ./examples/detect_boundary.R

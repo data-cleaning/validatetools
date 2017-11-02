@@ -41,9 +41,9 @@ detect_redundancy(rules)
 
 }
 \seealso{
-Other redundancy: \code{\link{detect_fixed_values}},
+Other redundancy: \code{\link{detect_fixed_variables}},
   \code{\link{is_implied_by}},
   \code{\link{remove_redundancy}},
-  \code{\link{simplify_fixed_values}},
+  \code{\link{simplify_fixed_variables}},
   \code{\link{simplify_rules}}
 }

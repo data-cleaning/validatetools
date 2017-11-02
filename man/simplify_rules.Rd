@@ -18,7 +18,7 @@ Simplifies a rule set set by applying different simplification methods. This is 
 works in common cases. The following simplification methods are executed:
 \itemize{
  \item \code{\link{substitute_values}}: filling in any parameters that are supplied via \code{.values} or \code{...}.
- \item \code{\link{simplify_fixed_values}}: find out if there are fixed values. If this is the case, they are substituted.
+ \item \code{\link{simplify_fixed_variables}}: find out if there are fixed values. If this is the case, they are substituted.
  \item \code{\link{simplify_conditional}}: Simplify conditional statements, by removing clauses that are superfluous.
  \item \code{\link{remove_redundancy}}: remove redundant rules.
 }
@@ -35,9 +35,9 @@ simplify_rules(rules)
 
 }
 \seealso{
-Other redundancy: \code{\link{detect_fixed_values}},
+Other redundancy: \code{\link{detect_fixed_variables}},
   \code{\link{detect_redundancy}},
   \code{\link{is_implied_by}},
   \code{\link{remove_redundancy}},
-  \code{\link{simplify_fixed_values}}
+  \code{\link{simplify_fixed_variables}}
 }
