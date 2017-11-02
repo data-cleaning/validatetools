@@ -8,3 +8,4 @@
 ^docs$
 ^issues$
 ^TODO.md
+^appveyor\.yml$
