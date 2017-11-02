@@ -12,7 +12,7 @@
 #' @export
 detect_redundancy <- function(x, ...){
   x <- check_validator(x)
-  can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
+  can_be_checked <- is_linear(x) | is_categorical(x) | is_conditional(x)
   vals <- to_exprs(x)
   dnf_set <- lapply(vals[can_be_checked], as_dnf)
   are_redundant <- sapply(seq_along(dnf_set), function(i){
@@ -40,7 +40,7 @@ detect_redundancy <- function(x, ...){
 simplify_redundancy <- function(x, ...){
   x <- check_validator(x)
 
-  can_be_checked <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
+  can_be_checked <- is_linear(x) | is_categorical(x) | is_conditional(x)
   
   vals <- to_exprs(x)
   dnf_set <- lapply(vals[can_be_checked], as_dnf)

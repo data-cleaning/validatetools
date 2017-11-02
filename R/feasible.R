@@ -91,9 +91,9 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
     is_lin <- all(r$type == "double")
     is_cat <- all(r$type == "binary")
     if (is_lin){
-      r <- errorlocate:::soft_lin_rule(r, prefix = ".delta_")
+      r <- soft_lin_rule(r, prefix = ".delta_")
     } else if (is_cat){
-      r <- errorlocate:::soft_cat_rule(r, prefix = ".delta_")
+      r <- soft_cat_rule(r, prefix = ".delta_")
     } else {
       return(r)
     }
@@ -108,7 +108,7 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
     objective[names(weight)] <- weight
   }
   
-  lp <- errorlocate:::translate_mip_lp(mr, objective = objective) #TODO figure out "eps" param
+  lp <- translate_mip_lp(mr, objective = objective) #TODO figure out "eps" param
   res <- solve(lp)
   
   if (res %in% c(0,1,4,12)){

@@ -3,6 +3,8 @@ op <- function(e){
   } else { e }
 }
 
+node <- op
+
 op_to_s <- function(e){
   deparse(op(e))
 }
@@ -30,20 +32,19 @@ consume <- function(e, token = "("){
 }
 
 is_lin_eq <- function(e){
-  errorlocate:::is_lin_(e) && op_to_s(e) == "=="
+  is_lin_(e) && op_to_s(e) == "=="
 }
 
-#TODO move this to errorlocate
 invert_or_negate <- function(e){
-  if (errorlocate:::is_lin_(e)){
+  if (is_lin_(e)){
     if (is_lin_eq(e)){
       # Dirty Hack but it works for now. Ideally this should be split in two statements
       substitute( l < r | l > r, list(l = left(e), r = right(e))) 
     } else {
-      errorlocate:::invert_(e)
+      invert_(e)
     }
   } else {
-    errorlocate:::negate_(e)
+    negate_(e)
   }
 }
 
@@ -69,7 +70,7 @@ as_dnf <- function(expr, ...){
   } else if(op_if == "!"){
     cond <- left(expr)
     cons <- NULL
-  } else if (errorlocate:::is_cat_(expr) || errorlocate:::is_lin_(expr)){
+  } else if (is_cat_(expr) || is_lin_(expr)){
     return(structure(list(expr), class="dnf"))
   } else {
     stop("Invalid expression")
@@ -158,11 +159,11 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
 }
 
 dnf_to_mip_rule <- function(d, name = "", ...){
-  islin <- sapply(d, errorlocate:::is_lin_)
+  islin <- sapply(d, is_lin_)
   d_l <- d[islin]
   if (any(islin)){
     if (length(d) == 1){ # pure numerical
-      return(list(errorlocate:::lin_mip_rule_(d[[1]], name = name)))
+      return(list(lin_mip_rule_(d[[1]], name = name)))
     }
     names(d_l) <- paste0(name, "._lin", seq_along(d_l))
     
@@ -174,7 +175,7 @@ dnf_to_mip_rule <- function(d, name = "", ...){
     # turn into mip_rules
     d_l <- lapply(names(d_l), function(name){
       e <- d_l[[name]]
-      mr <- errorlocate:::lin_mip_rule_(e = e, name = name)
+      mr <- lin_mip_rule_(e = e, name = name)
     })
     
     # replace "==" with two statements
@@ -193,21 +194,21 @@ dnf_to_mip_rule <- function(d, name = "", ...){
     
     # turn all linear subclauses into soft constraints.
     d_l <- lapply(c(d_l, d_l2), function(mr){
-      mr <- errorlocate:::rewrite_mip_rule(mr)
-      mr <- errorlocate:::soft_lin_rule(mr, prefix = "")
+      mr <- rewrite_mip_rule(mr)
+      mr <- soft_lin_rule(mr, prefix = "")
       mr
     })
     ##
   }
-  c( list(errorlocate:::cat_mip_rule_(as.expression(d)[[1]], name = name))
+  c( list(cat_mip_rule_(as.expression(d)[[1]], name = name))
    , d_l # for pure categorical this is list()
    )
 }
 
-# translates the validator rules into mip rules, TODO rearrange errorlocate and validatetools
+# translates the validator rules into mip rules
 to_miprules <- function(x, ...){
   check_validator(x, check_infeasible = FALSE)
-  can_translate <- errorlocate::is_linear(x) | errorlocate::is_categorical(x) | errorlocate::is_conditional(x)
+  can_translate <- is_linear(x) | is_categorical(x) | is_conditional(x)
   if (!all(can_translate)){
     warning("Ignoring rules: ", paste(names(x)[!can_translate], collapse = ", "))
   }
@@ -217,7 +218,7 @@ to_miprules <- function(x, ...){
     e <- exprs[[name]]
     d <- as_dnf(e)
     lapply( dnf_to_mip_rule(d, name = name)
-          , errorlocate:::rewrite_mip_rule
+          , rewrite_mip_rule
           )
   })
   unlist(mr, recursive = F)
@@ -226,7 +227,7 @@ to_miprules <- function(x, ...){
 to_lp <- function(x, objective = NULL, eps = 0.001){
   check_validator(x, check_infeasible = FALSE)
   rules <- to_miprules(x)
-  errorlocate:::translate_mip_lp(rules = rules, objective = objective, eps = eps)
+  translate_mip_lp(rules = rules, objective = objective, eps = eps)
 }
 
 # as_dnf(quote(!(gender == "male") | x > 6))

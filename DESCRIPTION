@@ -1,6 +1,6 @@
 Package: validatetools
 Title: Tools for Manipulating and Simplifying Validation Rule Sets
-Version: 0.3.6
+Version: 0.4
 Authors@R: c( person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role = c("aut", "cre"))
             , person("Mark", "van der Loo", email = "mark.vanderloo@gmail.com",role = c("aut"))
             , person("Jacco", "Daalmans", role = c("ctb"))
@@ -13,7 +13,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/data-cleaning/validatetools
 BugReports: https://github.com/data-cleaning/validatetools/issues
-Imports: errorlocate, methods, stats, utils, lpSolveAPI
+Imports: methods, stats, utils, lpSolveAPI
 Suggests: testthat,
     covr
 RoxygenNote: 6.0.1
