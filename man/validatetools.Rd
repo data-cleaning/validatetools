@@ -40,3 +40,6 @@ The following methods detect possible simplifications and apply them to a rule s
 }
 }
 
+\references{
+Statistical Data Cleaning with Applications in R, Mark van der Loo and Edwin de Jonge, ISBN: 978-1-118-89715-7
+}

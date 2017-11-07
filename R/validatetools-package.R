@@ -30,6 +30,8 @@
 #'   \item \code{\link{remove_redundancy}}: remove redundant rules.
 #' }
 #' 
+#' @references Statistical Data Cleaning with Applications in R, Mark van der Loo and Edwin de Jonge, ISBN: 978-1-118-89715-7
+#' 
 #' @name validatetools
 #' @importFrom methods substituteDirect
 #' @importFrom stats setNames
