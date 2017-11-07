@@ -10,13 +10,19 @@ validatetools
 Installation
 ------------
 
-You can install a beta version of `validatetools` with
+`validatetools` is available from CRAN and can be installed with
+
+``` r
+install.packages("validatetools")
+```
+
+The latest beta version of `validatetools` can be installed with
 
 ``` r
 install.packages("validatetools", repos = "https://data-cleaning.github.io/drat")
 ```
 
-The adventurous can install an (unstable) `validatetools` from github with:
+The adventurous can install an (unstable) development version of `validatetools` from github with:
 
 ``` r
 # install.packages("devtools")
