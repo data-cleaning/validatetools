@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -110,6 +110,14 @@
 
     <p><code>character</code> with the names of the rule that cause the implication.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other redundancy: <code><a href='detect_fixed_variables.html'>detect_fixed_variables</a></code>,
+  <code><a href='detect_redundancy.html'>detect_redundancy</a></code>,
+  <code><a href='remove_redundancy.html'>remove_redundancy</a></code>,
+  <code><a href='simplify_fixed_variables.html'>simplify_fixed_variables</a></code>,
+  <code><a href='simplify_rules.html'>simplify_rules</a></code></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'>validator</span>( <span class='kw'>rule1</span> <span class='kw'>=</span> <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>
@@ -117,7 +125,7 @@
                   )
 
 <span class='co'># rule1 is superfluous</span>
-<span class='fu'><a href='simplify_redundancy.html'>simplify_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
+<span class='fu'><a href='remove_redundancy.html'>remove_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
 #&gt;  rule2: x &gt; 2</div><div class='input'>
 <span class='co'># rule 1 is implied by rule 2</span>
 <span class='fu'>is_implied_by</span>(<span class='no'>rules</span>, <span class='st'>"rule1"</span>)</div><div class='output co'>#&gt; [1] "rule2"</div><div class='input'>
@@ -126,7 +134,7 @@
 )
 
 <span class='co'># standout: rule1 and rule2, oldest rules wins</span>
-<span class='fu'><a href='simplify_redundancy.html'>simplify_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
+<span class='fu'><a href='remove_redundancy.html'>remove_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; Object of class 'validator' with 1 elements:
 #&gt;  rule1: x &gt; 2</div><div class='input'>
 <span class='co'># Note that detection signifies both rules!</span>
 <span class='fu'><a href='detect_redundancy.html'>detect_redundancy</a></span>(<span class='no'>rules</span>)</div><div class='output co'>#&gt; rule1 rule2 
@@ -140,6 +148,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

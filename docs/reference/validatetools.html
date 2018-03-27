@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -84,20 +84,23 @@
     </div>
 
     
-    <p><code>validatetools</code> is a utility package for managing validation rule sets that can be defined with <code>validate</code>.
-In production systems validation rule sets tend to grow organically and accumulate redundant or (partial)
-contradictory rules. `validatetools` helps to identify problems with large rule sets and includes simplification
-methods for resolving issues.</p>
+    <p><code>validatetools</code> is a utility package for managing validation rule sets
+that are defined with <code>validate</code>. In production systems
+validation rule sets tend to grow organically and accumulate redundant or
+(partially) contradictory rules. `validatetools` helps to identify problems
+with large rule sets and includes simplification methods for resolving
+issues.</p>
     
 
         
     <h2 class="hasAnchor" id="problem-detection"><a class="anchor" href="#problem-detection"></a>Problem detection</h2>
 
     
-    <p>A rule set may have evolved and can have problems. The following methods allow for problem detection:</p><ul>
+    <p>The following methods allow for problem detection:</p><ul>
 <li><p><code><a href='is_infeasible.html'>is_infeasible</a></code> checks a rule set for feasibility. An infeasible system must be corrected to be useful.</p></li>
 <li><p><code><a href='detect_boundary_num.html'>detect_boundary_num</a></code> shows for each numerical variable the allowed range of values.</p></li>
-<li><p><code><a href='detect_fixed_values.html'>detect_fixed_values</a></code> shows variables whose value is fixated by the rule set.</p></li>
+<li><p><code><a href='detect_boundary_cat.html'>detect_boundary_cat</a></code> shows for each categorical variable the allowed range of values.</p></li>
+<li><p><code><a href='detect_fixed_variables.html'>detect_fixed_variables</a></code> shows variables whose value is fixated by the rule set.</p></li>
 <li><p><code><a href='detect_redundancy.html'>detect_redundancy</a></code> shows which rules are already implied by other rules.</p></li>
 </ul>
     
@@ -106,10 +109,14 @@ methods for resolving issues.</p>
     
     <p>The following methods detect possible simplifications and apply them to a rule set.</p><ul>
 <li><p><code><a href='substitute_values.html'>substitute_values</a></code>: replace variables with constants.</p></li>
-<li><p><code><a href='simplify_fixed_values.html'>simplify_fixed_values</a></code>: substitute the fixed values of a rule set.</p></li>
+<li><p><code><a href='simplify_fixed_variables.html'>simplify_fixed_variables</a></code>: substitute the fixed variables with their values in a rule set.</p></li>
 <li><p><code><a href='simplify_conditional.html'>simplify_conditional</a></code>: remove redundant (parts of) conditional rules.</p></li>
-<li><p><code><a href='simplify_redundancy.html'>simplify_redundancy</a></code>: remove redundant rules.</p></li>
+<li><p><code><a href='remove_redundancy.html'>remove_redundancy</a></code>: remove redundant rules.</p></li>
 </ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Statistical Data Cleaning with Applications in R, Mark van der Loo and Edwin de Jonge, ISBN: 978-1-118-89715-7</p>
     
 
   </div>
@@ -120,6 +127,8 @@ methods for resolving issues.</p>
       <li><a href="#problem-detection">Problem detection</a></li>
 
       <li><a href="#simplifying-rule-set">Simplifying rule set</a></li>
+
+      <li><a href="#references">References</a></li>
           </ul>
 
   </div>

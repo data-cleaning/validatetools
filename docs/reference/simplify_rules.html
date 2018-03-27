@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -87,9 +87,9 @@
     <p>Simplifies a rule set set by applying different simplification methods. This is a convenience function that 
 works in common cases. The following simplification methods are executed:</p><ul>
 <li><p><code><a href='substitute_values.html'>substitute_values</a></code>: filling in any parameters that are supplied via <code>.values</code> or <code>...</code>.</p></li>
-<li><p><code><a href='simplify_fixed_values.html'>simplify_fixed_values</a></code>: find out if there are fixed values. If this is the case, they are substituted.</p></li>
+<li><p><code><a href='simplify_fixed_variables.html'>simplify_fixed_variables</a></code>: find out if there are fixed values. If this is the case, they are substituted.</p></li>
 <li><p><code><a href='simplify_conditional.html'>simplify_conditional</a></code>: Simplify conditional statements, by removing clauses that are superfluous.</p></li>
-<li><p><code><a href='simplify_redundancy.html'>simplify_redundancy</a></code>: remove redundant rules.</p></li>
+<li><p><code><a href='remove_redundancy.html'>remove_redundancy</a></code>: remove redundant rules.</p></li>
 </ul><p>For more control, these methods can be called separately.</p>
     
 
@@ -112,6 +112,14 @@ works in common cases. The following simplification methods are executed:</p><ul
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other redundancy: <code><a href='detect_fixed_variables.html'>detect_fixed_variables</a></code>,
+  <code><a href='detect_redundancy.html'>detect_redundancy</a></code>,
+  <code><a href='is_implied_by.html'>is_implied_by</a></code>,
+  <code><a href='remove_redundancy.html'>remove_redundancy</a></code>,
+  <code><a href='simplify_fixed_variables.html'>simplify_fixed_variables</a></code></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>rules</span> <span class='kw'>&lt;-</span> <span class='fu'>validator</span>( <span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>
@@ -130,7 +138,9 @@ works in common cases. The following simplification methods are executed:</p><ul
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

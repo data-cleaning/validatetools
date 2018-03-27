@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -84,9 +84,9 @@
     </div>
 
     
-    <p>This function checks if the linear, categorical and conditional rules are consistent. If not
-the system is said to be "infeasible" and it is not possible to validate any data with it, because
-there will be always a rule that is not obeyed.</p>
+    <p>An infeasible rule set cannot be satisfied by any data because of internal 
+contradictions. This function checks whether the record-wise linear,
+categorical and conditional rules in a rule set are consistent.</p>
     
 
     <pre class="usage"><span class='fu'>is_infeasible</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -108,10 +108,13 @@ there will be always a rule that is not obeyed.</p>
 
     <p>TRUE or FALSE</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>It works by translating these rules into a mixed integer problem and check this system of
-(in)equalities for feasibility.</p>
+    <p>Other feasibility: <code><a href='detect_boundary_cat.html'>detect_boundary_cat</a></code>,
+  <code><a href='detect_boundary_num.html'>detect_boundary_num</a></code>,
+  <code><a href='detect_infeasible_rules.html'>detect_infeasible_rules</a></code>,
+  <code><a href='is_contradicted_by.html'>is_contradicted_by</a></code>,
+  <code><a href='make_feasible.html'>make_feasible</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -136,7 +139,7 @@ there will be always a rule that is not obeyed.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
