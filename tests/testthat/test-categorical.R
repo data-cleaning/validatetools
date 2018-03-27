@@ -10,6 +10,7 @@ describe("categorical", {
                   )
     expect_equal(is_categorical(v), c(TRUE, TRUE, FALSE, FALSE))
   })
+  
   it("can derive coefficients",{
     v <- validator( a %in% c("a1", "a2"),
                     if (a %in% 'a1') b == "b1"
@@ -33,4 +34,17 @@ describe("categorical", {
                   )
     cat_coefficients(v)
   })
+})
+
+describe("%vin%", {
+  skip_if_not_installed("validate", minimum_version = "0.2.3")
+  it("can detect categorical rules with %vin%", {
+    v <- validator( a %vin% c("a1", "a2"),
+                    if (a %vin% 'a1') b == "b1",
+                    x > 1,
+                    if (x>1) a == "a1"
+    )
+    expect_equal(is_categorical(v), c(TRUE, TRUE, FALSE, FALSE))
+  })
+  
 })

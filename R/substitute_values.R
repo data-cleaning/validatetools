@@ -23,7 +23,7 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
     e <- substituteDirect(e, .values)
     tryCatch({
       # Workaround to make upgrade possible
-      if (packageVersion("validate")=="0.2.0"){
+      if (packageVersion("validate") < "0.2.2"){
         r <- eval(e, envir = list(), enclos = NULL)
       } else {
         # we need to explicitly include this '%in%'-replacement from 'validate'
