@@ -1,3 +1,6 @@
+#' @importFrom utils packageVersion
+NULL 
+
 
 #' substitute a value in a rule set
 #' 
