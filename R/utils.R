@@ -10,7 +10,11 @@ check_validator <- function(x, copy = TRUE, check_infeasible = TRUE){
 }
 
 to_exprs <- function(x, ...){
-  x$exprs(lin_eq_eps = 0, lin_ineq_eps = 0, vectorize = F)
+  x$exprs( lin_eq_eps   = 0
+         , lin_ineq_eps = 0
+         , replace_in   = FALSE
+         , vectorize    = FALSE
+         )
 }
 
 

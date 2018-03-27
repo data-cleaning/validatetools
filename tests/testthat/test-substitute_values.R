@@ -36,6 +36,7 @@ test_that("substitute wrong value gives warning", {
 
 
 test_that("substitute_value works with components", {
+  
   rules <- validator(gender %in% c("male","female"), if (gender == "male") x > 6)
   rules_s <- substitute_values(rules, gender="female")
   expect_equal(length(rules_s), 1)
