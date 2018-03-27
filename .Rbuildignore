@@ -5,6 +5,7 @@
 ^codecov\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
+^README\.md$
 ^docs$
 ^issues$
 ^TODO.md
