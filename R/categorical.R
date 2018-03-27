@@ -18,6 +18,7 @@ is_cat_ <- function(expr, or=TRUE, ...){
 
   switch (op,
     "%in%" = TRUE,  # allow all literals (should check for character and logical)
+    "%vin%" = TRUE, # Added to comply with validate >= 0.2.2
     "("    = is_cat_(l, or),
     "!"    = is_cat_(l, !or),
     "=="   = is.character(r) || is.logical(r),
@@ -52,6 +53,7 @@ get_catvar <- function(expr, not = FALSE){
 
   switch ( op,
           "%in%" = cvi(l, r, not),
+          "%vin%" = cvi(l,r,not),
           "=="   = cvi(l, r, not),
           "!="   = cvi(l, r, !not),
           "if"   = c( get_catvar(l, !not), get_catvar(r, not)),

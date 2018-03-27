@@ -19,7 +19,13 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
   vals <- lapply(to_exprs(.x), function(e){
     e <- substituteDirect(e, .values)
     tryCatch({
-      r <- eval(e, envir = list(), enclos = NULL)
+      # Workaround to make upgrade possible
+      if (packageVersion("validate")=="0.2.0"){
+        r <- eval(e, envir = list(), enclos = NULL)
+      } else {
+        # we need to explicitly include this '%in%'-replacement from 'validate'
+        r <- eval(e, envir = list(`%vin%`=validate::`%vin%`), enclos = NULL)
+      }
       # to deal with non-mip translatable rules
       if (!is.logical(r)){
         r <- e
