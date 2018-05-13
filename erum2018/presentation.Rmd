@@ -6,26 +6,28 @@ date: "Statistics Netherlands / eRum 2018"
 output:
   beamer_presentation:
     includes:
-      in_header: header.tex
+      in_header: tex/header.tex
     keep_tex: yes
-    theme: "Frankfurt"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(eval = TRUE)
 library(validatetools)
 ```
 
-## {.plain .fragile}
+## Who am I?
 
-\begin{centering}
-  \includegraphics[width=0.9\paperwidth]{img/bad-data}
-  \par
-\end{centering}
+- Data scientist / Methodologist Statistics Netherlands (aka CBS).
+- Author of several R-packages, including `whisker`, `validate`, `errorlocate`, `docopt`, `tableplot`, `chunked`, `ffbase`,...
+- Co-author of _Statistical Data Cleaning with applications in R (2018)_ (sorry for the plug, but relevant for this talk...)
+
+## {.plain}
+
+\hspace*{-1cm}\includegraphics[width=1\paperwidth]{img/bad-data}
 
 ## Data cleaning...
 
-A large part of your job is spent in data-cleaning:
+A large part of your and our job is spent in data-cleaning:
 
 - getting your data in the right shape (e.g. `tidyverse`)
 
@@ -37,46 +39,27 @@ A large part of your job is spent in data-cleaning:
 
 - impute values for missing or erroneous data (e.g. `simputation`)
 
-## {.plain}
 
-\begin{center}
-  \includegraphics[height=1\paperheight]{img/keep-calm-and-validate}
-\end{center}
-
-## Completeness
-
--
-
-
-## Validation rules?
-
-Package `validate` allows to:
-
-- formulate explicit data rule that data must conform to:
-
-```{r}
-library(validate)
-check_that( data.frame(age=160, driver_license=TRUE), 
-  age >= 0, 
-  age < 150,
-  if (driver_license == TRUE) age >= 16
-)
-```
 
 ## {.plain}
 
-\hspace{-1.5cm}
+\hspace*{-1cm}
 \includegraphics[width=1\paperwidth]{img/rules.png}
 
+## Cleaning philosophy
+
+- "Explicit is better than implicit".
+- Make data knowledge as explicit as possible.
+- Store these as validation rules.
+
+### Advantages:
+
+- Easy checking of rules
+- Data quality statistics: how often is each rule violated? 
+- Allows for reasoning on rules: which variables are involved in errors?
+- Simplifies rule changes and additions.
+
 ## Rules
-
-A lot of datacleaning packages are based on explicit rules that data must conform to.
-
-- `validate` to check **validity** of data
-- `errorlocate` to find **errors**.
-- `rspa`, `deductive`, `dcmodify` for **correction** and **imputation** using data rules.
-
-## Rules (2)
 
 - Data rules are solidified domain knowledge.
 - Real world knowledge e.g. :
@@ -86,8 +69,33 @@ A lot of datacleaning packages are based on explicit rules that data must confor
       
 - Expert knowledge, e.g:
 
-      - if `profit > 0` then `turnover > 0`
-      - if `married` then 'age > 16' 
+      - `IF profit > 0 THEN turnover > 0`
+      - `IF married THEN age > 16` 
+
+## Rules (2)
+
+A lot of datacleaning packages are based on explicit rules that data must conform to.
+
+- `validate` to check **validity** of data
+- `errorlocate` to find **errors**.
+- `rspa`, `deductive`, `dcmodify` for **correction** and **imputation** using data rules.
+
+
+## R package `validate`
+
+Package `validate` allows to:
+
+- formulate explicit data rule that data must conform to:
+
+```{r, eval=FALSE}
+library(validate)
+check_that( data.frame(age=160, job = "yes", income = 3000), 
+  age >= 0, 
+  age < 150,
+  job %in% c("yes", "no"),
+  if (driver_license == TRUE) age >= 16
+)
+```
 
 
 ## Data checking
@@ -101,30 +109,52 @@ data validity:
 
 ### Result: 
 
-- Often many rules, great and small
+- Often many rules, great and small.
 - Rules often defined multiple times at different processing steps.
 - Rules may partially contradict each other.
 
+## Why-o-why `validatetools`?
 
-## Validate tools
+- We have package `validate`, what is the need?
 
-- Use `validate` to collect 
+### Because we'd like to...
+
+- clean up rule set ( kind of meta-cleaning...).
+- detect and resolve problems with rules:
+
+    - redundant rules
+    - conflicting rules
+    - unintended consequences.
+
+- check the rule set using formal logic (without any data!).
+- solve these kind of fun problems :-)
 
 ## Formally...
 
 ### Rule set $S$
 
-$$
-S = r_1 \land \cdots \land r_n
-$$
-
-### Rule $r_i$
+A validation rule set $S$ is a conjunction of rules $r_i$, which applied on record $\la{x}$ returns `TRUE` (valid) or `FALSE` (invalid)
 
 $$
-r_i = \bigvee_j C_i^j
+S(\la{x}) = r_1(\la{x}) \land \cdots \land r_n(\la{x})
 $$
 
-### Atomic clause $C_i^j$
+### Note 
+
+- a record has to comply to each rule $r_i$.
+
+- it is thinkable that two or more $r_i$ are in conflict, making each record invalid.
+
+## Formally...
+
+### Rule $r_i(x)$
+
+A rule a disjunction of atomic clauses:
+
+$$
+r_i(x) = \bigvee_j C_i^j(x)
+$$
+with: 
 
 $$
 C_i^j(\la{x}) = \left\{
@@ -136,3 +166,111 @@ C_i^j(\la{x}) = \left\{
   \end{array}
 \right.
 $$
+
+## Formally, note
+
+- We restrict ourselves to **linear**, **categorical** and **mixed constraints**. 
+- Rules are not independent.
+
+## Mixed Integer Programming
+
+$$
+$$
+
+
+## Problem: infeasibility
+
+### Problem
+
+One or more rules in conflict:
+
+- $S(x)$ always is `FALSE, **no data correct**
+- _happens more often than you think_
+
+
+```{r}
+library(validatetools)
+rules <- validator( is_adult = age >=21
+                  , is_child = age < 18
+                  )
+is_infeasible(rules)
+```
+
+## {.plain}
+
+\hspace*{-2cm}
+\includegraphics[height=1\paperheight]{img/keepcalm-and-resolve.png}
+
+## Conflict, and now?
+
+```{r}
+# Find out which rule would remove the conflict
+detect_infeasible_rules(rules)
+# And itś conflicting rule(s)
+is_contradicted_by(rules, "is_adult")
+```
+
+- One of these rules needs to be removed
+- Which one? Depends on human assessment...
+
+## Detecting and removing redundant rules
+
+- Rule $r_1$ may imply $r_2$, so $r_2$ can be removed.
+- Simplifies rule set!
+
+```{r}
+rules <- validator( r1 = age >= 18
+                  , r2 = age >= 12
+                  )
+detect_redundancy(rules)
+remove_redundancy(rules)
+```
+
+## Value substitution
+
+```{r}
+rules <- validator( r1 = if (gender == "male") weight > 50
+                  , r2 = gender %in% c("male", "female")
+                  )
+
+substitute_values(rules, gender = "male")
+```
+
+## Conditional statement
+
+
+
+## All to gether now:
+
+`simplify_rules` applies all simplification methods to the rule set
+
+```{r}
+rules <- validator( r1 = if (age < 16) income == 0
+                  , r2 = job %in% c("yes", "no")
+                  , r3 = if (job == "yes") income > 0
+                  )
+simplify_rules(rules, job = "yes")
+```
+
+## Interested?
+
+\begin{minipage}[c]{0.5\textwidth}
+\includegraphics[width=0.9\textwidth]{img/SDCR.jpg} 
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+\begin{block}{SDCR}
+M. van der Loo and E. de Jonge (2018)
+\emph{Statistical Data Cleaning with applications in R}
+Wiley, Inc.
+\end{block}
+\begin{block}{validatetools}
+\begin{itemize}
+\item Available on \href{https://CRAN.R-project.org/package=validatetools}{\underline{CRAN}}
+\end{itemize}
+\end{block}
+\begin{block}{More theory?}
+$\leftarrow$ See book 
+\end{block}
+\end{minipage}
+
+Thank you for your attention! / Köszönöm a figyelmet!
