@@ -97,17 +97,11 @@ check_that( data.frame(age=160, job = "no", income = 3000),
 
 A lot of datacleaning packages are using validate rules to facilitate their work.
 
-- `validate`: validation statistics
+- `validate`: validation **checks** and data **quality stats** on data. 
 - `errorlocate` to find **errors** in variables (in stead of records)
 - `rspa` data **correction** under data constraints
 - `deductive` deductive **correction**
 - `dcmodify` deterministic **correction** and **imputation**.
-
-### Result: 
-
-- Often many rules, great and small.
-- Rules often defined multiple times at different processing steps.
-- Rules may partially contradict each other.
 
 ## Why-o-why `validatetools`?
 
@@ -116,23 +110,24 @@ A lot of datacleaning packages are using validate rules to facilitate their work
 ### In "real life"
 
 - We have large data analysis processes with many steps.
-- Often many rules (> 100) on many variables (> 20) and many observations (> 0.5M).
+- Often many rules (> 100) on many variables (> 20) and many observations (> 0.5M) 
+with diverse subpopulations.
 - Results often in redundant or (partially) contradictive rule sets...
 
 ## Because we'd like to...
 
-- clean up rule set ( kind of meta-cleaning...).
+- clean up rule sets ( kind of meta-cleaning...).
 - detect and resolve problems with rules:
 
     - Detect **conflicting** rules.
     - Remove **redundant** rules.
     - **Substitute** values and **simplify** rules.
-    - Detect unintended consequences.
+    - Detect **unintended** rule interactions.
 
 - check the rule set using formal logic (without any data!).
 - solve these kind of fun problems :-)
 
-## Formally...
+## Formal logic
 
 ### Rule set $S$
 
@@ -148,7 +143,7 @@ $$
 
 - it is thinkable that two or more $r_i$ are in conflict, making each record invalid.
 
-## Formally...
+## Formal logic (2)
 
 ### Rule $r_i(x)$
 
@@ -169,6 +164,36 @@ C_i^j(\la{x}) = \left\{
   \end{array}
 \right.
 $$
+
+## Rule types
+
+- _linear_ restrictions
+- _categorical_ restrictions
+- _if_ statements with linear and categorical restrictions
+
+### If statement is Modus ponens:
+
+$$
+  \begin{array}{ll}
+                  & \textsf{if } P \textsf{ then } Q \\
+  \Leftrightarrow & P \implies Q \\
+  \Leftrightarrow & \lnot P \lor Q
+  \end{array}
+$$
+
+## Example
+
+```{r}
+rules <- validator(
+  example = if (job == "yes") income > 0
+)
+```
+$$
+r_{\textrm{example}}(x) = \textrm{job} \not \in \textrm{"yes"} \lor  \textrm{income} > 0  
+$$
+```{r}
+print(rules)
+```
 
 ## Mixed Integer Programming
 
