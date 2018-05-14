@@ -37,7 +37,7 @@ A large part of your and our job is spent in data-cleaning:
 
 - see data changes, improvements (e.g. `daff`, `lumberjack`)
 
-### Desirable properties: 
+### Desirable data cleaning properties: 
 
 - Reproducible data checks
 - Automate repeated data checking (e.g. monthly/quarterly stats)
@@ -51,9 +51,9 @@ A large part of your and our job is spent in data-cleaning:
 
 ## Cleaning philosophy
 
-- "Explicit is better than implicit".
-- Make data knowledge as explicit as possible.
-- Store these as validation rules.
+- **"Explicit is better than implicit"**.
+- Make data knowledge as **explicit** as possible.
+- Store these as **validation rules**.
 
 ### Advantages:
 
@@ -65,6 +65,8 @@ A large part of your and our job is spent in data-cleaning:
 ## Rules
 
 - Data rules are solidified domain knowledge.
+- In statistical production: much domain knowledge available.
+- Many rules, many diverse subpopulations.
 - Real world knowledge e.g. :
 
       - `age` is not negative.
@@ -93,21 +95,13 @@ check_that( data.frame(age=160, job = "no", income = 3000),
 
 ## Rules (2)
 
-A lot of datacleaning packages are using validate rules to do their work.
+A lot of datacleaning packages are using validate rules to facilitate their work.
 
+- `validate`: validation statistics
 - `errorlocate` to find **errors** in variables (in stead of records)
 - `rspa` data **correction** under data constraints
 - `deductive` deductive **correction**
 - `dcmodify` deterministic **correction** and **imputation**.
-
-## Data checking
-
-- A large part of data quality assurance in Official Statistics is checking
-data validity:
-- $n$, number of records is high, typically > 0.5M
-- $p$, number of columns is high, typically > 20
-- population is diverse, different rules for different subpopulations.
-- often many processing steps from input to statistic each checking/using (implicit) domain knowledge.
 
 ### Result: 
 
@@ -121,9 +115,9 @@ data validity:
 
 ### In "real life"
 
-- We have large data analysis processes with many steps
+- We have large data analysis processes with many steps.
 - Often many rules (> 100) on many variables (> 20) and many observations (> 0.5M).
-- 
+- Results often in redundant or (partially) contradictive rule sets...
 
 ## Because we'd like to...
 
