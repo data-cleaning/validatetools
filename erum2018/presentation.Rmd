@@ -31,15 +31,18 @@ A large part of your and our job is spent in data-cleaning:
 
 - getting your data in the right shape (e.g. `tidyverse`)
 
-- assessing missing data (e.g. `VIM`)
+- checking validity (e.g. `validate`, `dataMaid`, `errorlocate`)
 
-- checking validity (e.g. `validate`)
+- impute values for missing or erroneous data (e.g. `VIM`, `simputation`)
 
-- locating and removing errors: `errorlocate`!
+- see data changes, improvements (e.g. `daff`, `lumberjack`)
 
-- impute values for missing or erroneous data (e.g. `simputation`)
+### Desirable properties: 
 
-
+- Reproducible data checks
+- Automate repeated data checking (e.g. monthly/quarterly stats)
+- Monitor data improvements / changes. 
+- But **How?**
 
 ## {.plain}
 
@@ -72,17 +75,10 @@ A large part of your and our job is spent in data-cleaning:
       - `IF profit > 0 THEN turnover > 0`
       - `IF married THEN age > 16` 
 
-## Rules (2)
-
-A lot of datacleaning packages are based on explicit rules that data must conform to.
-
-- `validate` to check **validity** of data
-- `errorlocate` to find **errors**.
-- `rspa`, `deductive`, `dcmodify` for **correction** and **imputation** using data rules.
 
 ## R package `validate`
 
-With package `validate` formulate explicit data rule that data must conform to:
+With package `validate` you formulate explicit rules that data must conform to:
 
 ```{r, eval=FALSE}
 library(validate)
@@ -95,6 +91,14 @@ check_that( data.frame(age=160, job = "no", income = 3000),
 )
 ```
 
+## Rules (2)
+
+A lot of datacleaning packages are using validate rules to do their work.
+
+- `errorlocate` to find **errors** in variables (in stead of records)
+- `rspa` data **correction** under data constraints
+- `deductive` deductive **correction**
+- `dcmodify` deterministic **correction** and **imputation**.
 
 ## Data checking
 
@@ -115,7 +119,13 @@ data validity:
 
 - We have package `validate`, what is the need?
 
-### Because we'd like to...
+### In "real life"
+
+- We have large data analysis processes with many steps
+- Often many rules (> 100) on many variables (> 20) and many observations (> 0.5M).
+- 
+
+## Because we'd like to...
 
 - clean up rule set ( kind of meta-cleaning...).
 - detect and resolve problems with rules:
@@ -168,9 +178,18 @@ $$
 
 ## Mixed Integer Programming
 
-$$
-$$
+Each problem we try to solve, can be translated into a mip problem, which can be 
+readily solved using a mip solver. 
 
+`validatetools` uses `lpSolveApi`.
+
+$$
+\begin{array}{r}
+  \textrm{Minimize } f(\mathbf{x}) = 0; \\
+  \textrm{s.t. }\mathbf{Rx} \leq \mathbf{d} \\
+\end{array}
+$$
+with $\la{R}$ and $\la{d}$ the rule definitions and $f(\la{x})$ is the specific problem that is solved.
 
 ## Problem: infeasibility
 
