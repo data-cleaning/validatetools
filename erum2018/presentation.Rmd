@@ -17,7 +17,7 @@ library(validatetools)
 
 ## Who am I?
 
-- Data scientist / Methodologist Statistics Netherlands (aka CBS).
+- Data scientist / Methodologist at Statistics Netherlands (aka CBS).
 - Author of several R-packages, including `whisker`, `validate`, `errorlocate`, `docopt`, `tableplot`, `chunked`, `ffbase`,...
 - Co-author of _Statistical Data Cleaning with applications in R (2018)_ (sorry for the plug, but relevant for this talk...)
 
@@ -49,7 +49,7 @@ A large part of your and our job is spent in data-cleaning:
 \hspace*{-1cm}
 \includegraphics[width=1\paperwidth]{img/rules.png}
 
-## Cleaning philosophy
+## Data Cleaning philosophy
 
 - **"Explicit is better than implicit"**.
 - Make data knowledge as **explicit** as possible.
@@ -122,7 +122,7 @@ with diverse subpopulations.
     - Detect **conflicting** rules.
     - Remove **redundant** rules.
     - **Substitute** values and **simplify** rules.
-    - Detect **unintended** rule interactions.
+    - Detect unintended rule **interactions**.
 
 - check the rule set using formal logic (without any data!).
 - solve these kind of fun problems :-)
@@ -197,7 +197,7 @@ print(rules)
 
 ## Mixed Integer Programming
 
-Each problem we try to solve, can be translated into a mip problem, which can be 
+Each rule set problem can be translated into a mip problem, which can be 
 readily solved using a mip solver. 
 
 `validatetools` uses `lpSolveApi`.
@@ -236,9 +236,12 @@ is_infeasible(rules)
 ## Conflict, and now?
 
 ```{r}
+rules <- validator( is_adult = age >=21
+                  , is_child = age < 18
+                  )
 # Find out which rule would remove the conflict
 detect_infeasible_rules(rules)
-# And itś conflicting rule(s)
+# And its conflicting rule(s)
 is_contradicted_by(rules, "is_adult")
 ```
 
@@ -247,8 +250,7 @@ is_contradicted_by(rules, "is_adult")
 
 ## Detecting and removing redundant rules
 
-- Rule $r_1$ may imply $r_2$, so $r_2$ can be removed.
-- Simplifies rule set!
+Rule $r_1$ may imply $r_2$, so $r_2$ can be removed.
 
 ```{r}
 rules <- validator( r1 = age >= 18
@@ -280,7 +282,7 @@ rules <- validator( r1 = if (income > 0) age >= 16
 simplify_conditional(rules)
 ```
 
-## All to gether now!:
+## All together now!
 
 `simplify_rules` applies all simplification methods to the rule set
 
