@@ -80,20 +80,18 @@ A lot of datacleaning packages are based on explicit rules that data must confor
 - `errorlocate` to find **errors**.
 - `rspa`, `deductive`, `dcmodify` for **correction** and **imputation** using data rules.
 
-
 ## R package `validate`
 
-Package `validate` allows to:
-
-- formulate explicit data rule that data must conform to:
+With package `validate` formulate explicit data rule that data must conform to:
 
 ```{r, eval=FALSE}
 library(validate)
-check_that( data.frame(age=160, job = "yes", income = 3000), 
+check_that( data.frame(age=160, job = "no", income = 3000), 
   age >= 0, 
   age < 150,
   job %in% c("yes", "no"),
-  if (driver_license == TRUE) age >= 16
+  if (job == "yes") age >= 16,
+  if (income > 0) job == "yes"
 )
 ```
 
@@ -122,9 +120,10 @@ data validity:
 - clean up rule set ( kind of meta-cleaning...).
 - detect and resolve problems with rules:
 
-    - redundant rules
-    - conflicting rules
-    - unintended consequences.
+    - Detect **conflicting** rules.
+    - Remove **redundant** rules.
+    - **Substitute** values and **simplify** rules.
+    - Detect unintended consequences.
 
 - check the rule set using formal logic (without any data!).
 - solve these kind of fun problems :-)
@@ -166,11 +165,6 @@ C_i^j(\la{x}) = \left\{
   \end{array}
 \right.
 $$
-
-## Formally, note
-
-- We restrict ourselves to **linear**, **categorical** and **mixed constraints**. 
-- Rules are not independent.
 
 ## Mixed Integer Programming
 
@@ -238,9 +232,17 @@ substitute_values(rules, gender = "male")
 
 ## Conditional statement
 
+A bit more complex reasoning, but still classical logic:
 
+```{r}
+rules <- validator( r1 = if (income > 0) age >= 16
+                  , r2 = age < 12
+                  )
+# age > 16 is always FALSE so r1 can be simplified
+simplify_conditional(rules)
+```
 
-## All to gether now:
+## All to gether now!:
 
 `simplify_rules` applies all simplification methods to the rule set
 
