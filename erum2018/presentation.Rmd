@@ -29,20 +29,20 @@ library(validatetools)
 
 A large part of your and our job is spent in data-cleaning:
 
-- getting your data in the right shape (e.g. `tidyverse`)
+- getting your data in the right shape (e.g. `tidyverse`, `recipes`)
 
 - checking validity (e.g. `validate`, `dataMaid`, `errorlocate`)
 
-- impute values for missing or erroneous data (e.g. `VIM`, `simputation`)
+- impute values for missing or erroneous data (e.g. `VIM`, `simputation`, `recipes`)
 
 - see data changes, improvements (e.g. `daff`, `lumberjack`)
 
 ### Desirable data cleaning properties: 
 
-- Reproducible data checks
-- Automate repeated data checking (e.g. monthly/quarterly stats)
+- Reproducible data checks.
+- Automate repetitive data checking (e.g. monthly/quarterly).
 - Monitor data improvements / changes. 
-- But **How?**
+- **How** do this systematically?
 
 ## {.plain}
 
@@ -52,35 +52,19 @@ A large part of your and our job is spent in data-cleaning:
 ## Data Cleaning philosophy
 
 - **"Explicit is better than implicit"**.
-- Make data knowledge as **explicit** as possible.
-- Store these as **validation rules**.
+- Data rules are solidified **domain knowledge**.
+- Store these as **validation rules** and apply these when necessary.
 
 ### Advantages:
 
-- Easy checking of rules
+- Easy checking of rules: data validation.
 - Data quality statistics: how often is each rule violated? 
 - Allows for reasoning on rules: which variables are involved in errors?
 - Simplifies rule changes and additions.
 
-## Rules
-
-- Data rules are solidified domain knowledge.
-- In statistical production: much domain knowledge available.
-- Many rules, many diverse subpopulations.
-- Real world knowledge e.g. :
-
-      - `age` is not negative.
-      - human `age` is less then `150` years.
-      
-- Expert knowledge, e.g:
-
-      - `IF profit > 0 THEN turnover > 0`
-      - `IF married THEN age > 16` 
-
-
 ## R package `validate`
 
-With package `validate` you formulate explicit rules that data must conform to:
+With package `validate` you can formulate explicit rules that data must conform to:
 
 ```{r, eval=FALSE}
 library(validate)
@@ -98,23 +82,16 @@ check_that( data.frame(age=160, job = "no", income = 3000),
 A lot of datacleaning packages are using validate rules to facilitate their work.
 
 - `validate`: validation **checks** and data **quality stats** on data. 
-- `errorlocate` to find **errors** in variables (in stead of records)
-- `rspa` data **correction** under data constraints
-- `deductive` deductive **correction**
-- `dcmodify` deterministic **correction** and **imputation**.
+- `errorlocate`: to find **errors** in variables (in stead of records)
+- `rspa`: data **correction** under data constraints
+- `deductive`: deductive **correction**
+- `dcmodify`: deterministic **correction** and **imputation**.
 
 ## Why-o-why `validatetools`?
 
 - We have package `validate`, what is the need?
 
-### In "real life"
-
-- We have large data analysis processes with many steps.
-- Often many rules (> 100) on many variables (> 20) and many observations (> 0.5M) 
-with diverse subpopulations.
-- Results often in redundant or (partially) contradictive rule sets...
-
-## Because we'd like to...
+### Because we'd like to...
 
 - clean up rule sets ( kind of meta-cleaning...).
 - detect and resolve problems with rules:
@@ -127,98 +104,12 @@ with diverse subpopulations.
 - check the rule set using formal logic (without any data!).
 - solve these kind of fun problems :-)
 
-## Formal logic
-
-### Rule set $S$
-
-A validation rule set $S$ is a conjunction of rules $r_i$, which applied on record $\la{x}$ returns `TRUE` (valid) or `FALSE` (invalid)
-
-$$
-S(\la{x}) = r_1(\la{x}) \land \cdots \land r_n(\la{x})
-$$
-
-### Note 
-
-- a record has to comply to each rule $r_i$.
-
-- it is thinkable that two or more $r_i$ are in conflict, making each record invalid.
-
-## Formal logic (2)
-
-### Rule $r_i(x)$
-
-A rule a disjunction of atomic clauses:
-
-$$
-r_i(x) = \bigvee_j C_i^j(x)
-$$
-with: 
-
-$$
-C_i^j(\la{x}) = \left\{
-  \begin{array}{l}
- \la{a}^T\la{x} \leq b \\
-  \la{a}^T\la{x} = b \\
-  x_j \in F_{ij}  \textrm{with } F_{ij} \subseteq D_j \\
-  x_j \not\in F_{ij} \textrm{with } F_{ij} \subseteq D_j \\
-  \end{array}
-\right.
-$$
-
-## Rule types
-
-- _linear_ restrictions
-- _categorical_ restrictions
-- _if_ statements with linear and categorical restrictions
-
-### If statement is Modus ponens:
-
-$$
-  \begin{array}{ll}
-                  & \textsf{if } P \textsf{ then } Q \\
-  \Leftrightarrow & P \implies Q \\
-  \Leftrightarrow & \lnot P \lor Q
-  \end{array}
-$$
-
-## Example
-
-```{r}
-rules <- validator(
-  example = if (job == "yes") income > 0
-)
-```
-$$
-r_{\textrm{example}}(x) = \textrm{job} \not \in \textrm{"yes"} \lor  \textrm{income} > 0  
-$$
-```{r}
-print(rules)
-```
-
-## Mixed Integer Programming
-
-Each rule set problem can be translated into a mip problem, which can be 
-readily solved using a mip solver. 
-
-`validatetools` uses `lpSolveApi`.
-
-$$
-\begin{array}{r}
-  \textrm{Minimize } f(\mathbf{x}) = 0; \\
-  \textrm{s.t. }\mathbf{Rx} \leq \mathbf{d} \\
-\end{array}
-$$
-with $\la{R}$ and $\la{d}$ the rule definitions and $f(\la{x})$ is the specific problem that is solved.
 
 ## Problem: infeasibility
 
 ### Problem
 
-One or more rules in conflict:
-
-- $S(x)$ always is `FALSE, **no data correct**
-- _happens more often than you think_
-
+One or more rules in conflict: all data incorrect! (_and yes that happens when rule sets are large ..._)
 
 ```{r}
 library(validatetools)
@@ -294,6 +185,44 @@ rules <- validator( r1 = if (age < 16) income == 0
 simplify_rules(rules, job = "yes")
 ```
 
+## How does it work?
+
+`validatetools`:
+
+- reformulates rules into formal logic form.
+
+- translates them into a mixed integer program for each of the problems.
+
+### Rule types
+
+- _linear_ restrictions
+- _categorical_ restrictions
+- _if_ statements with linear and categorical restrictions
+
+### If statement is Modus ponens:
+
+$$
+  \begin{array}{ll}
+                  & \textsf{if } P \textsf{ then } Q \\
+  \Leftrightarrow & P \implies Q \\
+  \Leftrightarrow & \lnot P \lor Q
+  \end{array}
+$$
+
+## Example
+
+```{r}
+rules <- validator(
+  example = if (job == "yes") income > 0
+)
+```
+$$
+r_{\textrm{example}}(x) = \textrm{job} \not \in \textrm{"yes"} \lor  \textrm{income} > 0  
+$$
+```{r}
+print(rules)
+```
+
 ## Interested?
 
 \begin{minipage}[c]{0.5\textwidth}
@@ -316,3 +245,62 @@ $\leftarrow$ See book
 \end{minipage}
 
 Thank you for your attention! / Köszönöm a figyelmet!
+
+
+## Addendum
+
+
+## Formal logic
+
+### Rule set $S$
+
+A validation rule set $S$ is a conjunction of rules $r_i$, which applied on record $\la{x}$ returns `TRUE` (valid) or `FALSE` (invalid)
+
+$$
+S(\la{x}) = r_1(\la{x}) \land \cdots \land r_n(\la{x})
+$$
+
+### Note 
+
+- a record has to comply to each rule $r_i$.
+
+- it is thinkable that two or more $r_i$ are in conflict, making each record invalid.
+
+## Formal logic (2)
+
+### Rule $r_i(x)$
+
+A rule a disjunction of atomic clauses:
+
+$$
+r_i(x) = \bigvee_j C_i^j(x)
+$$
+with: 
+
+$$
+C_i^j(\la{x}) = \left\{
+  \begin{array}{l}
+ \la{a}^T\la{x} \leq b \\
+  \la{a}^T\la{x} = b \\
+  x_j \in F_{ij}  \textrm{with } F_{ij} \subseteq D_j \\
+  x_j \not\in F_{ij} \textrm{with } F_{ij} \subseteq D_j \\
+  \end{array}
+\right.
+$$
+
+
+## Mixed Integer Programming
+
+Each rule set problem can be translated into a mip problem, which can be 
+readily solved using a mip solver. 
+
+`validatetools` uses `lpSolveApi`.
+
+$$
+\begin{array}{r}
+  \textrm{Minimize } f(\mathbf{x}) = 0; \\
+  \textrm{s.t. }\mathbf{Rx} \leq \mathbf{d} \\
+\end{array}
+$$
+with $\la{R}$ and $\la{d}$ the rule definitions and $f(\la{x})$ is the specific problem that is solved.
+
