@@ -35,7 +35,7 @@ A large part of your and our job is spent in data-cleaning:
 
 - impute values for missing or erroneous data (e.g. `VIM`, `simputation`, `recipes`)
 
-- see data changes, improvements (e.g. `daff`, `lumberjack`)
+- see data changes, improvements (e.g. `daff`, `diffobj`, `lumberjack`)
 
 ### Desirable data cleaning properties: 
 
@@ -59,7 +59,7 @@ A large part of your and our job is spent in data-cleaning:
 
 - Easy checking of rules: data validation.
 - Data quality statistics: how often is each rule violated? 
-- Allows for reasoning on rules: which variables are involved in errors?
+- Allows for reasoning on rules: which variables are involved in errors? How do errors affect the resulting statistic?
 - Simplifies rule changes and additions.
 
 ## R package `validate`
@@ -178,9 +178,9 @@ simplify_conditional(rules)
 `simplify_rules` applies all simplification methods to the rule set
 
 ```{r}
-rules <- validator( r1 = if (age < 16) income == 0
-                  , r2 = job %in% c("yes", "no")
-                  , r3 = if (job == "yes") income > 0
+rules <- validator( r1 = job %in% c("yes", "no")
+                  , r2 = if (job == "yes") income > 0
+                  , r3 = if (age < 16) income == 0
                   )
 simplify_rules(rules, job = "yes")
 ```
