@@ -1,3 +1,6 @@
+version 0.4.3
+- Fixed issue #9, bug with pure categorical rules.
+
 version 0.4.2
 - Internal updates for compatability with 'validate' version 0.2.3.
 

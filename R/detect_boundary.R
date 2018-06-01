@@ -46,6 +46,10 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
     return(bounds)
   }, simplify = TRUE)
   
+  if (length(bounds) == 0){ # when there are no numeric variables..
+    bounds <- matrix(ncol=0, nrow=2)
+  }
+  
   data.frame( variable = colnames(bounds)
             , lowerbound = round(bounds[1,], prec)
             , upperbound = round(bounds[2,], prec)

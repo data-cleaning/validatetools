@@ -7,6 +7,15 @@ test_that("trivial example", {
   expect_equal(fixed_variables$x, 0)
 })
 
+test_that("Pure categorical constraints work", {
+  rules <- validate::validator( if (A == "a") B == "b"
+                              , A == "a"
+                              )
+  fixed_variables <- detect_fixed_variables(rules)
+  expect_equal(length(fixed_variables), 2)
+  expect_equal(fixed_variables$A, "a")
+  expect_equal(fixed_variables$B, "b")
+})
 
 test_that("a more complex example", {
   rules <- validate::validator( x1 + x2 + x3 == 0

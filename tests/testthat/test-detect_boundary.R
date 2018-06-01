@@ -21,6 +21,14 @@ test_that("detect num boundary works", {
   expect_equal(as.list(bounds[1,]), list(variable="x", lowerbound=1, upperbound=Inf))
 })
 
+test_that("detect num boundary works without num variables", {
+  rules <- validate::validator(
+    if (A == "a")  B == "b"
+  )
+  bounds <- detect_boundary_num(rules)
+  expect_equal(nrow(bounds), 0)
+})
+
 test_that("detect cat boundary works", {
   rules <- x <-  validator( x > 1
                           , if (x > 0) A == 'a1'
