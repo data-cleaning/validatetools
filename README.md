@@ -1,14 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/validatetools)](https://cran.r-project.org/package=validatetools) [![Travis-CI Build Status](https://travis-ci.org/data-cleaning/validatetools.svg?branch=master)](https://travis-ci.org/data-cleaning/validatetools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/data-cleaning/validatetools?branch=master&svg=true)](https://ci.appveyor.com/project/data-cleaning/validatetools) [![Coverage Status](https://img.shields.io/codecov/c/github/data-cleaning/validatetools/master.svg)](https://codecov.io/github/data-cleaning/validatetools?branch=master)
 
-validatetools
-=============
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/validatetools)](https://cran.r-project.org/package=validatetools)
+[![Travis-CI Build
+Status](https://travis-ci.org/data-cleaning/validatetools.svg?branch=master)](https://travis-ci.org/data-cleaning/validatetools)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/data-cleaning/validatetools?branch=master&svg=true)](https://ci.appveyor.com/project/data-cleaning/validatetools)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/data-cleaning/validatetools/master.svg)](https://codecov.io/github/data-cleaning/validatetools?branch=master)
+[![Mentioned in Awesome Official
+Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 
-`validatetools` is a utility package for managing validation rule sets that are defined with `validate`. In production systems validation rule sets tend to grow organically and accumulate redundant or (partially) contradictory rules. `validatetools` helps to identify problems with large rule sets and includes simplification methods for resolving issues.
+# validatetools
 
-Installation
-------------
+`validatetools` is a utility package for managing validation rule sets
+that are defined with `validate`. In production systems validation rule
+sets tend to grow organically and accumulate redundant or (partially)
+contradictory rules. `validatetools` helps to identify problems with
+large rule sets and includes simplification methods for resolving
+issues.
+
+## Installation
 
 `validatetools` is available from CRAN and can be installed with
 
@@ -16,21 +28,22 @@ Installation
 install.packages("validatetools")
 ```
 
-The latest beta version of `validatetools` can be installed with
+The latest beta version of `validatetools` can be installed
+with
 
 ``` r
 install.packages("validatetools", repos = "https://data-cleaning.github.io/drat")
 ```
 
-The adventurous can install an (unstable) development version of `validatetools` from github with:
+The adventurous can install an (unstable) development version of
+`validatetools` from github with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("data-cleaning/validatetools")
 ```
 
-Example
--------
+## Example
 
 ### Check for feasibility
 
@@ -58,10 +71,11 @@ is_contradicted_by(rules, "rule1")
 #> [1] "rule2"
 ```
 
-Simplifying
------------
+## Simplifying
 
-The function `simplify_rules` combines most simplification methods of `validatetools` to simplify a rule set. For example, it reduces the following rule set to a simpler form:
+The function `simplify_rules` combines most simplification methods of
+`validatetools` to simplify a rule set. For example, it reduces the
+following rule set to a simpler form:
 
 ``` r
 rules <- validator( if (age < 16) income == 0
@@ -81,7 +95,8 @@ simplify_rules(rules, job = "yes")
 #>  .const_job: job == "yes"
 ```
 
-`simplify_rules` combines the following simplification and substitution methods:
+`simplify_rules` combines the following simplification and substitution
+methods:
 
 ### Value substitution
 
