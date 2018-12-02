@@ -20,4 +20,8 @@ describe("get_mr_type",{
     #get_mr_expression(mr)
     #get_mr_weights(mr)
   })
+  it("can be a negative coefficient",{
+    rules <- validator(-2*x > 0)
+    lin_as_mip_rules(rules)
+  })
 })

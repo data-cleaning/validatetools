@@ -14,6 +14,13 @@ test_that("trivial example works", {
   expect_equal(red, c(rule1 = TRUE, rule2 = FALSE))
 })
 
+test_that("negative coeficients work",{
+  rules <- validator( rule1 = x > 1
+                    , rule2 = -1*x < -1
+                    )
+  rules_s <- remove_redundancy(rules)
+})
+
 test_that("double rule detection works", {
   
   rules <- validator( rule1 = x > 2

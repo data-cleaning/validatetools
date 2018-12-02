@@ -93,7 +93,14 @@ lin_mip_rule_ <- function(e, sign=1, name, ...){
   }
 
   if (op == '*'){
+    if (is.numeric(left(l))){
+      l <- eval(l) # to deal with negative coefficients
+    }
     if (is.numeric(l)){ return(lin_mip_rule_(r, sign*l)) }
+    
+    if (is.numeric(left(r))){
+      r <- eval(r) # to deal with negative coefficients
+    }
     if (is.numeric(r)){ return(lin_mip_rule_(l, sign*r)) }
   }
   stop("Invalid linear statement")
