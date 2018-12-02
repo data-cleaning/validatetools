@@ -1,3 +1,6 @@
+version 0.4.4
+- Negative coeficients in linear rules were ignored, now fixed
+
 version 0.4.3
 - Fixed issue #9, bug with pure categorical rules.
 
