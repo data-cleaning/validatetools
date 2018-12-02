@@ -45,8 +45,8 @@ is_lin_ <- function(expr, top=TRUE, ...){
     }
 
   if (op == "*"){
-      if (is.numeric(l)){ return(is_lin_(r, FALSE)) }
-      if (is.numeric(r)){ return(is_lin_(l, FALSE)) }
+      if (is.numeric(l) || is.numeric(left(l))){ return(is_lin_(r, FALSE)) }
+      if (is.numeric(r) || is.numeric(left(r))){ return(is_lin_(l, FALSE)) }
   }
   FALSE
 }
