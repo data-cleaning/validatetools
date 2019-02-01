@@ -43,3 +43,4 @@ Other feasibility: \code{\link{detect_boundary_cat}},
   \code{\link{is_contradicted_by}},
   \code{\link{is_infeasible}}
 }
+\concept{feasibility}

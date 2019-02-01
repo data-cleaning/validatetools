@@ -41,3 +41,4 @@ Other redundancy: \code{\link{detect_fixed_variables}},
   \code{\link{remove_redundancy}},
   \code{\link{simplify_fixed_variables}}
 }
+\concept{redundancy}

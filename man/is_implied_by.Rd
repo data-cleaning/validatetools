@@ -49,3 +49,4 @@ Other redundancy: \code{\link{detect_fixed_variables}},
   \code{\link{simplify_fixed_variables}},
   \code{\link{simplify_rules}}
 }
+\concept{redundancy}

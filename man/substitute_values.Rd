@@ -4,7 +4,8 @@
 \alias{substitute_values}
 \title{substitute a value in a rule set}
 \usage{
-substitute_values(.x, .values = list(...), ..., .add_constraints = TRUE)
+substitute_values(.x, .values = list(...), ...,
+  .add_constraints = TRUE)
 }
 \arguments{
 \item{.x}{\code{validator} object with rules}
