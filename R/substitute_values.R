@@ -39,7 +39,7 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
     })
   })
   
-  is_cond <- is_conditional(.x)
+  is_cond <- is_conditional(.x) | is_categorical(.x)
   vals[is_cond] <- lapply(vals[is_cond], function(cond){
     if (is.null(cond)){
       return(TRUE)
