@@ -94,7 +94,7 @@ test_that("reported issues are solved",{
   expect_equal(exprs_s[[1]], quote( 0 > a))
 })
 
-test_that('Ton issue',{
+test_that('Ton issue 11',{
   rules <- validator(r1 = if (A == "1") B == TRUE)
   rules_s <- substitute_values(rules, A = "1")
   exprs_s <- to_exprs(rules_s)

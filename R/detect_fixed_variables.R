@@ -19,7 +19,7 @@ detect_fixed_variables <- function(x, eps = x$options("lin.eq.eps"), ...){
     fixed_num <- as.list(fixed_num)
   }
   fixed_cat <- NULL
-  bounds_cat <- detect_boundary_cat(x)
+  bounds_cat <- detect_boundary_cat(x, as_df = TRUE)
   if (NROW(bounds_cat)){
     bounds_cat <- subset(bounds_cat, min == 1)
     if (nrow(bounds_cat)){

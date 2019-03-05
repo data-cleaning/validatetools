@@ -63,12 +63,13 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 #' Detect viable domains for categorical variables
 #' @example ./examples/detect_boundary.R
 #' @param x \code{\link{validator}} object with rules
+#' @param as_df return result as data.frame (before 0.4.5)
 #' @param ... not used
 #' @family feasibility
 #' @return \code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 
 #' category/value of a categorical variable.
 #' @export
-detect_boundary_cat <- function(x, ...){
+detect_boundary_cat <- function(x, ..., as_df = FALSE){
   var_cat <- get_variables_cat(x)
   bounds <- sapply(seq_len(nrow(var_cat)), function(i){
     bounds <- c(min=0L, max=1L)
@@ -98,7 +99,12 @@ detect_boundary_cat <- function(x, ...){
   #stop("To be implemented")
   # for each category detect bound
   if (length(bounds)){
-    cbind(var_cat[-1], t(bounds))
+    bounds = cbind(var_cat[-1], t(bounds))
+    if (isTRUE(as_df)){
+      return(bounds)
+    }
+    vals <- subset(bounds, max == 1)
+    tapply(vals$value, vals$variable, c)
   } else{
     NULL
   }

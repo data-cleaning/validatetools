@@ -35,6 +35,10 @@ test_that("detect cat boundary works", {
                           , B %in% c("b1", "b2")
                           )
   cat_bounds <- detect_boundary_cat(rules)
+  expect_equal(cat_bounds$A, "a1")
+  expect_equal(cat_bounds$B, c("b1", "b2"))
+  
+  cat_bounds <- detect_boundary_cat(rules, as_df = TRUE)
   expect_equal(as.list(cat_bounds[1,]), list(variable="A", value="a1", min=1, max=1))
   expect_equal(as.list(cat_bounds[2,]), list(variable="B", value="b1", min=0, max=1))
   expect_equal(as.list(cat_bounds[3,]), list(variable="B", value="b2", min=0, max=1))
@@ -48,6 +52,9 @@ test_that("detect cat boundary works for longer named variables", {
   )
   
   cat_bounds <- detect_boundary_cat(rules)
+  expect_equal(as.list(cat_bounds), list(job="yes"))
+  
+  cat_bounds <- detect_boundary_cat(rules, as_df = TRUE)
   expect_equal(as.list(cat_bounds[1,]), list(variable="job", value="yes", min=1, max=1))
   expect_equal(as.list(cat_bounds[2,]), list(variable="job", value="no", min=0, max=0))
 })
