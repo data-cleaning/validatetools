@@ -12,6 +12,7 @@
 #' @export
 is_infeasible <- function(x, ...){
   lp <- to_lp(x) # TODO find out how to treat eps for linear inequalities...
+  #lpSolveAPI::lp.control(lp, presolve="none")
   res <- solve(lp)
   # any of the following means that there is a solution found by lpSolveAPI:
   # TODO generate errors if the lpSolveAPI gives other return values...
@@ -109,6 +110,10 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   }
   
   lp <- translate_mip_lp(mr, objective = objective) #TODO figure out "eps" param
+  lpSolveAPI::lp.control( lp
+                        #, verbose="full"
+                        , presolve="none"
+                        )
   res <- solve(lp)
   
   if (res %in% c(0,1,4,12)){

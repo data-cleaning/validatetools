@@ -58,3 +58,21 @@ test_that("detect_infeasible_rules with equality constraint works",{
   res <- detect_infeasible_rules(rules)
   expect_equal(res, "r3")
 })
+
+test_that("detect_infeasible works on categorical rules", {
+  rules <- validator( dA = A %in% c("a1", "a2")
+                      , r1 = A == "a1"
+                      , r2 = A == "a2"
+  )
+  res <- detect_infeasible_rules(rules)
+  expect_equal(res, "r1")
+})
+
+test_that("detect_infeasible works on negated categorical rules", {
+  rules <- validator( dA = A %in% c("a1", "a2")
+                      , r1 = A == "a1"
+                      , r2 = !(A == "a1")
+  )
+  res <- detect_infeasible_rules(rules)
+  expect_equal(res, "r1")
+})
