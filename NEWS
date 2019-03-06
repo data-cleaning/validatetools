@@ -1,5 +1,6 @@
 version 0.4.5
-- Fix for issue 11
+- Fix for issue 11, Thanks to Ton de Waal
+- output of detect_boundary_cat has changed (improved)
 
 version 0.4.4
 - Negative coeficients in linear rules were ignored, now fixed

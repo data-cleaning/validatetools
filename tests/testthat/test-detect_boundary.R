@@ -52,7 +52,7 @@ test_that("detect cat boundary works for longer named variables", {
   )
   
   cat_bounds <- detect_boundary_cat(rules)
-  expect_equal(as.list(cat_bounds), list(job="yes"))
+  expect_equal(cat_bounds, list(job="yes"))
   
   cat_bounds <- detect_boundary_cat(rules, as_df = TRUE)
   expect_equal(as.list(cat_bounds[1,]), list(variable="job", value="yes", min=1, max=1))

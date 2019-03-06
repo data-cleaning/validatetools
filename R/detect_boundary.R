@@ -104,7 +104,8 @@ detect_boundary_cat <- function(x, ..., as_df = FALSE){
       return(bounds)
     }
     vals <- subset(bounds, max == 1)
-    tapply(vals$value, vals$variable, c)
+    vals <- tapply(vals$value, vals$variable, c, simplify = FALSE)
+    lapply(vals, function(x) x) # trick make an list array into a named list
   } else{
     NULL
   }
