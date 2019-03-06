@@ -44,3 +44,5 @@ test_that("is_contradicted_by works on wrong rule", {
   expect_warning(rules_cd <- is_contradicted_by(rules, "r3"))
   expect_equal(rules_cd, character())
 })
+
+

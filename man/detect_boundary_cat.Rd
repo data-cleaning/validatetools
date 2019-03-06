@@ -4,12 +4,14 @@
 \alias{detect_boundary_cat}
 \title{Detect viable domains for categorical variables}
 \usage{
-detect_boundary_cat(x, ...)
+detect_boundary_cat(x, ..., as_df = FALSE)
 }
 \arguments{
 \item{x}{\code{\link{validator}} object with rules}
 
 \item{...}{not used}
+
+\item{as_df}{return result as data.frame (before 0.4.5)}
 }
 \value{
 \code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 

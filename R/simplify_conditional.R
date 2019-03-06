@@ -12,7 +12,7 @@
 simplify_conditional <- function(x, ...){
   x <- check_validator(x)
   
-  is_cond <- is_conditional(x)
+  is_cond <- is_conditional(x) | is_categorical(x)
   vals <- to_exprs(x)
   for (i in which(is_cond)){
     cond <- vals[[i]]
@@ -28,7 +28,6 @@ simplify_conditional <- function(x, ...){
 
 simplify_non_relaxing <- function(cond_expr, vals){
   clauses <- as_dnf(cond_expr)
-  #browser()
   clauses[] <- lapply(clauses, function(clause){
     test_rules <- do.call(validate::validator, c(vals, clause))
     if (is_infeasible(test_rules)){

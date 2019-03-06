@@ -1,5 +1,8 @@
 # TODO
 
+- add `add_boundary` function, which adds the boundaries for the (selected) variables and 
+does an optional (default TRUE) remove_redundancy, possibly simplyfying the rule set
+
 - add `decorate_validator`: add metadata to the simplified versions of the validator objects, with the correct
 `origin`, `created` and possibly and updated description (e.g. `simplified version of: `)
 - add an argument to `detect_redundancy` to return the same rules as `remove_redundancy`.
@@ -11,3 +14,5 @@
 ## Rescaling of rule matrix
 
 - Use data to determine a (sub) optimal scaling of the MIP matrix: ideally the entries of the matrix should have the same order (~1).
+
+
