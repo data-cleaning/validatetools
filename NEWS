@@ -1,6 +1,6 @@
 version 0.4.6
 - Fix for issue 11, Thanks to Ton de Waal: simplify_conditional was not working
-correctly on purely categorical rules
+correctly on pure categorical rules
 - output of detect_boundary_cat has changed (improved)
 
 version 0.4.4
