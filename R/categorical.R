@@ -128,7 +128,7 @@ cat_mip_rule_ <- function(e, name, ...){
   a <- unlist(lapply(rule_l, function(x){
     vars <- bin_var_name(x)
     # if (x %in% set) +1, if (!(x %in% set)) -1
-    coef <- rep(if(x$not || x$value == FALSE) -1L else 1L, length(vars))
+    coef <- rep(if(x$not || all(x$value == FALSE)) -1L else 1L, length(vars))
     names(coef) <- vars
     coef
   })
