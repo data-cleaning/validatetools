@@ -38,7 +38,6 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
       e
     })
   })
-  
   is_cond <- is_conditional(.x) | is_categorical(.x)
   vals[is_cond] <- lapply(vals[is_cond], function(cond){
     if (is.null(cond)){
@@ -47,10 +46,12 @@ substitute_values <- function (.x, .values = list(...), ..., .add_constraints = 
     clauses <- as_dnf(cond)
     # try to simplify clauses
     s_clauses <- lapply(clauses, function(clause){
-      tryCatch(r <- eval(clause, envir = list(), enclos = NULL), error = function(x) {
-        clause
-      })
+      tryCatch( r <- eval(clause, envir = list(), enclos = NULL)
+              , error = function(x) {
+                       clause
+        })
     })
+    class(s_clauses) <- class(clauses)
     is_logi_clause <- sapply(s_clauses, is.logical)
     if (any(unlist(s_clauses[is_logi_clause]))){
       # one of the clause is TRUE so the whole statement is TRUE

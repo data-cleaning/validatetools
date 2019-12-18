@@ -102,3 +102,14 @@ test_that('Ton issue 11',{
   expect_equal(exprs_s$.const_A, quote(A == "1"))
 })
   
+test_that('Sander issue 12',{
+  rules <- validator(
+    r1 = A %in% c('a','b'),
+    r2 = (A == "a") | (x >= -500) | (x <= 100))
+  
+  rules_s <- substitute_values(rules, A = 'b', .add_constraints = FALSE)
+  
+  exprs_s <- to_exprs(rules_s)
+  expect_equal(length(exprs_s), 1)
+  expect_equal(exprs_s$r2, quote(if (x < -500) x <= 100))
+})

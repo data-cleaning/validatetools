@@ -1,3 +1,6 @@
+version 0.4.7
+- Fix for issue 12, Thanks to Sander Scholtus: substitute_values was failing on conditional statements.
+
 version 0.4.6
 - Fix for issue 11, Thanks to Ton de Waal: simplify_conditional was not working
 correctly on pure categorical rules

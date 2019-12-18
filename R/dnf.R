@@ -158,6 +158,13 @@ as.expression.dnf <- function(x, as_if = FALSE, ...){
   parse(text=as.character(x, as_if = as_if, ...))
 }
 
+#' @export
+`[.dnf` <- function(x, ...){
+  xs <- unclass(x)[...]
+  class(xs) <- class(x)
+  xs
+}
+
 dnf_to_mip_rule <- function(d, name = "", ...){
   islin <- sapply(d, is_lin_)
   d_l <- d[islin]

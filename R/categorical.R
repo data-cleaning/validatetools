@@ -137,7 +137,7 @@ cat_mip_rule_ <- function(e, name, ...){
   # sum(a_pos) + sum(1-a_neg) >= 1
   # condition is that at least one of the variable is true, extract the negated memberships
   b <- 1 - sum(sapply(rule_l, function(x){
-    x$not || (x$value == FALSE)
+    x$not || all(x$value == FALSE)
   }))
 
   if ( length(rule_l) == 1){
