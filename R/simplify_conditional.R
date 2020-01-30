@@ -35,7 +35,8 @@ simplify_non_relaxing <- function(cond_expr, vals){
     }
     clause
   })
-  as.expression(clauses, as_if = TRUE)[[1]]
+  is_null <- sapply(clauses, is.null)
+  as.expression(clauses[!is_null], as_if = TRUE)[[1]]
 }
 
 simplify_non_constraining <- function(cond_expr, vals){

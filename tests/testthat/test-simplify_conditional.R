@@ -89,5 +89,27 @@ test_that("equality constraints work (pure categorical)", {
   expect_equal(exprs_s$r2, exprs$r2)
   expect_equal(exprs_s$dA, exprs$dA) # superfluous, will be removed with remove_redundance
   expect_equal(exprs_s$dB, exprs$dB)
+})
+
+test_that("a more complex if statement also works", {
+  rules <- validator( r1 = if (income > 0 & tvstar != TRUE) age >= 16
+                      , r2 = age < 12
+  )
+  rules_s <- simplify_conditional(rules)
+  exprs <- to_exprs(rules)
+  exprs_s <- to_exprs(rules_s)
+  
+  expect_equal(exprs_s$r1, quote(if (income > 0) tvstar == TRUE))
+  expect_equal(exprs_s$r2, exprs$r2)
+  
+  rules <- validator( r1 = if (income > 0) age >= 16 | tvstar == TRUE
+                      , r2 = age < 12
+  )
+  rules_s <- simplify_conditional(rules)
+  exprs <- to_exprs(rules)
+  exprs_s <- to_exprs(rules_s)
+  
+  expect_equal(exprs_s$r1, quote(if (income > 0) tvstar == TRUE))
+  expect_equal(exprs_s$r2, exprs$r2)
   
 })

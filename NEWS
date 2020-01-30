@@ -1,3 +1,7 @@
+version 0.5
+- improved dnf parsing: more complex if statements are parsed as dnf
+- complex if statements were failing with simplify_conditional.
+
 version 0.4.7
 - Fix for issue 12, Thanks to Sander Scholtus: substitute_values was failing on conditional statements.
 
