@@ -10,3 +10,4 @@ v2 <- validator(
   (A == "a") | (x <= 100) | (x >= -500) )
 
 r <- substitute_values(v2, A = 'b', .add_constraints = FALSE)
+r

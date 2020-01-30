@@ -53,7 +53,7 @@ test_that("substitute_value works with components", {
   rules_s <- substitute_values(rules, .values = list(x=3))
   # Nice! second rule can only obeyed when gender != male
   expect_equal(length(rules_s), 3) 
-  expect_equal(to_exprs(rules_s)[[2]], quote(!(gender == "male")))
+  expect_equal(to_exprs(rules_s)[[2]], quote(gender != "male"))
 })
 
 test_that("substitute_value works with components %vin%", {
@@ -75,7 +75,7 @@ test_that("substitute_value works with components %vin%", {
   rules_s <- substitute_values(rules, .values = list(x=3))
   # Nice! second rule can only obeyed when gender != male
   expect_equal(length(rules_s), 3) 
-  expect_equal(to_exprs(rules_s)[[2]], quote(!(gender == "male")))
+  expect_equal(to_exprs(rules_s)[[2]], quote(gender != "male"))
 })
 
 

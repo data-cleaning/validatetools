@@ -24,7 +24,7 @@ test_that("non-relaxing clause works (pure categorical)", {
   exprs_s <- to_exprs(rules_s)
   
   #skip_on_travis() 
-  expect_equal(exprs_s$r2, quote(!(A == "a")))
+  expect_equal(exprs_s$r2, quote(A != "a"))
 })
 
 
