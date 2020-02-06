@@ -45,12 +45,14 @@ describe("soft_lin_rule",{
     expect_equal(sr$a, c(x=1, .delta_x = -1e7))
     expect_equal(sr$op, "<=")
     expect_equal(sr$rule, "x")
+    expect_equal(sr$type, c(x = "double", .delta_x = "binary"))
     expect_equal(sr$b, 42)
 
     sr <- expect_values(values)[[2]]
     expect_equal(sr$a, c(x=-1, .delta_x = -1e7))
     expect_equal(sr$op, "<=")
     expect_equal(sr$rule, "x")
+    expect_equal(sr$type, c(x = "double", .delta_x = "binary"))
     expect_equal(sr$b, -42)
   })
 

@@ -75,7 +75,7 @@ lin_mip_rule_ <- function(e, sign=1, name, ...){
     coef <- c(lin_mip_rule_(l, sign), lin_mip_rule_(r, -sign), .b=0) # makes sure that .b exists
     coef <- tapply(coef, names(coef), sum) # sum up coefficients
     b <- names(coef) == ".b"
-    return(mip_rule(coef[!b], op, -coef[b], name))
+    return(mip_rule(coef[!b], op = op, b = -coef[b], rule = name))
   }
 
   if (op == '-'){
