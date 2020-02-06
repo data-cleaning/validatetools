@@ -216,7 +216,7 @@ dnf_to_mip_rule <- function(d, name = "", ...){
 # translates the validator rules into mip rules
 to_miprules <- function(x, ...){
   check_validator(x, check_infeasible = FALSE)
-  can_translate <- is_linear(x) | is_categorical(x) | is_conditional(x)
+  can_translate <- is_linear(x) | is_categorical(x) | is_conditional(x) | is_local_variable(x)
   if (!all(can_translate)){
     warning("Ignoring rules: ", paste(names(x)[!can_translate], collapse = ", "))
   }
