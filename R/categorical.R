@@ -69,10 +69,16 @@ get_catvar <- function(expr, not = FALSE){
 
 # generate binary variable names from vars and their values.
 bin_var_name <- function(x, infix=INFIX_CAT_NAME){
-  if (is.character(x$value)){
-    paste0(x$var, infix, x$value)
-  } else {
+  if (is.logical(x$value)){
     x$var
+  } else {
+    if (is.numeric(x$value)){
+      warning("'", x$var, "' seems a categorical variable, please recode it as a factor in the data.
+Only use character or logical values in %in% statements to prevent this warning.",
+              call. = FALSE)
+      
+    }
+    paste0(x$var, infix, x$value)
   }
 }
 
@@ -141,7 +147,10 @@ cat_mip_rule_ <- function(e, name, ...){
   }))
 
   if ( length(rule_l) == 1){
-    if (isTRUE(length(a) > 1) || op(e) == "=="){  # this is a strict(er) version and allows for some optimization
+    if ( isTRUE(length(a) > 1) 
+      || op(e) == "=="
+      || is.character(rule_l[[1]]$value)
+      ){  # this is a strict(er) version and allows for some optimization
       mip_rule(a = a, op = "==", b = b, rule = name, type=sapply(a, function(x) 'binary'))
     } else {
       mip_rule(a = -a, op = "<=", b = -b, rule = name, type=sapply(a, function(x) 'binary')) # needed for logical variables
