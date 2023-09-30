@@ -3,7 +3,6 @@
 \docType{package}
 \name{validatetools}
 \alias{validatetools}
-\alias{validatetools-package}
 \title{Tools for validation rules}
 \description{
 \code{validatetools} is a utility package for managing validation rule sets

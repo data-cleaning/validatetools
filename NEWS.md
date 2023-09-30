@@ -1,6 +1,6 @@
 # validatetools 0.5.2
 
-* Added a `NEWS.md` file to track changes to the package.
+* Added fix for change `is.atomic(NULL)==FALSE` in R 4.3.2
 
 # validatetools 0.5
 

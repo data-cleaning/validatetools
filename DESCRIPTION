@@ -1,6 +1,6 @@
 Package: validatetools
 Title: Checking and Simplifying Validation Rule Sets
-Version: 0.5.1.9000
+Version: 0.5.2
 Authors@R: c( person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role = c("aut", "cre")
             , comment=c(ORCID="0000-0002-6580-4718"))
             , person("Mark", "van der Loo", email = "mark.vanderloo@gmail.com",role = c("aut"))
@@ -18,4 +18,4 @@ BugReports: https://github.com/data-cleaning/validatetools/issues
 Imports: methods, stats, utils, lpSolveAPI
 Suggests: testthat,
     covr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3

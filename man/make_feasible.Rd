@@ -37,10 +37,11 @@ make_feasible(rules)
 is_contradicted_by(rules, "rule1")
 }
 \seealso{
-Other feasibility: \code{\link{detect_boundary_cat}},
-  \code{\link{detect_boundary_num}},
-  \code{\link{detect_infeasible_rules}},
-  \code{\link{is_contradicted_by}},
-  \code{\link{is_infeasible}}
+Other feasibility: 
+\code{\link{detect_boundary_cat}()},
+\code{\link{detect_boundary_num}()},
+\code{\link{detect_infeasible_rules}()},
+\code{\link{is_contradicted_by}()},
+\code{\link{is_infeasible}()}
 }
 \concept{feasibility}

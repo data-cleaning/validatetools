@@ -35,10 +35,11 @@ simplify_rules(rules)
 
 }
 \seealso{
-Other redundancy: \code{\link{detect_fixed_variables}},
-  \code{\link{detect_redundancy}},
-  \code{\link{is_implied_by}},
-  \code{\link{remove_redundancy}},
-  \code{\link{simplify_fixed_variables}}
+Other redundancy: 
+\code{\link{detect_fixed_variables}()},
+\code{\link{detect_redundancy}()},
+\code{\link{is_implied_by}()},
+\code{\link{remove_redundancy}()},
+\code{\link{simplify_fixed_variables}()}
 }
 \concept{redundancy}

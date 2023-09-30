@@ -14,7 +14,8 @@ detect_fixed_variables(x, eps = x$options("lin.eq.eps"), ...)
 \item{...}{not used.}
 }
 \description{
-Detects variables that have a fixed value in the rule set. To simplify a rule set, these variables can be substituted with their value.
+Detects variables that have a fixed value in the rule set. 
+To simplify a rule set, these variables can be substituted with their value.
 }
 \examples{
 library(validate)
@@ -33,10 +34,11 @@ simplify_fixed_variables(rules)
 \seealso{
 \code{\link{simplify_fixed_variables}}
 
-Other redundancy: \code{\link{detect_redundancy}},
-  \code{\link{is_implied_by}},
-  \code{\link{remove_redundancy}},
-  \code{\link{simplify_fixed_variables}},
-  \code{\link{simplify_rules}}
+Other redundancy: 
+\code{\link{detect_redundancy}()},
+\code{\link{is_implied_by}()},
+\code{\link{remove_redundancy}()},
+\code{\link{simplify_fixed_variables}()},
+\code{\link{simplify_rules}()}
 }
 \concept{redundancy}

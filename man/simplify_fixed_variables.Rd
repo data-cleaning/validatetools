@@ -35,10 +35,11 @@ rules <- validator( x1 + x2 + x3 == 0
 simplify_fixed_variables(rules)
 }
 \seealso{
-Other redundancy: \code{\link{detect_fixed_variables}},
-  \code{\link{detect_redundancy}},
-  \code{\link{is_implied_by}},
-  \code{\link{remove_redundancy}},
-  \code{\link{simplify_rules}}
+Other redundancy: 
+\code{\link{detect_fixed_variables}()},
+\code{\link{detect_redundancy}()},
+\code{\link{is_implied_by}()},
+\code{\link{remove_redundancy}()},
+\code{\link{simplify_rules}()}
 }
 \concept{redundancy}
