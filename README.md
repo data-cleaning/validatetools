@@ -1,15 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/validatetools)](https://cran.r-project.org/package=validatetools)
-[![Travis-CI Build
-Status](https://travis-ci.org/data-cleaning/validatetools.svg?branch=master)](https://travis-ci.org/data-cleaning/validatetools)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/data-cleaning/validatetools?branch=master&svg=true)](https://ci.appveyor.com/project/edwindj/validatetools)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/data-cleaning/validatetools/master.svg)](https://codecov.io/github/data-cleaning/validatetools?branch=master)
+[![R-CMD-check](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
+[![codecov](https://codecov.io/github/data-cleaning/validatetools/graph/badge.svg?token=3tIe5HAUWm)](https://codecov.io/github/data-cleaning/validatetools)
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
+<!-- badges: end -->
 
 # validatetools
 
@@ -28,8 +27,7 @@ issues.
 install.packages("validatetools")
 ```
 
-The latest beta version of `validatetools` can be installed
-with
+The latest beta version of `validatetools` can be installed with
 
 ``` r
 install.packages("validatetools", repos = "https://data-cleaning.github.io/drat")
@@ -156,7 +154,7 @@ rules <- validator( if (age  < 16) income == 0
                   )
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
-#>  V1: !(age < 16) | (income == 0)
+#>  V1: age >= 16 | (income == 0)
 #>  V2: income >= 0
 ```
 

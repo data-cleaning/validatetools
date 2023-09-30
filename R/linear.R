@@ -34,8 +34,12 @@ is_lin_ <- function(expr, top=TRUE, ...){
     return(is_lin_(l, FALSE) && is_lin_(r, FALSE))
   }
 
+  if (is.null(expr)){
+    return(TRUE)
+  }
+  
   if (is.atomic(expr)){
-    return(is.numeric(expr) || is.null(expr))
+    return(is.numeric(expr))
   }
 
   if (is.symbol(expr)){ return(TRUE) }

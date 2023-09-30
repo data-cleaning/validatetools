@@ -8,7 +8,7 @@ is_cat_ <- function(expr, or=TRUE, ...){
     return(TRUE)
   }
 
-  if(is.atomic(expr)){
+  if(is.atomic(expr) || is.null(expr)){
     return(is.logical(expr))
   }
 

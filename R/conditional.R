@@ -78,7 +78,7 @@ rep_lin_ <- function(e, or=TRUE, h=new.env()){
   l <- left(e)
   r <- right(e)
 
-  if (is.atomic(e) || is.symbol(e)){
+  if (is.atomic(e) || is.symbol(e) || is.null(e)){
     return(e)
   }
 
