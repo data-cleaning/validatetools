@@ -1,6 +1,7 @@
 #' Detect fixed variables
 #' 
-#' Detects variables that have a fixed value in the rule set. To simplify a rule set, these variables can be substituted with their value.
+#' Detects variables that have a fixed value in the rule set. 
+#' To simplify a rule set, these variables can be substituted with their value.
 #' @example ./examples/detect_fixed_variables.R
 #' @seealso \code{\link{simplify_fixed_variables}}
 #' @param x \code{\link{validator}} object with the validation rules.

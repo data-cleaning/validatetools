@@ -5,7 +5,7 @@ NULL
 #' substitute a value in a rule set
 #' 
 #' Substitute values into expression, thereby simplifying the rule set.
-#' Rules that evaluate to TRUE because of the substition are removed.
+#' Rules that evaluate to TRUE because of the substitution are removed.
 #' @example ./examples/substitute_values.R
 #' @param .x \code{validator} object with rules
 #' @param .values (optional) named list with values for variables to substitute

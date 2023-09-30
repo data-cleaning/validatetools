@@ -13,11 +13,11 @@ knitr::opts_chunk$set(
 library(validatetools)
 ```
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/validatetools)](https://cran.r-project.org/package=validatetools)
-[![Travis-CI Build Status](https://travis-ci.org/data-cleaning/validatetools.svg?branch=master)](https://travis-ci.org/data-cleaning/validatetools)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/da/validatetools?branch=master&svg=true)](https://ci.appveyor.com/project/edwindj/validatetools)
-[![Coverage Status](https://img.shields.io/codecov/c/github/data-cleaning/validatetools/master.svg)](https://codecov.io/github/data-cleaning/validatetools?branch=master)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
 [![Mentioned in Awesome Official Statistics ](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
+<!-- badges: end -->
 
 # validatetools
 
