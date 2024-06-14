@@ -6,6 +6,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
 [![codecov](https://codecov.io/github/data-cleaning/validatetools/graph/badge.svg?token=3tIe5HAUWm)](https://codecov.io/github/data-cleaning/validatetools)
+[![status](https://tinyverse.netlify.app/badge/validatetools)](https://CRAN.R-project.org/package=validatetools)
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 <!-- badges: end -->
@@ -14,7 +15,7 @@ Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficials
 
 `validatetools` is a utility package for managing validation rule sets
 that are defined with `validate`. In production systems validation rule
-sets tend to grow organically and accumulate redundant or (partially)
+sets tend to grow organically and validatetools redundant or (partially)
 contradictory rules. `validatetools` helps to identify problems with
 large rule sets and includes simplification methods for resolving
 issues.
