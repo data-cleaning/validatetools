@@ -237,7 +237,34 @@ to_miprules <- function(x, ...){
 to_lp <- function(x, objective = NULL, eps = 0.001){
   check_validator(x, check_infeasible = FALSE)
   rules <- to_miprules(x)
+  rules <- fix_cat_domain(rules)
   translate_mip_lp(rules = rules, objective = objective, eps = eps)
+}
+
+# make sure that the values of each categorical variable are exclusive
+# which is not guaranteed when no domain is given
+fix_cat_domain <- function(rules){
+  type <- get_mr_type(rules)
+  binvars <- names(type)[type == "binary"]
+  if (length(binvars) == 0){
+    return(rules)
+  }
+  
+  catvars <- 
+    strsplit(binvars, INFIX_CAT_NAME)
+  
+  catvars <- sapply(catvars, function(x){
+      x[[1]]
+    })
+  
+  cv <- 
+    split(binvars, catvars) |> 
+    lapply(function(x){
+      a <- sapply(x, \(x) 1)
+      type <- sapply(x, \(x) "binary")
+      mip_rule(a = a, op = "<=", b = 1, rule = "domain", type = type)
+    })
+  c(rules, unname(cv))
 }
 
 # as_dnf(quote(!(gender == "male") | x > 6))

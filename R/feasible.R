@@ -66,6 +66,7 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   }
   
   mr <- to_miprules(x)
+  mr <- fix_cat_domain(mr)
   
   is_equality <- sapply(mr, function(m){
     m$op == "==" && all(m$type == "double")
@@ -87,7 +88,6 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   
   # make all rules soft rules
   objective <- numeric()
-  
   mr <- lapply(mr , function(r){
     is_lin <- all(r$type == "double")
     is_cat <- all(r$type == "binary")

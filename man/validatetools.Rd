@@ -2,6 +2,7 @@
 % Please edit documentation in R/validatetools-package.R
 \docType{package}
 \name{validatetools}
+\alias{validatetools-package}
 \alias{validatetools}
 \title{Tools for validation rules}
 \description{
@@ -41,4 +42,26 @@ The following methods detect possible simplifications and apply them to a rule s
 
 \references{
 Statistical Data Cleaning with Applications in R, Mark van der Loo and Edwin de Jonge, ISBN: 978-1-118-89715-7
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/data-cleaning/validatetools}
+  \item Report bugs at \url{https://github.com/data-cleaning/validatetools/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Edwin de Jonge \email{edwindjonge@gmail.com} (\href{https://orcid.org/0000-0002-6580-4718}{ORCID})
+
+Authors:
+\itemize{
+  \item Mark van der Loo \email{mark.vanderloo@gmail.com}
+}
+
+Other contributors:
+\itemize{
+  \item Jacco Daalmans [contributor]
+}
+
 }

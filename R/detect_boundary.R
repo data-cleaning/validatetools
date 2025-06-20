@@ -11,7 +11,7 @@
 #' @example ./examples/detect_boundary.R
 #' @export
 #' @param x \code{\link{validator}} object, rule set to be checked
-#' @param eps detected fixed values will have this precission.
+#' @param eps detected fixed values will have this precision.
 #' @param ... currently not used
 #' @family feasibility
 #' @return \code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".

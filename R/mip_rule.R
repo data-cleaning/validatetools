@@ -18,6 +18,7 @@ mip_rule <- function(a, op, b, rule, type, weight=Inf, ...){
            )
 }
 
+#' @export
 as.character.mip_rule <- function(x, ...){
   a <- paste0(x$a, "*", names(x$a), collapse= ' + ')
 
