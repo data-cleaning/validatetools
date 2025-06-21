@@ -1,6 +1,6 @@
 # validatetools 0.6.0
 
-* added a fix when categorical variables where used, without a rule that specified the domain. Thanks to
+* added a fix when categorical variables where used, without a rule that specified the domain. (issue #15) Thanks to
 Romina Filippini and Simona Toti for reporting. 
 
 # validatetools 0.5.2

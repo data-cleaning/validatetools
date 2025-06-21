@@ -7,14 +7,14 @@
 detect_boundary_num(x, eps = 1e-08, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object, rule set to be checked}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object, rule set to be checked}
 
 \item{eps}{detected fixed values will have this precision.}
 
 \item{...}{currently not used}
 }
 \value{
-\code{\link{data.frame}} with columns "variable", "lowerbound", "upperbound".
+\code{\link[=data.frame]{data.frame()}} with columns "variable", "lowerbound", "upperbound".
 }
 \description{
 Detect for each numerical variable in a validation rule set, what its maximum and minimum values are.
@@ -46,7 +46,7 @@ Statistical Data Cleaning with R (2017), Chapter 8, M. van der Loo, E. de Jonge
 Simplifying constraints in data editing (2015). Technical Report 2015|18, Statistics Netherlands, J. Daalmans
 }
 \seealso{
-\code{\link{detect_fixed_variables}}
+\code{\link[=detect_fixed_variables]{detect_fixed_variables()}}
 
 Other feasibility: 
 \code{\link{detect_boundary_cat}()},

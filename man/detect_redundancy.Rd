@@ -7,7 +7,7 @@
 detect_redundancy(x, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with the validation rules.}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with the validation rules.}
 
 \item{...}{not used.}
 }

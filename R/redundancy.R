@@ -4,7 +4,7 @@
 #' 
 #' @note For removal of duplicate rules, simplify
 #' @example ./examples/redundancy.R
-#' @param x \code{\link{validator}} object with the validation rules.
+#' @param x [validate::validator()] object with the validation rules.
 #' @param ... not used.
 #' 
 #' @family redundancy
@@ -31,12 +31,12 @@ detect_redundancy <- function(x, ...){
 #' Simplify a rule set by removing redundant rules
 #' @export
 #' @example ./examples/redundancy.R
-#' @param x \code{\link{validator}} object with validation rules.
+#' @param x [validate::validator()] object with validation rules.
 #' @param ... not used
 #' 
 #' @family redundancy
 #' 
-#' @return simplified \code{\link{validator}} object, in which redundant rules are removed.
+#' @return simplified [validate::validator()] object, in which redundant rules are removed.
 remove_redundancy <- function(x, ...){
   x <- check_validator(x)
 

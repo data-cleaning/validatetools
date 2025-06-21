@@ -3,9 +3,9 @@
 
 #' Check which rules are linear rules.
 #' @export
-#' @param x \code{\link{validator}} object containing data validation rules
+#' @param x [validate::validator()] object containing data validation rules
 #' @param ... not used
-#' @return \code{logical} indicating which rules are (purely) linear.
+#' @return `logical` indicating which rules are (purely) linear.
 is_linear <- function(x, ...){
   stopifnot(inherits(x, "validator"))
   sapply(x$rules, function(rule){

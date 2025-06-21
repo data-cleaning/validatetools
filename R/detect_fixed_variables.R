@@ -3,8 +3,8 @@
 #' Detects variables that have a fixed value in the rule set. 
 #' To simplify a rule set, these variables can be substituted with their value.
 #' @example ./examples/detect_fixed_variables.R
-#' @seealso \code{\link{simplify_fixed_variables}}
-#' @param x \code{\link{validator}} object with the validation rules.
+#' @seealso [simplify_fixed_variables()]
+#' @param x [validate::validator()] object with the validation rules.
 #' @param eps detected fixed values will have this precission.
 #' @param ... not used.
 #' @family redundancy
@@ -38,11 +38,11 @@ detect_fixed_variables <- function(x, eps = x$options("lin.eq.eps"), ...){
 #'   
 #' @export
 #' @example ./examples/detect_fixed_variables.R
-#' @param x \code{\link{validator}} object with validation rules
+#' @param x [validate::validator()] object with validation rules
 #' @param eps detected fixed values will have this precission.
-#' @param ... passed to \code{\link{substitute_values}}.
+#' @param ... passed to [substitute_values()].
 #' @family redundancy
-#' @return \code{\link{validator}} object in which 
+#' @return [validate::validator()] object in which 
 simplify_fixed_variables <- function(x, eps = 1e-8, ...){
   x <- check_validator(x)
   fv <- detect_fixed_variables(x, eps = eps, ...)

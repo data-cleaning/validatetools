@@ -7,7 +7,7 @@
 is_contradicted_by(x, rule_name)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with rules.}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with rules.}
 
 \item{rule_name}{\code{character} with the names of the rules that are causing infeasibility.}
 }

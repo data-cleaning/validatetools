@@ -16,8 +16,8 @@ library(validatetools)
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
-[![codecov](https://codecov.io/github/data-cleaning/validatetools/graph/badge.svg?token=3tIe5HAUWm)](https://codecov.io/github/data-cleaning/validatetools)
 [![Mentioned in Awesome Official Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
+[![Codecov test coverage](https://codecov.io/gh/data-cleaning/validatetools/graph/badge.svg)](https://app.codecov.io/gh/data-cleaning/validatetools)
 <!-- badges: end -->
 
 # validatetools

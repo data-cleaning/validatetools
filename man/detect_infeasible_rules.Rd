@@ -7,9 +7,9 @@
 detect_infeasible_rules(x, weight = numeric(), ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with rules}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with rules}
 
-\item{weight}{optional named \code{\link{numeric}} with weights. Unnamed variables in the weight are given the default
+\item{weight}{optional named \code{\link[=numeric]{numeric()}} with weights. Unnamed variables in the weight are given the default
 weight \code{1}.}
 
 \item{...}{not used}

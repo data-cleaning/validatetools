@@ -7,17 +7,17 @@
 make_feasible(x, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with the validation rules.}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with the validation rules.}
 
-\item{...}{passed to \code{\link{detect_infeasible_rules}}}
+\item{...}{passed to \code{\link[=detect_infeasible_rules]{detect_infeasible_rules()}}}
 }
 \value{
-\code{\link{validator}} object with feasible rules.
+\code{\link[validate:validator]{validate::validator()}} object with feasible rules.
 }
 \description{
 Make an infeasible system feasible, by removing the minimum (weighted) number of rules, such that the remaining
 rules are not conflicting.
-This function uses \code{\link{detect_infeasible_rules}} for determining the rules to be removed.
+This function uses \code{\link[=detect_infeasible_rules]{detect_infeasible_rules()}} for determining the rules to be removed.
 }
 \examples{
 rules <- validator( x > 0)

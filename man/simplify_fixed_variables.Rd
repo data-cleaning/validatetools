@@ -7,14 +7,14 @@
 simplify_fixed_variables(x, eps = 1e-08, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with validation rules}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with validation rules}
 
 \item{eps}{detected fixed values will have this precission.}
 
-\item{...}{passed to \code{\link{substitute_values}}.}
+\item{...}{passed to \code{\link[=substitute_values]{substitute_values()}}.}
 }
 \value{
-\code{\link{validator}} object in which
+\code{\link[validate:validator]{validate::validator()}} object in which
 }
 \description{
 Detect variables of which the values are restricted to a single value by the

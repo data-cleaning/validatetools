@@ -15,7 +15,7 @@ is_infeasible(x, ...)
 TRUE or FALSE
 }
 \description{
-An infeasible rule set cannot be satisfied by any data because of internal 
+An infeasible rule set cannot be satisfied by any data because of internal
 contradictions. This function checks whether the record-wise linear,
 categorical and conditional rules in a rule set are consistent.
 }

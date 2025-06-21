@@ -262,8 +262,15 @@ fix_cat_domain <- function(rules){
     lapply(function(x){
       a <- sapply(x, \(x) 1)
       type <- sapply(x, \(x) "binary")
-      mip_rule(a = a, op = "<=", b = 1, rule = "domain", type = type)
+      mip_rule(a = a, op = "<=", b = 1, rule = ".domain.", type = type)
     })
+  cv <- 
+    lapply(names(cv), function(n){
+      mr <- cv[[n]]
+      mr$rule <- paste0(".domain.", n)
+      mr
+    })
+  
   c(rules, unname(cv))
 }
 

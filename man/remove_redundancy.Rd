@@ -7,12 +7,12 @@
 remove_redundancy(x, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with validation rules.}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with validation rules.}
 
 \item{...}{not used}
 }
 \value{
-simplified \code{\link{validator}} object, in which redundant rules are removed.
+simplified \code{\link[validate:validator]{validate::validator()}} object, in which redundant rules are removed.
 }
 \description{
 Simplify a rule set by removing redundant rules

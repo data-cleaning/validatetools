@@ -7,7 +7,7 @@
 is_implied_by(x, rule_name, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with rule}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with rule}
 
 \item{rule_name}{\code{character} with the names of the rules to be checked}
 

@@ -7,14 +7,14 @@
 detect_boundary_cat(x, ..., as_df = FALSE)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with rules}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with rules}
 
 \item{...}{not used}
 
 \item{as_df}{return result as data.frame (before 0.4.5)}
 }
 \value{
-\code{data.frame} with columns \code{$variable}, \code{$value}, \code{$min}, \code{$max}. Each row is a 
+\code{data.frame} with columns \verb{$variable}, \verb{$value}, \verb{$min}, \verb{$max}. Each row is a
 category/value of a categorical variable.
 }
 \description{

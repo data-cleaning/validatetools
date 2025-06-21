@@ -7,12 +7,12 @@
 simplify_conditional(x, ...)
 }
 \arguments{
-\item{x}{\code{\link{validator}} object with the validation rules.}
+\item{x}{\code{\link[validate:validator]{validate::validator()}} object with the validation rules.}
 
 \item{...}{not used.}
 }
 \value{
-\code{\link{validator}} simplified rule set.
+\code{\link[validate:validator]{validate::validator()}} simplified rule set.
 }
 \description{
 Conditional rules may be constrained by the others rules in a validation rule set.

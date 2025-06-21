@@ -3,11 +3,11 @@
 #' Find out which rules are causing rule_name(s) to be redundant.
 #' @example ./examples/redundancy.R
 #' @export
-#' @param x \code{\link{validator}} object with rule
-#' @param rule_name \code{character} with the names of the rules to be checked
+#' @param x [validate::validator()] object with rule
+#' @param rule_name `character` with the names of the rules to be checked
 #' @param ... not used
 #' @family redundancy
-#' @return \code{character} with the names of the rule that cause the implication.
+#' @return `character` with the names of the rule that cause the implication.
 is_implied_by <- function(x, rule_name, ...){
   check_validator(x)
   idx <- match(rule_name, names(x), 0)
