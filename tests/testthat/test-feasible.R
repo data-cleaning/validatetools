@@ -55,7 +55,7 @@ test_that("detect_infeasible_rules with equality constraint works",{
                     , r2 = x > 2
                     , r3 = y > 1
                     )
-  res <- detect_infeasible_rules(rules)
+  res <- detect_infeasible_rules(rules, weight = c(r1=Inf))
   expect_equal(res, "r3")
 })
 

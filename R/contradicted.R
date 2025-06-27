@@ -10,15 +10,17 @@
 #' @return `character` with conflicting rules.
 is_contradicted_by <- function(x, rule_name){
   rn <- rule_name %in% names(x)
-  
+
   if (any(!rn)){
     nms <- paste0('"',rule_name[!rn], '"', collapse = ", ")
     warning("Rule(s) ", nms, " not found in rule set 'x'.", call. = FALSE)
   }
   
   N <- length(x)
-  weight <- rep(N, length(rule_name))
+  #weight <- rep(N, length(rule_name))
+  weight <- rep(Inf, length(rule_name))
   names(weight) <- rule_name
+  
   
   res <- character()
   contra <- detect_infeasible_rules(x, weight = weight)

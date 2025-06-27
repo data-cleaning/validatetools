@@ -18,4 +18,14 @@ describe("infeasible", {
     expect_true(is_infeasible(v))
   })
   
+  it("detects infeasible rules no domain set", {
+    v <- validator( a == "a1",
+                    a == "a2",
+                    b == "b1",
+                    c == "c1"
+    )
+    expect_true(is_infeasible(v))
+  })
+  
+  
 })

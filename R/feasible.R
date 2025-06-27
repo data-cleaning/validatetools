@@ -61,13 +61,19 @@ make_feasible <- function(x, ...){
 #' @param ... not used
 #' @return `character` with the names of the rules that are causing infeasibility.
 detect_infeasible_rules <- function(x, weight = numeric(), ...){
+  # browser()
   if (!is_infeasible(x)){
     return(character())
   }
-  
+  # browser()
+
   mr <- to_miprules(x)
   mr <- fix_cat_domain(mr)
   
+  nms <- mr |> sapply(\(x) x$rule)
+  w_inf <- nms[grepl("^\\.domain.", nms)] |> sapply(\(x) Inf)
+  weight <- c(weight, w_inf)
+
   is_equality <- sapply(mr, function(m){
     m$op == "==" && all(m$type == "double")
   })
@@ -87,8 +93,15 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   }
   
   # make all rules soft rules
+  wl <- as.list(weight)
   objective <- numeric()
   mr <- lapply(mr , function(r){
+    w <- wl[[r$rule]]
+    exclude <- (is.numeric(w) && w == Inf)
+    if (exclude){
+      return(r)
+    }
+    
     is_lin <- all(r$type == "double")
     is_cat <- all(r$type == "binary")
     if (is_lin){
@@ -102,17 +115,18 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
     objective[[paste0(".delta_", r$rule)]] <<- r$weight
     r
   })
-  
   # set the weights to the weights supplied by the user
-  if (!is.null(names(weight))){
-    names(weight) <- paste0(".delta_", names(weight))
-    objective[names(weight)] <- weight
+  if (length(weight) && !is.null(names(weight))){
+    weight <- weight[sapply(weight, is.finite)]
+    if (length(weight)){
+      names(weight) <- paste0(".delta_", names(weight))
+      objective[names(weight)] <- weight
+    }
   }
-  
   lp <- translate_mip_lp(mr, objective = objective) #TODO figure out "eps" param
   lpSolveAPI::lp.control( lp
                         #, verbose="full"
-                        , presolve="none"
+                        , presolve="rows"
                         )
   res <- solve(lp)
   

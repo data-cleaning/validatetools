@@ -10,6 +10,8 @@ is_feasible(rules)
 
 
 conflicts <- detect_infeasible_rules(rules)
-conflict
+conflicts
 conflict2 <- is_contradicted_by(rules, conflicts)
 make_feasible(rules)
+
+
