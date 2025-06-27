@@ -1,0 +1,22 @@
+---
+output: github_document
+---
+
+
+```{r}
+library(validate)
+library(validatetools)
+
+rules <- validator(
+  if (nace == "a") export == "y",
+  if (nace == "a")  export == "n"
+)
+
+detect_contradicting_if_rules(rules)
+```
+
+
+```{r}
+conflicts <- detect_contradicting_if_rules(rules, verbose=FALSE)
+conflicts
+```

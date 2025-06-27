@@ -7,9 +7,9 @@
 #' @param verbose Logical. If `TRUE`, print the results.
 #' @return A list of contradictions found in the if clauses, or `NULL` if none are found.
 #' @family feasibility
-#' @example ./examples/detect_infeasible_if_rules.R
+#' @example ./examples/detect_contradicting_if_rules.R
 #' @export
-detect_infeasible_if_rules <- function(x, ..., verbose = TRUE){
+detect_contradicting_if_rules <- function(x, ..., verbose = TRUE){
   res <- detect_if_clauses(x, ...)
   if (length(res) == 0){
     if (verbose){

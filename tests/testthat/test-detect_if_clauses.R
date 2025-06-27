@@ -7,7 +7,7 @@ describe("detect contradictory categorical if clauses", {
       if (a == "a") b == "b2"
     )
     
-    a <- detect_infeasible_if_rules(v)
+    a <- detect_contradicting_if_rules(v)
     expect_equal(a, list("a == \"a\"" = c("V1", "V2")))
   })
   
@@ -17,7 +17,7 @@ describe("detect contradictory categorical if clauses", {
       if (a == "a") x < -1
     )
     
-     a <- detect_infeasible_if_rules(v)
+     a <- detect_contradicting_if_rules(v)
      expect_equal(a, list("a == \"a\"" = c("V2", "V1")))
   })
   
@@ -27,7 +27,7 @@ describe("detect contradictory categorical if clauses", {
       if (x > 0) b == "b2"
     )
     
-    a <- detect_infeasible_if_rules(v)
+    a <- detect_contradicting_if_rules(v)
     expect_equal(a, list("x > 0" = c("V2", "V1")))
   })
   

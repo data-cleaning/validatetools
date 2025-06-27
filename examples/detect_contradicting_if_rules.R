@@ -3,4 +3,4 @@ rules <- validator(
   if (nace == "a")  export == "n"
 )
 
-detect_infeasible_if_rules(rules)
+detect_contradicting_if_rules(rules)
