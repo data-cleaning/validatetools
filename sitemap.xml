@@ -9,8 +9,8 @@
 <url><loc>/reference/cat_coefficients.html</loc></url>
 <url><loc>/reference/detect_boundary_cat.html</loc></url>
 <url><loc>/reference/detect_boundary_num.html</loc></url>
+<url><loc>/reference/detect_contradicting_if_rules.html</loc></url>
 <url><loc>/reference/detect_fixed_variables.html</loc></url>
-<url><loc>/reference/detect_infeasible_if_rules.html</loc></url>
 <url><loc>/reference/detect_infeasible_rules.html</loc></url>
 <url><loc>/reference/detect_redundancy.html</loc></url>
 <url><loc>/reference/expect_values.html</loc></url>
