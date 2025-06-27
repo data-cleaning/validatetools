@@ -1,21 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
-[![codecov](https://codecov.io/github/data-cleaning/validatetools/graph/badge.svg?token=3tIe5HAUWm)](https://codecov.io/github/data-cleaning/validatetools)
-[![status](https://tinyverse.netlify.app/badge/validatetools)](https://CRAN.R-project.org/package=validatetools)
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
+[![Codecov test
+coverage](https://codecov.io/gh/data-cleaning/validatetools/graph/badge.svg)](https://app.codecov.io/gh/data-cleaning/validatetools)
 <!-- badges: end -->
 
 # validatetools
 
 `validatetools` is a utility package for managing validation rule sets
 that are defined with `validate`. In production systems validation rule
-sets tend to grow organically and validatetools redundant or (partially)
+sets tend to grow organically and accumulate redundant or (partially)
 contradictory rules. `validatetools` helps to identify problems with
 large rule sets and includes simplification methods for resolving
 issues.
@@ -68,6 +69,27 @@ make_feasible(rules)
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1")
 #> [1] "rule2"
+```
+
+### Finding contradicting if rules
+
+``` r
+rules <- validator(
+  if (nace == "a") export == "y",
+  if (nace == "a")  export == "n"
+)
+
+conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
+#> 1 contradiction(s) with if clauses found:
+#> When nace == "a":
+#>   V1: if (nace == "a") export == "y"
+#>   V2: if (nace == "a") export == "n"
+```
+
+``` r
+print(conflicts)
+#> $`nace == "a"`
+#> [1] "V1" "V2"
 ```
 
 ## Simplifying

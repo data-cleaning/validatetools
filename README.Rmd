@@ -67,6 +67,23 @@ make_feasible(rules)
 is_contradicted_by(rules, "rule1")
 ```
 
+### Finding contradicting if rules
+
+
+```{r}
+rules <- validator(
+  if (nace == "a") export == "y",
+  if (nace == "a")  export == "n"
+)
+
+conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
+```
+
+
+```{r}
+print(conflicts)
+```
+
 ## Simplifying 
 
 The function `simplify_rules` combines most simplification methods of `validatetools` to simplify a rule set.

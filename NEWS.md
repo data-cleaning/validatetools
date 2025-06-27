@@ -3,6 +3,13 @@
 * added a fix when categorical variables where used, without a rule that specified the domain. (issue #15) Thanks to
 Romina Filippini and Simona Toti for reporting. 
 
+* added a new function `detect_contradicting_if_rules`. (issue #16)
+  It detects all rules that are not satisfiable together with the if condition.
+  Thanks to Romina Filippini and Simona Toti for the suggestion.
+  
+* fix for `is_contradicted_by` and `detect_infeasible_rules` when the rules contained 
+if statements.
+  
 # validatetools 0.5.2
 
 * Added fix for change `is.atomic(NULL)==FALSE` in R 4.3.2
