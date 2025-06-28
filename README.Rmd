@@ -72,8 +72,8 @@ is_contradicted_by(rules, "rule1")
 
 ```{r}
 rules <- validator(
-  if (income > 0) job == "yes",
-  if (job == "yes") income == 0
+  rule1 = if (income > 0) job == "yes",
+  rule2 = if (job == "yes") income == 0
 )
     
 

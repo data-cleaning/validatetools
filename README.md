@@ -75,22 +75,22 @@ is_contradicted_by(rules, "rule1")
 
 ``` r
 rules <- validator(
-  if (income > 0) job == "yes",
-  if (job == "yes") income == 0
+  rule1 = if (income > 0) job == "yes",
+  rule2 = if (job == "yes") income == 0
 )
     
 
 conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
 #> 1 contradiction(s) with if clauses found:
 #> When income > 0:
-#>   V2: if (job == "yes") income == 0
-#>   V1: if (income > 0) job == "yes"
+#>   rule2: if (job == "yes") income == 0
+#>   rule1: if (income > 0) job == "yes"
 ```
 
 ``` r
 print(conflicts)
 #> $`income > 0`
-#> [1] "V2" "V1"
+#> [1] "rule2" "rule1"
 ```
 
 ## Simplifying
