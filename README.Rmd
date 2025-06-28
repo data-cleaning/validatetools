@@ -72,9 +72,10 @@ is_contradicted_by(rules, "rule1")
 
 ```{r}
 rules <- validator(
-  if (nace == "a") export == "y",
-  if (nace == "a")  export == "n"
+  if (income > 0) job == "yes",
+  if (job == "yes") income == 0
 )
+    
 
 conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
 ```
