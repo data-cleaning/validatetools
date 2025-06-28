@@ -54,14 +54,25 @@ describe("detect contradictory categorical if clauses", {
     expect_equal(a, list("income > 0" = c("V2", "V1")))
   })
 
-  it("detects multi conditions", {
+  it("detects multi conditions 1", {
     v <- validator(
       if (nace == "a" && export > 0) international == TRUE,
       if (nace == "a") international == FALSE
     )
     
     a <- detect_contradicting_if_rules(v, verbose=FALSE)
-    skip("Need to fix multi conditions")
+    expect_equal(a, list("nace == \"a\" && export > 0" = c("V2", "V1")))
   })
+  
+  it("detects multi conditions 2", {
+    v <- validator(
+      if (income > 0) status == "working" | status == "self-employed",
+      if (status == "unemployed") income > 0
+    )
+    
+    a <- detect_contradicting_if_rules(v, verbose=FALSE)
+    expect_equal(a, list("status == \"unemployed\"" = c("V1", "V2")))
+  })
+  
   
 })

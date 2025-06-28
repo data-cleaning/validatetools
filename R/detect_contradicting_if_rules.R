@@ -61,31 +61,21 @@ check_condition <- function(cond_expr, x){
   if (length(clauses) <= 1){
     return(NULL)
   }
-  # to do for %in statement and replace with multiple "=="
-  neg_clauses <- lapply(clauses, invert_or_negate)
+  # browser()
+  # take last clause as consequent, and the rest as the condition
+  cond <- 
+    utils::head(clauses, -1) |> 
+    lapply(invert_or_negate)
   
-  l <- list()
-  for (neg in neg_clauses){
-    v <- x + do.call(validate::validator, list(.test = neg))
-    if (is_feasible(v)){
-      next
-    }
-    v1 <- is_contradicted_by(v, ".test")
-    l[[deparse(neg)]] <- v1
-    # op <- op_to_s(neg)
-    # if (op == "=="){
-    #   .values <- list(neg[[3]]) |> setNames(as.character(neg[[2]]))
-    #   test_rules <- substitute_values(x, .values = .values)
-    #   v <- detect_infeasible_rules(test_rules)
-    #   if (is.null(v)){
-    #     next
-    #   }
-    #   v1 <- is_contradicted_by(test_rules, v)
-    #   v <- c(v,v1)
-    #   l[[deparse(neg)]] <- v
-    # } 
-    
-    # TODO expand %in% statement here
+  names(cond) <- paste0(".test", seq_along(cond))
+  cond_s <- sapply(cond, deparse_all) |> paste0(collapse = " && ")
+
+  v <- x + do.call(validate::validator, cond)
+  if (is_feasible(v)){
+    return(NULL)
   }
+  l <- list()
+  v1 <- is_contradicted_by(v, names(cond))
+  l[[cond_s]] <- v1
   l
 }
