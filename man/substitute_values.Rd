@@ -16,7 +16,8 @@ substitute_values(.x, .values = list(...), ..., .add_constraints = TRUE)
 \item{.add_constraints}{\code{logical}, should values be added as constraints to the resulting validator object?}
 }
 \description{
-Substitute values into expression, thereby simplifying the rule set.
+Substitute values / fill in a value for one ore more variables, thereby
+simplifying the rule set.
 Rules that evaluate to TRUE because of the substitution are removed.
 }
 \examples{

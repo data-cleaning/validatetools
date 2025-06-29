@@ -2,7 +2,7 @@
 % Please edit documentation in R/redundancy.R
 \name{detect_redundancy}
 \alias{detect_redundancy}
-\title{Detect redundant rules without removing.}
+\title{Detect redundant rules}
 \usage{
 detect_redundancy(x, ...)
 }
@@ -12,7 +12,9 @@ detect_redundancy(x, ...)
 \item{...}{not used.}
 }
 \description{
-Detect redundancies in a rule set.
+Detect redundancies in a rule set, but do not remove the rules.
+A rule in a ruleset can be redundant if it is implied by another rule
+or by a combination of rules. See the examples for more information.
 }
 \note{
 For removal of duplicate rules, simplify

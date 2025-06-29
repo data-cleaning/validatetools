@@ -16,3 +16,4 @@ expect_values(values, weights, ...)
 \description{
 expect values
 }
+\keyword{internal}

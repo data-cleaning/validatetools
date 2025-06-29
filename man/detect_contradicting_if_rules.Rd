@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_contradicting_if_rules.R
 \name{detect_contradicting_if_rules}
 \alias{detect_contradicting_if_rules}
-\title{Detect infeasible if clauses}
+\title{Detect infeasible if rules}
 \usage{
 detect_contradicting_if_rules(x, ..., verbose = TRUE)
 }
@@ -17,7 +17,11 @@ detect_contradicting_if_rules(x, ..., verbose = TRUE)
 A list of contradictions found in the if clauses, or \code{NULL} if none are found.
 }
 \description{
-Detect if clauses that contradict each other. This is useful to detect if clauses that are not satistifable.
+Detect whether conditions in if-rules may generate contradictions. Strictly
+speaking these rules do not make the rule set infeasible but rather make
+the if-condition unsatisfiable. So semantically speaking these rules are
+contradicting, because the writer of the rule set did not have the intention
+to make the condition forbidden. See examples for more details.
 }
 \examples{
 rules <- validator(
@@ -25,7 +29,19 @@ rules <- validator(
   if (nace == "a")  export == "n"
 )
 
-detect_contradicting_if_rules(rules)
+conflicts <- detect_contradicting_if_rules(rules)
+
+print(conflicts)
+
+
+# this creates a implicit contradiction when income > 0
+rules <- validator(
+  rule1 = if (income > 0) job == "yes",
+  rule2 = if (job == "yes") income == 0
+)
+
+conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
+
 }
 \seealso{
 Other feasibility: 

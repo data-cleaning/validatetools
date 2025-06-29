@@ -18,6 +18,12 @@ make_feasible(x, ...)
 Make an infeasible system feasible, by removing the minimum (weighted) number of rules, such that the remaining
 rules are not conflicting.
 This function uses \code{\link[=detect_infeasible_rules]{detect_infeasible_rules()}} for determining the rules to be removed.
+Note that this may not result in your desired system, because some rules may be more important.
+This can be mediated by supplying weights for the rules. Default weight is 1.
+}
+\details{
+Also \code{make_feasible()} does not check for contradictions in \code{if} rules, so it is wise to also check
+\code{detect_contradicting_if_rules()} after making the system feasible.
 }
 \examples{
 rules <- validator( x > 0)

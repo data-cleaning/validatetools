@@ -58,9 +58,11 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 }
 
 
-#' Detect viable domains for categorical variables
+#' Detect domains for categorical variables
 #' 
-#' Detect viable domains for categorical variables
+#' Detect viable domains for categorical variables.
+#' A rule set may constrain a categorical variable to a subset of its values.
+#' `detect_boundary_cat()` finds the categories that are allowed by the rule set.
 #' @example ./examples/detect_boundary.R
 #' @param x [validate::validator()] object with rules
 #' @param as_df return result as data.frame (before 0.4.5)

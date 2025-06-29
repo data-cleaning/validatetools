@@ -1,6 +1,10 @@
-#' Detect infeasible if clauses
+#' Detect infeasible if rules
 #' 
-#' Detect if clauses that contradict each other. This is useful to detect if clauses that are not satistifable.
+#' Detect whether conditions in if-rules may generate contradictions. Strictly
+#' speaking these rules do not make the rule set infeasible but rather make
+#' the if-condition unsatisfiable. So semantically speaking these rules are 
+#' contradicting, because the writer of the rule set did not have the intention 
+#' to make the condition forbidden. See examples for more details.
 #' 
 #' @param x A validator object.
 #' @param ... Additional arguments passed to `detect_if_clauses`.

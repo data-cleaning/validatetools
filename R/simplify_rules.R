@@ -9,6 +9,9 @@
 #'  \item [remove_redundancy()]: remove redundant rules.
 #' }
 #' For more control, these methods can be called separately.
+#' 
+#' Note that it is wise to call [detect_contradicting_if_rules()]
+#' before calling this function.
 #' @example ./examples/simplify_rules.R
 #' @export
 #' @param .x [validate::validator()] object with the rules to be simplified.

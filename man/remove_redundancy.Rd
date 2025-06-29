@@ -15,7 +15,7 @@ remove_redundancy(x, ...)
 simplified \code{\link[validate:validator]{validate::validator()}} object, in which redundant rules are removed.
 }
 \description{
-Simplify a rule set by removing redundant rules
+Simplify a rule set by removing redundant rules, i.e. rules that are implied by other rules.
 }
 \examples{
 rules <- validator( rule1 = x > 1

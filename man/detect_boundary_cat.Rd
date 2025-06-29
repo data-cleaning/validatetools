@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_boundary.R
 \name{detect_boundary_cat}
 \alias{detect_boundary_cat}
-\title{Detect viable domains for categorical variables}
+\title{Detect domains for categorical variables}
 \usage{
 detect_boundary_cat(x, ..., as_df = FALSE)
 }
@@ -18,7 +18,9 @@ detect_boundary_cat(x, ..., as_df = FALSE)
 category/value of a categorical variable.
 }
 \description{
-Detect viable domains for categorical variables
+Detect viable domains for categorical variables.
+A rule set may constrain a categorical variable to a subset of its values.
+\code{detect_boundary_cat()} finds the categories that are allowed by the rule set.
 }
 \examples{
 rules <- validator(

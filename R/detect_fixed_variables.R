@@ -1,6 +1,6 @@
 #' Detect fixed variables
 #' 
-#' Detects variables that have a fixed value in the rule set. 
+#' Detects variables that are constrained by the rule set to have one fixed value.
 #' To simplify a rule set, these variables can be substituted with their value.
 #' @example ./examples/detect_fixed_variables.R
 #' @seealso [simplify_fixed_variables()]

@@ -41,6 +41,7 @@ eps_min <- suffix("_eps_min")
 #' @param values named list of values.
 #' @param weights named numeric of equal length as values.
 #' @param ... not used
+#' @keywords internal
 expect_values <- function(values, weights, ...){
   if (missing(weights)){
     weights <- rep(1, length(values))

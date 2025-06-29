@@ -18,6 +18,7 @@ TRUE or FALSE
 An infeasible rule set cannot be satisfied by any data because of internal
 contradictions. This function checks whether the record-wise linear,
 categorical and conditional rules in a rule set are consistent.
+Note that is it always wise to also check \code{detect_contradicting_if_rules()}.
 }
 \examples{
 rules <- validator( x > 0)

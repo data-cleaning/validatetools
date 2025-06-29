@@ -24,6 +24,10 @@ works in common cases. The following simplification methods are executed:
 }
 For more control, these methods can be called separately.
 }
+\details{
+Note that it is wise to call \code{\link[=detect_contradicting_if_rules]{detect_contradicting_if_rules()}}
+before calling this function.
+}
 \examples{
 rules <- validator( x > 0
                   , if (x > 0) y == 1

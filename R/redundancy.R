@@ -1,6 +1,8 @@
-#' Detect redundant rules without removing.
+#' Detect redundant rules
 #' 
-#' Detect redundancies in a rule set. 
+#' Detect redundancies in a rule set, but do not remove the rules.
+#' A rule in a ruleset can be redundant if it is implied by another rule
+#' or by a combination of rules. See the examples for more information.
 #' 
 #' @note For removal of duplicate rules, simplify
 #' @example ./examples/redundancy.R
@@ -28,7 +30,7 @@ detect_redundancy <- function(x, ...){
 
 #' Remove redundant rules
 #' 
-#' Simplify a rule set by removing redundant rules
+#' Simplify a rule set by removing redundant rules, i.e. rules that are implied by other rules.
 #' @export
 #' @example ./examples/redundancy.R
 #' @param x [validate::validator()] object with validation rules.

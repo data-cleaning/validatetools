@@ -3,6 +3,7 @@
 #' An infeasible rule set cannot be satisfied by any data because of internal 
 #' contradictions. This function checks whether the record-wise linear,
 #' categorical and conditional rules in a rule set are consistent.
+#' Note that is it always wise to also check `detect_contradicting_if_rules()`.
 #'  
 #' @example ./examples/feasible.R
 #' @param x `validator` object with validation rules.
@@ -29,6 +30,11 @@ is_feasible <- function(x, ...){
 #' Make an infeasible system feasible, by removing the minimum (weighted) number of rules, such that the remaining
 #' rules are not conflicting.
 #' This function uses [detect_infeasible_rules()] for determining the rules to be removed.
+#' Note that this may not result in your desired system, because some rules may be more important. 
+#' This can be mediated by supplying weights for the rules. Default weight is 1.
+#' 
+#' Also `make_feasible()` does not check for contradictions in `if` rules, so it is wise to also check
+#' `detect_contradicting_if_rules()` after making the system feasible.
 #' @export
 #' @param x [validate::validator()] object with the validation rules.
 #' @param ... passed to [detect_infeasible_rules()]
@@ -71,7 +77,8 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
   mr <- fix_cat_domain(mr)
   
   nms <- mr |> sapply(\(x) x$rule)
-  w_inf <- nms[grepl("^\\.domain.", nms)] |> sapply(\(x) Inf)
+  # meaning: all rules that start with a dot are "hard rules"
+  w_inf <- nms[grepl("^\\.", nms)] |> sapply(\(x) Inf)
   weight <- c(weight, w_inf)
 
   is_equality <- sapply(mr, function(m){

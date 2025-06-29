@@ -6,6 +6,7 @@
 #' @param  rules mip rules
 #' @param objective function
 #' @param eps accuracy for equality/inequality
+#' @keywords internal
 translate_mip_lp <- function( rules
                             , objective=NULL
                             , eps = 1e-3
