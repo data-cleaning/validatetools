@@ -148,9 +148,9 @@
 </h2>
 <p>The function <code>simplify_rules</code> combines most simplification methods of <code>validatetools</code> to simplify a rule set. For example, it reduces the following rule set to a simpler form:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span>                  , <span class="va">job</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
-<span>                  , <span class="kw">if</span> <span class="op">(</span><span class="va">job</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span>                  , rule2 <span class="op">=</span> <span class="va">job</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>                  , rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">job</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
 <span>                  <span class="op">)</span></span>
 <span><span class="fu"><a href="reference/simplify_rules.html">simplify_rules</a></span><span class="op">(</span><span class="va">rules</span>, age <span class="op">=</span> <span class="fl">13</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 3 elements:</span></span>
@@ -160,8 +160,8 @@
 <span><span class="co">#or </span></span>
 <span><span class="fu"><a href="reference/simplify_rules.html">simplify_rules</a></span><span class="op">(</span><span class="va">rules</span>, job <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 3 elements:</span></span>
-<span><span class="co">#&gt;  V1        : age &gt;= 16</span></span>
-<span><span class="co">#&gt;  V3        : income &gt; 0</span></span>
+<span><span class="co">#&gt;  rule1     : age &gt;= 16</span></span>
+<span><span class="co">#&gt;  rule3     : income &gt; 0</span></span>
 <span><span class="co">#&gt;  .const_job: job == "yes"</span></span></code></pre></div>
 <p><code>simplify_rules</code> combines the following simplification and substitution methods:</p>
 <div class="section level3">
@@ -184,7 +184,7 @@
 <h3 id="finding-fixed-values">Finding fixed values<a class="anchor" aria-label="anchor" href="#finding-fixed-values"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&lt;=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">0</span>, rule2 <span class="op">=</span> <span class="va">x</span> <span class="op">&lt;=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/detect_fixed_variables.html">detect_fixed_variables</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $x</span></span>
 <span><span class="co">#&gt; [1] 0</span></span>
@@ -218,13 +218,13 @@
 <span></span>
 <span></span>
 <span><span class="co"># non-constraining clause</span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span>  <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span>                  , <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span><span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span>  <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span>                  , rule2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span><span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
 <span>                  <span class="op">)</span></span>
 <span><span class="fu"><a href="reference/simplify_conditional.html">simplify_conditional</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 2 elements:</span></span>
-<span><span class="co">#&gt;  V1: age &gt;= 16 | (income == 0)</span></span>
-<span><span class="co">#&gt;  V2: income &gt;= 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  rule1: age &gt;= 16 | (income == 0)</span></span>
+<span><span class="co">#&gt;  rule2: income &gt;= 0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="removing-redundant-rules">Removing redundant rules<a class="anchor" aria-label="anchor" href="#removing-redundant-rules"></a>
