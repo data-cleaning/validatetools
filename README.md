@@ -108,9 +108,9 @@ The function `simplify_rules` combines most simplification methods of
 following rule set to a simpler form:
 
 ``` r
-rules <- validator( if (age < 16) income == 0
-                  , job %in% c("yes", "no")
-                  , if (job == "yes") income > 0
+rules <- validator( rule1 = if (age < 16) income == 0
+                  , rule2 = job %in% c("yes", "no")
+                  , rule3 = if (job == "yes") income > 0
                   )
 simplify_rules(rules, age = 13)
 #> Object of class 'validator' with 3 elements:
@@ -120,8 +120,8 @@ simplify_rules(rules, age = 13)
 #or 
 simplify_rules(rules, job = "yes")
 #> Object of class 'validator' with 3 elements:
-#>  V1        : age >= 16
-#>  V3        : income > 0
+#>  rule1     : age >= 16
+#>  rule3     : income > 0
 #>  .const_job: job == "yes"
 ```
 
@@ -147,7 +147,7 @@ substitute_values(rules, height = 6, gender = "male")
 ### Finding fixed values
 
 ``` r
-rules <- validator( x >= 0, x <=0)
+rules <- validator( rule1 = x >= 0, rule2 = x <=0)
 detect_fixed_variables(rules)
 #> $x
 #> [1] 0
@@ -181,13 +181,13 @@ simplify_conditional(rules)
 
 
 # non-constraining clause
-rules <- validator( if (age  < 16) income == 0
-                  , if (age >=16) income >= 0
+rules <- validator( rule1 = if (age  < 16) income == 0
+                  , rule2 = if (age >=16) income >= 0
                   )
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
-#>  V1: age >= 16 | (income == 0)
-#>  V2: income >= 0
+#>  rule1: age >= 16 | (income == 0)
+#>  rule2: income >= 0
 ```
 
 ### Removing redundant rules

@@ -91,9 +91,9 @@ The function `simplify_rules` combines most simplification methods of `validatet
 For example, it reduces the following rule set to a simpler form:
 
 ```{r}
-rules <- validator( if (age < 16) income == 0
-                  , job %in% c("yes", "no")
-                  , if (job == "yes") income > 0
+rules <- validator( rule1 = if (age < 16) income == 0
+                  , rule2 = job %in% c("yes", "no")
+                  , rule3 = if (job == "yes") income > 0
                   )
 simplify_rules(rules, age = 13)
 #or 
@@ -117,7 +117,7 @@ substitute_values(rules, height = 6, gender = "male")
 ### Finding fixed values
 
 ```{r}
-rules <- validator( x >= 0, x <=0)
+rules <- validator( rule1 = x >= 0, rule2 = x <=0)
 detect_fixed_variables(rules)
 simplify_fixed_variables(rules)
 
@@ -140,8 +140,8 @@ simplify_conditional(rules)
 
 
 # non-constraining clause
-rules <- validator( if (age  < 16) income == 0
-                  , if (age >=16) income >= 0
+rules <- validator( rule1 = if (age  < 16) income == 0
+                  , rule2 = if (age >=16) income >= 0
                   )
 simplify_conditional(rules)
 ```
