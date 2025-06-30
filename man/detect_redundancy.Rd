@@ -4,12 +4,14 @@
 \alias{detect_redundancy}
 \title{Detect redundant rules}
 \usage{
-detect_redundancy(x, ...)
+detect_redundancy(x, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with the validation rules.}
 
 \item{...}{not used.}
+
+\item{verbose}{if \code{TRUE} print the redundant rule(s) to the console}
 }
 \description{
 Detect redundancies in a rule set, but do not remove the rules.

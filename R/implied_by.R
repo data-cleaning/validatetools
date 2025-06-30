@@ -41,7 +41,7 @@ is_implied_by <- function(x, rule_name, ...){
   # names(weight) <- names(negated_rules)
   # detect_infeasible_rules(test_rules, weight)
   
-  is_contradicted_by(test_rules, names(negated_rules))
+  is_contradicted_by(test_rules, names(negated_rules), verbose = FALSE)
 }
 
 # rules <- x <- validator(r1 = x > 1, r2 = x > 2)

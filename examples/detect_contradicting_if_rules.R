@@ -3,7 +3,7 @@ rules <- validator(
   if (nace == "a")  export == "n"
 )
 
-conflicts <- detect_contradicting_if_rules(rules)
+conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
 
 print(conflicts)
 

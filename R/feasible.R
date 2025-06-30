@@ -38,11 +38,12 @@ is_feasible <- function(x, ...){
 #' @export
 #' @param x [validate::validator()] object with the validation rules.
 #' @param ... passed to [detect_infeasible_rules()]
+#' @param verbose if `TRUE` print information to the console
 #' @family feasibility
 #' @example ./examples/feasible.R
 #' @return [validate::validator()] object with feasible rules.
-make_feasible <- function(x, ...){
-  dropping <- detect_infeasible_rules(x, ...) 
+make_feasible <- function(x, ..., verbose = interactive()){
+  dropping <- detect_infeasible_rules(x, ..., verbose = verbose) 
   
   if (length(dropping) == 0){
     message("No infeasibility found, returning original rule set")
@@ -65,8 +66,9 @@ make_feasible <- function(x, ...){
 #' weight `1`.
 #' @family feasibility
 #' @param ... not used
+#' @param verbose if `TRUE` it prints the infeasible rules that have been found.
 #' @return `character` with the names of the rules that are causing infeasibility.
-detect_infeasible_rules <- function(x, weight = numeric(), ...){
+detect_infeasible_rules <- function(x, weight = numeric(), ..., verbose = interactive()){
   # browser()
   if (!is_infeasible(x)){
     return(character())
@@ -145,6 +147,10 @@ detect_infeasible_rules <- function(x, weight = numeric(), ...){
     names(rules) <- sub("^\\.delta_", "", names(rules))
     
     dropping <- names(rules)[rules == 1]
+    if (isTRUE(verbose)){
+       v <- x[dropping] |> to_exprs() |> lapply(deparse_all)
+       message("Found: \n", paste0("  ", names(v), ": ", v, collapse = "\n"))
+    }
     dropping
   } else {
     stop("No solution found to make system feasible.", call. = FALSE)

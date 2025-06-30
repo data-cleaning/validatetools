@@ -4,12 +4,14 @@
 \alias{remove_redundancy}
 \title{Remove redundant rules}
 \usage{
-remove_redundancy(x, ...)
+remove_redundancy(x, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with validation rules.}
 
 \item{...}{not used}
+
+\item{verbose}{if \code{TRUE} print the remove rules to the console.}
 }
 \value{
 simplified \code{\link[validate:validator]{validate::validator()}} object, in which redundant rules are removed.

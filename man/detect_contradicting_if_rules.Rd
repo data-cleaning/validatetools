@@ -4,7 +4,7 @@
 \alias{detect_contradicting_if_rules}
 \title{Detect infeasible if rules}
 \usage{
-detect_contradicting_if_rules(x, ..., verbose = TRUE)
+detect_contradicting_if_rules(x, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{A validator object.}
@@ -29,7 +29,7 @@ rules <- validator(
   if (nace == "a")  export == "n"
 )
 
-conflicts <- detect_contradicting_if_rules(rules)
+conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
 
 print(conflicts)
 

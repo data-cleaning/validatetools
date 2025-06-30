@@ -13,7 +13,7 @@
 #' @family feasibility
 #' @example ./examples/detect_contradicting_if_rules.R
 #' @export
-detect_contradicting_if_rules <- function(x, ..., verbose = TRUE){
+detect_contradicting_if_rules <- function(x, ..., verbose = interactive()){
   res <- detect_if_clauses(x, ...)
   if (length(res) == 0){
     if (verbose){
@@ -79,7 +79,7 @@ check_condition <- function(cond_expr, x){
     return(NULL)
   }
   l <- list()
-  v1 <- is_contradicted_by(v, names(cond))
+  v1 <- is_contradicted_by(v, names(cond), verbose = FALSE)
   l[[cond_s]] <- v1
   l
 }

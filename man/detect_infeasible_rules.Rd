@@ -4,7 +4,7 @@
 \alias{detect_infeasible_rules}
 \title{Detect which rules cause infeasibility}
 \usage{
-detect_infeasible_rules(x, weight = numeric(), ...)
+detect_infeasible_rules(x, weight = numeric(), ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with rules}
@@ -13,6 +13,8 @@ detect_infeasible_rules(x, weight = numeric(), ...)
 weight \code{1}.}
 
 \item{...}{not used}
+
+\item{verbose}{if \code{TRUE} it prints the infeasible rules that have been found.}
 }
 \value{
 \code{character} with the names of the rules that are causing infeasibility.
@@ -33,11 +35,11 @@ rules <- validator( rule1 = x > 0
 
 is_infeasible(rules)
 
-detect_infeasible_rules(rules)
-make_feasible(rules)
+detect_infeasible_rules(rules, verbose=TRUE)
+make_feasible(rules, verbose = TRUE)
 
 # find out the conflict with this rule
-is_contradicted_by(rules, "rule1")
+is_contradicted_by(rules, "rule1", verbose = TRUE)
 }
 \seealso{
 Other feasibility: 

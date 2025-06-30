@@ -22,7 +22,7 @@ simplify_rules <- function(.x, .values = list(...), ...){
   .x <- substitute_values(.x, .values)
   .x <- simplify_fixed_variables(.x)
   .x <- simplify_conditional(.x)
-  .x <- remove_redundancy(.x)
+  .x <- remove_redundancy(.x, verbose=FALSE)
   .x
 }
 

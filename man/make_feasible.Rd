@@ -4,12 +4,14 @@
 \alias{make_feasible}
 \title{Make an infeasible system feasible.}
 \usage{
-make_feasible(x, ...)
+make_feasible(x, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with the validation rules.}
 
 \item{...}{passed to \code{\link[=detect_infeasible_rules]{detect_infeasible_rules()}}}
+
+\item{verbose}{if \code{TRUE} print information to the console}
 }
 \value{
 \code{\link[validate:validator]{validate::validator()}} object with feasible rules.
@@ -36,11 +38,11 @@ rules <- validator( rule1 = x > 0
 
 is_infeasible(rules)
 
-detect_infeasible_rules(rules)
-make_feasible(rules)
+detect_infeasible_rules(rules, verbose=TRUE)
+make_feasible(rules, verbose = TRUE)
 
 # find out the conflict with this rule
-is_contradicted_by(rules, "rule1")
+is_contradicted_by(rules, "rule1", verbose = TRUE)
 }
 \seealso{
 Other feasibility: 

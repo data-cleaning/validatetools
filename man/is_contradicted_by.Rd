@@ -4,12 +4,14 @@
 \alias{is_contradicted_by}
 \title{Find out which rules are conflicting}
 \usage{
-is_contradicted_by(x, rule_name)
+is_contradicted_by(x, rule_name, verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with rules.}
 
 \item{rule_name}{\code{character} with the names of the rules that are causing infeasibility.}
+
+\item{verbose}{if \code{TRUE} prints the}
 }
 \value{
 \code{character} with conflicting rules.
@@ -29,11 +31,11 @@ rules <- validator( rule1 = x > 0
 
 is_infeasible(rules)
 
-detect_infeasible_rules(rules)
-make_feasible(rules)
+detect_infeasible_rules(rules, verbose=TRUE)
+make_feasible(rules, verbose = TRUE)
 
 # find out the conflict with this rule
-is_contradicted_by(rules, "rule1")
+is_contradicted_by(rules, "rule1", verbose = TRUE)
 }
 \seealso{
 Other feasibility: 

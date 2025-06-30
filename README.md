@@ -58,16 +58,24 @@ rules <- validator( rule1 = x > 0
 is_infeasible(rules)
 #> [1] TRUE
 
-detect_infeasible_rules(rules)
+detect_infeasible_rules(rules, verbose=TRUE)
+#> Found: 
+#>   rule1: x > 0
 #> [1] "rule1"
-make_feasible(rules)
+make_feasible(rules, verbose=TRUE)
+#> Found: 
+#>   rule1: x > 0
 #> Dropping rule(s): "rule1"
 #> Object of class 'validator' with 1 elements:
 #>  rule2: x < 0
 #> Rules are evaluated using locally defined options
 
 # find out the conflict with this rule
-is_contradicted_by(rules, "rule1")
+is_contradicted_by(rules, "rule1", verbose=TRUE)
+#> Rule(s): 
+#>  rule1: x > 0
+#> contradicted by:
+#>  rule2: x < 0
 #> [1] "rule2"
 ```
 
@@ -190,7 +198,9 @@ rules <- validator( rule1 = age > 12
                   )
 
 # rule1 is superfluous
-remove_redundancy(rules)
+remove_redundancy(rules, verbose=TRUE)
+#> Removed redundant rule(s):
+#>   rule1: age > 12
 #> Object of class 'validator' with 1 elements:
 #>  rule2: age > 18
 
@@ -199,12 +209,17 @@ rules <- validator( rule1 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins
-remove_redundancy(rules)
+remove_redundancy(rules, verbose=TRUE)
+#> Removed redundant rule(s):
+#>   rule2: age > 12
 #> Object of class 'validator' with 1 elements:
 #>  rule1: age > 12
 
 # Note that detection signifies both rules!
-detect_redundancy(rules)
+detect_redundancy(rules, verbose=TRUE)
+#> Redundant rule(s):
+#>   rule1: age > 12
+#>   rule2: age > 12
 #> rule1 rule2 
 #>  TRUE  TRUE
 ```
