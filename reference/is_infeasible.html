@@ -103,16 +103,24 @@ Note that is it always wise to also check <code><a href="detect_contradicting_if
 <span class="r-in"><span><span class="fu">is_infeasible</span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rule1"</span>
-<span class="r-in"><span><span class="fu"><a href="make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 0</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Dropping rule(s): "rule1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Object of class 'validator' with 1 elements:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  rule2: x &lt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rules are evaluated using locally defined options</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># find out the conflict with this rule</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="is_contradicted_by.html">is_contradicted_by</a></span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="is_contradicted_by.html">is_contradicted_by</a></span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Rule(s): </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  rule1: x &gt; 0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> contradicted by:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  rule2: x &lt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rule2"</span>
 </code></pre></div>
     </div>

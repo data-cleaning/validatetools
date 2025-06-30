@@ -55,7 +55,7 @@ of the rules should stay and which should go?</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_contradicted_by</span><span class="op">(</span><span class="va">x</span>, <span class="va">rule_name</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_contradicted_by</span><span class="op">(</span><span class="va">x</span>, <span class="va">rule_name</span>, verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,6 +68,10 @@ of the rules should stay and which should go?</p>
 
 <dt id="arg-rule-name">rule_name<a class="anchor" aria-label="anchor" href="#arg-rule-name"></a></dt>
 <dd><p><code>character</code> with the names of the rules that are causing infeasibility.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>if <code>TRUE</code> prints the</p></dd>
 
 </dl></div>
     <div id="value">
@@ -99,16 +103,24 @@ of the rules should stay and which should go?</p>
 <span class="r-in"><span><span class="fu"><a href="is_infeasible.html">is_infeasible</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rule1"</span>
-<span class="r-in"><span><span class="fu"><a href="make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 0</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Dropping rule(s): "rule1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Object of class 'validator' with 1 elements:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  rule2: x &lt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rules are evaluated using locally defined options</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># find out the conflict with this rule</span></span></span>
-<span class="r-in"><span><span class="fu">is_contradicted_by</span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">is_contradicted_by</span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Rule(s): </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  rule1: x &gt; 0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> contradicted by:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  rule2: x &lt; 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rule2"</span>
 </code></pre></div>
     </div>
