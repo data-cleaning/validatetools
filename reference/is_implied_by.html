@@ -93,7 +93,9 @@
 <span class="r-in"><span>                  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># rule1 is superfluous</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="remove_redundancy.html">remove_redundancy</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="remove_redundancy.html">remove_redundancy</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Removed redundant rule(s):</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Object of class 'validator' with 1 elements:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  rule2: x &gt; 2</span>
 <span class="r-in"><span></span></span>
@@ -106,7 +108,9 @@
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># standout: rule1 and rule2, oldest rules wins</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="remove_redundancy.html">remove_redundancy</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="remove_redundancy.html">remove_redundancy</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Removed redundant rule(s):</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule2: x &gt; 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Object of class 'validator' with 1 elements:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  rule1: x &gt; 2</span>
 <span class="r-in"><span></span></span>
