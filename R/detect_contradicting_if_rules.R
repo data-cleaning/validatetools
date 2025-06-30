@@ -2,9 +2,17 @@
 #' 
 #' Detect whether conditions in if-rules may generate contradictions. Strictly
 #' speaking these rules do not make the rule set infeasible but rather make
-#' the if-condition unsatisfiable. So semantically speaking these rules are 
+#' the if-condition unsatisfiable. 
+#' Semantically speaking these rules are 
 #' contradicting, because the writer of the rule set did not have the intention 
-#' to make the condition forbidden. See examples for more details.
+#' to make the condition forbidden.
+#' 
+#' In general it detects cases where:
+#' 
+#' - `if (A) B` and `if (A) !B`, which probably is not intended, but strictly speaking equals `!A`.
+#' - `if (A) B` and `if (B) !A`, which probably is not intended but strictly speaking equals `!A`. 
+#' 
+#' See examples for more details.
 #' 
 #' @param x A validator object.
 #' @param ... Additional arguments passed to `detect_if_clauses`.
