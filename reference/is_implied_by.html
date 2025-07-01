@@ -53,7 +53,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_implied_by</span><span class="op">(</span><span class="va">x</span>, <span class="va">rule_name</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_implied_by</span><span class="op">(</span><span class="va">x</span>, <span class="va">rule_name</span>, <span class="va">...</span>, verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,6 +70,10 @@
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>not used</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>if <code>TRUE</code> print information to the console</p></dd>
 
 </dl></div>
     <div id="value">
@@ -100,7 +104,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  rule2: x &gt; 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># rule 1 is implied by rule 2</span></span></span>
-<span class="r-in"><span><span class="fu">is_implied_by</span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">is_implied_by</span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Rule(s)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule1: x &gt; 1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> implied by:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   rule2: x &gt; 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rule2"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/validate/man/validator.html" class="external-link">validator</a></span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span></span></span>
