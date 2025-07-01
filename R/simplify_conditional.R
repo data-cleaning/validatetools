@@ -3,6 +3,7 @@
 #' Conditional rules may be constrained by the others rules in a validation rule set.
 #' This procedure tries to simplify conditional statements.
 #' 
+#' 
 #' @references TODO non-constraining, non-relaxing
 #' @example ./examples/simplify_conditional.R
 #' @export

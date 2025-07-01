@@ -73,21 +73,23 @@ check_condition <- function(cond_expr, x){
   if (length(clauses) <= 1){
     return(NULL)
   }
-  # browser()
-  # take last clause as consequent, and the rest as the condition
-  cond <- 
-    utils::head(clauses, -1) |> 
-    lapply(invert_or_negate)
-  
+   # browser()
+  cond <- lapply(clauses, invert_or_negate)
   names(cond) <- paste0(".test", seq_along(cond))
-  cond_s <- sapply(cond, deparse_all) |> paste0(collapse = " && ")
+  cond_s <- sapply(cond, deparse_all)
 
-  v <- x + do.call(validate::validator, cond)
-  if (is_feasible(v)){
-    return(NULL)
-  }
   l <- list()
-  v1 <- is_contradicted_by(v, names(cond), verbose = FALSE)
-  l[[cond_s]] <- v1
+  
+  for (i in seq_along(cond)){
+    cd <- cond[-i]
+    v <- x + do.call(validate::validator, cd)
+    if (is_feasible(v)){
+      next
+    }
+    v1 <- is_contradicted_by(v, names(cd), verbose = FALSE)
+    c_s <- paste0(cond_s[-i], collapse = " && ")
+    l[[c_s]] <- v1
+  }
+  
   l
 }

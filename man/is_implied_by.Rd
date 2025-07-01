@@ -4,7 +4,7 @@
 \alias{is_implied_by}
 \title{Find which rule(s) make rule_name redundant}
 \usage{
-is_implied_by(x, rule_name, ...)
+is_implied_by(x, rule_name, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{\link[validate:validator]{validate::validator()}} object with rule}
@@ -12,6 +12,8 @@ is_implied_by(x, rule_name, ...)
 \item{rule_name}{\code{character} with the names of the rules to be checked}
 
 \item{...}{not used}
+
+\item{verbose}{if \code{TRUE} print information to the console}
 }
 \value{
 \code{character} with the names of the rule that cause the implication.
@@ -28,7 +30,7 @@ rules <- validator( rule1 = x > 1
 remove_redundancy(rules, verbose=TRUE)
 
 # rule 1 is implied by rule 2
-is_implied_by(rules, "rule1")
+is_implied_by(rules, "rule1", verbose=TRUE)
 
 rules <- validator( rule1 = x > 2
                   , rule2 = x > 2
