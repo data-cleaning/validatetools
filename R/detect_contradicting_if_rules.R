@@ -1,4 +1,4 @@
-#' Detect infeasible if rules
+#' Detect contradictory if-rules
 #' 
 #' Detect whether conditions in if-rules may generate contradictions. Strictly
 #' speaking these rules do not make the rule set infeasible but rather make

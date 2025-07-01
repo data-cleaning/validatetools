@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_contradicting_if_rules.R
 \name{detect_contradicting_if_rules}
 \alias{detect_contradicting_if_rules}
-\title{Detect infeasible if rules}
+\title{Detect contradictory if-rules}
 \usage{
 detect_contradicting_if_rules(x, ..., verbose = interactive())
 }
