@@ -6,7 +6,7 @@ rules <- validator( rule1 = x > 1
 remove_redundancy(rules, verbose=TRUE)
 
 # rule 1 is implied by rule 2
-is_implied_by(rules, "rule1")
+is_implied_by(rules, "rule1", verbose=TRUE)
 
 rules <- validator( rule1 = x > 2
                   , rule2 = x > 2

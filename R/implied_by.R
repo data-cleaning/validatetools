@@ -6,9 +6,10 @@
 #' @param x [validate::validator()] object with rule
 #' @param rule_name `character` with the names of the rules to be checked
 #' @param ... not used
+#' @param verbose if `TRUE` print information to the console
 #' @family redundancy
 #' @return `character` with the names of the rule that cause the implication.
-is_implied_by <- function(x, rule_name, ...){
+is_implied_by <- function(x, rule_name, ..., verbose = interactive()){
   check_validator(x)
   idx <- match(rule_name, names(x), 0)
   if (any(idx == 0L)){
@@ -41,7 +42,18 @@ is_implied_by <- function(x, rule_name, ...){
   # names(weight) <- names(negated_rules)
   # detect_infeasible_rules(test_rules, weight)
   
-  is_contradicted_by(test_rules, names(negated_rules), verbose = FALSE)
+  res <- is_contradicted_by(test_rules, names(negated_rules), verbose = FALSE)
+  if (isTRUE(verbose) && length(res)){
+    v <- x[rule_name] |> to_exprs() |> lapply(deparse_all)
+    v_i <- x[res] |> to_exprs() |> lapply(deparse_all)
+    message(
+      "Rule(s)\n",
+      paste0("  ", names(v),": ", v, collapse = "\n"),
+      "\nimplied by:\n",
+      paste0("  ", names(v_i),": ", v_i, collapse = "\n")
+    )
+  }
+  res
 }
 
 # rules <- x <- validator(r1 = x > 1, r2 = x > 2)
