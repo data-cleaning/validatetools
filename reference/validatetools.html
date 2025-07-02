@@ -69,7 +69,9 @@ issues.</p>
 
 
 <p>The following methods allow for problem detection:</p>
-<ul><li><p><code><a href="is_infeasible.html">is_infeasible()</a></code> checks a rule set for feasibility. An infeasible system must be corrected to be useful.</p></li>
+<ul><li><p><code><a href="is_infeasible.html">is_infeasible()</a></code> checks a rule set for feasibility, i.e.
+if it contains contradicting rules making it infeasible. An infeasible system must be corrected to be useful, because
+it means that no record can satisfy all rules.</p></li>
 <li><p><code><a href="detect_infeasible_rules.html">detect_infeasible_rules()</a></code> detects which rules cause infeasibility.</p></li>
 <li><p><code><a href="detect_contradicting_if_rules.html">detect_contradicting_if_rules()</a></code> detects which <code>if</code> rules are conflicting.</p></li>
 <li><p><code><a href="detect_boundary_num.html">detect_boundary_num()</a></code> shows for each numerical variable the allowed range of values.</p></li>

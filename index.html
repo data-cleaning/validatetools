@@ -77,13 +77,13 @@
 <p><code>validatetools</code> is available from CRAN and can be installed with</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"validatetools"</span><span class="op">)</span></span></code></pre></div>
-<p>The latest beta version of <code>validatetools</code> can be installed with</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"validatetools"</span>, repos <span class="op">=</span> <span class="st">"https://data-cleaning.github.io/drat"</span><span class="op">)</span></span></code></pre></div>
 <p>The adventurous can install an (unstable) development version of <code>validatetools</code> from github with:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"data-cleaning/validatetools"</span><span class="op">)</span></span></code></pre></div>
+<p>or use</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'validatetools'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://data-cleaning.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -131,7 +131,12 @@
 <span>  rule2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">job</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
 <span>    </span>
-<span></span>
+<span><span class="fu"><a href="reference/is_infeasible.html">is_infeasible</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The rule set is feasible,</span></span>
+<span><span class="co">#&gt;   but may contain contradictions in conditional if-rules.</span></span>
+<span><span class="co">#&gt;   use `detect_contradicting_if_rules()` to find out whether there are </span></span>
+<span><span class="co">#&gt;   contradictions in the if-clauses.</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="va">conflicts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/detect_contradicting_if_rules.html">detect_contradicting_if_rules</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 1 contradiction(s) with if clauses found:</span></span>
 <span><span class="co">#&gt; When income &gt; 0:</span></span>
