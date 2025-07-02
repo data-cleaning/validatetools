@@ -62,14 +62,6 @@ detect_infeasible_rules(rules, verbose=TRUE)
 #> Found: 
 #>   rule1: x > 0
 #> [1] "rule1"
-make_feasible(rules, verbose=TRUE)
-#> Found: 
-#>   rule1: x > 0
-#> Dropping rule(s): "rule1"
-#> Object of class 'validator' with 1 elements:
-#>  rule2: x < 0
-#> Rules are evaluated using locally defined options
-
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1", verbose=TRUE)
 #> Rule(s): 
@@ -77,6 +69,19 @@ is_contradicted_by(rules, "rule1", verbose=TRUE)
 #> contradicted by:
 #>  rule2: x < 0
 #> [1] "rule2"
+
+# we prefer to keep rule1, so we can give rule1 Inf weight
+detect_infeasible_rules(rules, weight=c(rule1 = Inf), verbose=TRUE)
+#> Found: 
+#>   rule2: x < 0
+#> [1] "rule2"
+make_feasible(rules, weight=c(rule1=Inf), verbose=TRUE)
+#> Found: 
+#>   rule2: x < 0
+#> Dropping rule(s): "rule2"
+#> Object of class 'validator' with 1 elements:
+#>  rule1: x > 0
+#> Rules are evaluated using locally defined options
 ```
 
 ### Finding contradicting if rules

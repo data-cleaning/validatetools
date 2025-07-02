@@ -61,10 +61,13 @@ rules <- validator( rule1 = x > 0
 is_infeasible(rules)
 
 detect_infeasible_rules(rules, verbose=TRUE)
-make_feasible(rules, verbose=TRUE)
-
 # find out the conflict with this rule
 is_contradicted_by(rules, "rule1", verbose=TRUE)
+
+# we prefer to keep rule1, so we can give rule1 Inf weight
+detect_infeasible_rules(rules, weight=c(rule1 = Inf), verbose=TRUE)
+make_feasible(rules, weight=c(rule1=Inf), verbose=TRUE)
+
 ```
 
 ### Finding contradicting if rules
