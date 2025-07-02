@@ -96,9 +96,10 @@
 <span><span class="fu"><a href="reference/is_infeasible.html">is_infeasible</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span></span>
-<span>                  <span class="op">)</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/is_infeasible.html">is_infeasible</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span></span>
@@ -115,10 +116,15 @@
 <span><span class="co">#&gt; [1] "rule2"</span></span>
 <span></span>
 <span><span class="co"># we prefer to keep rule1, so we can give rule1 Inf weight</span></span>
-<span><span class="fu"><a href="reference/detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span>, weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rule1 <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span></span>
+<span>  <span class="va">rules</span>, </span>
+<span>  weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rule1 <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>, </span>
+<span>  verbose<span class="op">=</span><span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Found: </span></span>
 <span><span class="co">#&gt;   rule2: x &lt; 0</span></span>
 <span><span class="co">#&gt; [1] "rule2"</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span>, weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rule1<span class="op">=</span><span class="cn">Inf</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Found: </span></span>
 <span><span class="co">#&gt;   rule2: x &lt; 0</span></span>
@@ -178,23 +184,27 @@
 <h3 id="value-substitution">Value substitution<a class="anchor" aria-label="anchor" href="#value-substitution"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">height</span> <span class="op">&gt;</span> <span class="fl">5</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">max_height</span> <span class="op">&gt;=</span> <span class="va">height</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">height</span> <span class="op">&gt;</span> <span class="fl">4</span></span>
+<span>                  , rule2 <span class="op">=</span> <span class="va">height</span> <span class="op">&lt;=</span> <span class="va">max_height</span></span>
 <span>                  , rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">100</span></span>
 <span>                  , rule4 <span class="op">=</span> <span class="va">gender</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span></span>
 <span>                  <span class="op">)</span></span>
-<span><span class="fu"><a href="reference/substitute_values.html">substitute_values</a></span><span class="op">(</span><span class="va">rules</span>, height <span class="op">=</span> <span class="fl">6</span>, gender <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Object of class 'validator' with 4 elements:</span></span>
-<span><span class="co">#&gt;  rule2        : max_height &gt;= 6</span></span>
-<span><span class="co">#&gt;  rule3        : weight &gt; 100</span></span>
-<span><span class="co">#&gt;  .const_height: height == 6</span></span>
-<span><span class="co">#&gt;  .const_gender: gender == "male"</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/substitute_values.html">substitute_values</a></span><span class="op">(</span><span class="va">rules</span>, max_height <span class="op">=</span> <span class="fl">6</span>, gender <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Object of class 'validator' with 5 elements:</span></span>
+<span><span class="co">#&gt;  rule1            : height &gt; 4</span></span>
+<span><span class="co">#&gt;  rule2            : height &lt;= 6</span></span>
+<span><span class="co">#&gt;  rule3            : weight &gt; 100</span></span>
+<span><span class="co">#&gt;  .const_max_height: max_height == 6</span></span>
+<span><span class="co">#&gt;  .const_gender    : gender == "male"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="finding-fixed-values">Finding fixed values<a class="anchor" aria-label="anchor" href="#finding-fixed-values"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">0</span>, rule2 <span class="op">=</span> <span class="va">x</span> <span class="op">&lt;=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> </span>
+<span>  rule1 <span class="op">=</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">0</span>, </span>
+<span>  rule2 <span class="op">=</span> <span class="va">x</span> <span class="op">&lt;=</span><span class="fl">0</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/detect_fixed_variables.html">detect_fixed_variables</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $x</span></span>
 <span><span class="co">#&gt; [1] 0</span></span>
@@ -202,10 +212,11 @@
 <span><span class="co">#&gt; Object of class 'validator' with 1 elements:</span></span>
 <span><span class="co">#&gt;  .const_x: x == 0</span></span>
 <span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span> <span class="op">+</span> <span class="va">x3</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
-<span>                  , rule3 <span class="op">=</span> <span class="va">x3</span> <span class="op">&gt;=</span><span class="fl">0</span></span>
-<span>                  <span class="op">)</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  rule1 <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span> <span class="op">+</span> <span class="va">x3</span> <span class="op">==</span> <span class="fl">0</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span> <span class="op">&gt;=</span> <span class="fl">0</span>,</span>
+<span>  rule3 <span class="op">=</span> <span class="va">x3</span> <span class="op">&gt;=</span><span class="fl">0</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/simplify_fixed_variables.html">simplify_fixed_variables</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 3 elements:</span></span>
 <span><span class="co">#&gt;  rule1    : x1 + x2 + 0 == 0</span></span>
@@ -217,9 +228,10 @@
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># non-relaxing clause</span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">16</span></span>
-<span>                  , r2 <span class="op">=</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">12</span></span>
-<span>                  <span class="op">)</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> </span>
+<span>  r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">16</span>,</span>
+<span>  r2 <span class="op">=</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">12</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># age &gt; 16 is always FALSE so r1 can be simplified</span></span>
 <span><span class="fu"><a href="reference/simplify_conditional.html">simplify_conditional</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 2 elements:</span></span>
@@ -228,9 +240,10 @@
 <span></span>
 <span></span>
 <span><span class="co"># non-constraining clause</span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span>  <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span><span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
-<span>                  <span class="op">)</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> </span>
+<span>  rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span>  <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span><span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/simplify_conditional.html">simplify_conditional</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 2 elements:</span></span>
 <span><span class="co">#&gt;  rule1: age &gt;= 16 | (income == 0)</span></span>
@@ -240,9 +253,10 @@
 <h3 id="removing-redundant-rules">Removing redundant rules<a class="anchor" aria-label="anchor" href="#removing-redundant-rules"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">18</span></span>
-<span>                  <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  rule1 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">18</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># rule1 is superfluous</span></span>
 <span><span class="fu"><a href="reference/remove_redundancy.html">remove_redundancy</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -251,8 +265,9 @@
 <span><span class="co">#&gt; Object of class 'validator' with 1 elements:</span></span>
 <span><span class="co">#&gt;  rule2: age &gt; 18</span></span>
 <span></span>
-<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  rule1 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">age</span> <span class="op">&gt;</span> <span class="fl">12</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># standout: rule1 and rule2, first rule wins</span></span>
