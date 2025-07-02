@@ -52,9 +52,10 @@ rules <- validator( x > 0)
 is_infeasible(rules)
 #> [1] FALSE
 
-rules <- validator( rule1 = x > 0
-                  , rule2 = x < 0
-                  )
+rules <- validator(
+  rule1 = x > 0,
+  rule2 = x < 0
+)
 is_infeasible(rules)
 #> [1] TRUE
 
@@ -71,10 +72,15 @@ is_contradicted_by(rules, "rule1", verbose=TRUE)
 #> [1] "rule2"
 
 # we prefer to keep rule1, so we can give rule1 Inf weight
-detect_infeasible_rules(rules, weight=c(rule1 = Inf), verbose=TRUE)
+detect_infeasible_rules(
+  rules, 
+  weight=c(rule1 = Inf), 
+  verbose=TRUE
+)
 #> Found: 
 #>   rule2: x < 0
 #> [1] "rule2"
+
 make_feasible(rules, weight=c(rule1=Inf), verbose=TRUE)
 #> Found: 
 #>   rule2: x < 0
@@ -141,23 +147,27 @@ methods:
 ### Value substitution
 
 ``` r
-rules <- validator( rule1 = height > 5
-                  , rule2 = max_height >= height
+rules <- validator( rule1 = height > 4
+                  , rule2 = height <= max_height
                   , rule3 = if (gender == "male") weight > 100
                   , rule4 = gender %in% c("male", "female")
                   )
-substitute_values(rules, height = 6, gender = "male")
-#> Object of class 'validator' with 4 elements:
-#>  rule2        : max_height >= 6
-#>  rule3        : weight > 100
-#>  .const_height: height == 6
-#>  .const_gender: gender == "male"
+substitute_values(rules, max_height = 6, gender = "male")
+#> Object of class 'validator' with 5 elements:
+#>  rule1            : height > 4
+#>  rule2            : height <= 6
+#>  rule3            : weight > 100
+#>  .const_max_height: max_height == 6
+#>  .const_gender    : gender == "male"
 ```
 
 ### Finding fixed values
 
 ``` r
-rules <- validator( rule1 = x >= 0, rule2 = x <=0)
+rules <- validator( 
+  rule1 = x >= 0, 
+  rule2 = x <=0
+)
 detect_fixed_variables(rules)
 #> $x
 #> [1] 0
@@ -165,10 +175,11 @@ simplify_fixed_variables(rules)
 #> Object of class 'validator' with 1 elements:
 #>  .const_x: x == 0
 
-rules <- validator( rule1 = x1 + x2 + x3 == 0
-                  , rule2 = x1 + x2 >= 0
-                  , rule3 = x3 >=0
-                  )
+rules <- validator(
+  rule1 = x1 + x2 + x3 == 0,
+  rule2 = x1 + x2 >= 0,
+  rule3 = x3 >=0
+)
 simplify_fixed_variables(rules)
 #> Object of class 'validator' with 3 elements:
 #>  rule1    : x1 + x2 + 0 == 0
@@ -180,9 +191,10 @@ simplify_fixed_variables(rules)
 
 ``` r
 # non-relaxing clause
-rules <- validator( r1 = if (income > 0) age >= 16
-                  , r2 = age < 12
-                  )
+rules <- validator( 
+  r1 = if (income > 0) age >= 16,
+  r2 = age < 12
+)
 # age > 16 is always FALSE so r1 can be simplified
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
@@ -191,9 +203,10 @@ simplify_conditional(rules)
 
 
 # non-constraining clause
-rules <- validator( rule1 = if (age  < 16) income == 0
-                  , rule2 = if (age >=16) income >= 0
-                  )
+rules <- validator( 
+  rule1 = if (age  < 16) income == 0,
+  rule2 = if (age >=16) income >= 0
+)
 simplify_conditional(rules)
 #> Object of class 'validator' with 2 elements:
 #>  rule1: age >= 16 | (income == 0)
@@ -203,9 +216,10 @@ simplify_conditional(rules)
 ### Removing redundant rules
 
 ``` r
-rules <- validator( rule1 = age > 12
-                  , rule2 = age > 18
-                  )
+rules <- validator(
+  rule1 = age > 12,
+  rule2 = age > 18
+)
 
 # rule1 is superfluous
 remove_redundancy(rules, verbose=TRUE)
@@ -214,8 +228,9 @@ remove_redundancy(rules, verbose=TRUE)
 #> Object of class 'validator' with 1 elements:
 #>  rule2: age > 18
 
-rules <- validator( rule1 = age > 12
-                  , rule2 = age > 12
+rules <- validator(
+  rule1 = age > 12,
+  rule2 = age > 12
 )
 
 # standout: rule1 and rule2, first rule wins
