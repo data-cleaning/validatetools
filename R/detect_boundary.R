@@ -1,6 +1,7 @@
-#' Detect the range for numerical variables
+#' Detect the allowed range for numerical variables
 #' 
-#' Detect for each numerical variable in a validation rule set, what its maximum and minimum values are.
+#' Detect for each numerical variable in a validation rule set, what its maximum and minimum allowed values are.
+#' The rule set may constrain numerical variables to a subset of their values.
 #' This allows for manual rule set checking: does rule set `x` overly constrain numerical values?
 #' 
 #' This procedure only finds minimum and maximum values, but misses gaps.
@@ -60,8 +61,8 @@ detect_boundary_num <- function(x, eps = 1e-8, ...){
 
 #' Detect domains for categorical variables
 #' 
-#' Detect viable domains for categorical variables.
-#' A rule set may constrain a categorical variable to a subset of its values.
+#' Detect the allowed values for categorical variables: the rule set may constrain
+#' the categorical variables to a subset of their values.
 #' `detect_boundary_cat()` finds the categories that are allowed by the rule set.
 #' @example ./examples/detect_boundary.R
 #' @param x [validate::validator()] object with rules

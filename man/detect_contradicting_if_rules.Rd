@@ -17,7 +17,7 @@ detect_contradicting_if_rules(x, ..., verbose = interactive())
 A list of contradictions found in the if clauses, or \code{NULL} if none are found.
 }
 \description{
-Detect whether conditions in if-rules may generate contradictions. Strictly
+Detect whether conditions in conditional if-rules may generate contradictions. Strictly
 speaking these rules do not make the rule set infeasible but rather make
 the if-condition unsatisfiable.
 Semantically speaking these rules are
@@ -25,10 +25,10 @@ contradicting, because the writer of the rule set did not have the intention
 to make the condition forbidden.
 }
 \details{
-In general it detects cases where:
+In general it detects (variations on) cases where:
 \itemize{
-\item \code{if (A) B} and \code{if (A) !B}, which probably is not intended, but strictly speaking equals \code{!A}.
-\item \code{if (A) B} and \code{if (B) !A}, which probably is not intended but strictly speaking equals \code{!A}.
+\item \code{if (A) B} and \code{if (A) !B}, which probably is not intended, but logically equals \code{!A}.
+\item \code{if (A) B} and \code{if (B) !A}, which probably is not intended but logically equals \code{!A}.
 }
 
 See examples for more details.

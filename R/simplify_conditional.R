@@ -1,9 +1,7 @@
 #' Simplify conditional statements
 #' 
-#' Conditional rules may be constrained by the others rules in a validation rule set.
+#' Conditional rules (if-rules) may be constrained by the others rules in a validation rule set.
 #' This procedure tries to simplify conditional statements.
-#' 
-#' 
 #' @references TODO non-constraining, non-relaxing
 #' @example ./examples/simplify_conditional.R
 #' @export
@@ -31,7 +29,7 @@ simplify_non_relaxing <- function(cond_expr, vals){
   clauses <- as_dnf(cond_expr)
   clauses[] <- lapply(clauses, function(clause){
     test_rules <- do.call(validate::validator, c(vals, clause))
-    if (is_infeasible(test_rules)){
+    if (is_infeasible(test_rules, verbose=FALSE)){
       return(NULL)
     }
     clause
@@ -45,7 +43,7 @@ simplify_non_constraining <- function(cond_expr, vals){
   for (clause in clauses){
     clause_neg <- invert_or_negate(clause)
     test_rules <- do.call(validate::validator, c(vals, clause_neg))
-    if (is_infeasible(test_rules)){
+    if (is_infeasible(test_rules, verbose=FALSE)){
       return(clause)
     }
   }

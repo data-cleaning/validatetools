@@ -18,8 +18,8 @@ detect_boundary_cat(x, ..., as_df = FALSE)
 category/value of a categorical variable.
 }
 \description{
-Detect viable domains for categorical variables.
-A rule set may constrain a categorical variable to a subset of its values.
+Detect the allowed values for categorical variables: the rule set may constrain
+the categorical variables to a subset of their values.
 \code{detect_boundary_cat()} finds the categories that are allowed by the rule set.
 }
 \examples{

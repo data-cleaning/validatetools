@@ -3,7 +3,7 @@ check_validator <- function(x, copy = TRUE, check_infeasible = TRUE){
   if (!inherits(x, "validator")){
     stop("This method needs a 'validator' object, but was given a '", class(x), "'.",call. = FALSE)
   }
-  if (isTRUE(check_infeasible) && is_infeasible(x)){
+  if (isTRUE(check_infeasible) && is_infeasible(x, verbose=FALSE)){
     stop("This rule set is infeasible. Please fix and repair the rule set with `make_feasible` before continuing.", call. = FALSE)
   }
   invisible(x)

@@ -88,9 +88,9 @@ cat_var_name <- function(x, infix=INFIX_CAT_NAME){
   gsub(suffix,"",names(x$a))
 }
 
-#' Check if rules are categorical
+#' Check whether rules are categorical
 #'
-#' Check if rules are categorical
+#' Check whether rules are categorical
 #' @export
 #' @param x validator object
 #' @param ... not used

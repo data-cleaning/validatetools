@@ -2,7 +2,7 @@
 % Please edit documentation in R/implied_by.R
 \name{is_implied_by}
 \alias{is_implied_by}
-\title{Find which rule(s) make rule_name redundant}
+\title{Find which rule(s) imply a rule}
 \usage{
 is_implied_by(x, rule_name, ..., verbose = interactive())
 }
@@ -20,6 +20,8 @@ is_implied_by(x, rule_name, ..., verbose = interactive())
 }
 \description{
 Find out which rules are causing rule_name(s) to be redundant.
+A rule set can contain rules that are implied by the other rules, so it is
+superfluous, see examples.
 }
 \examples{
 rules <- validator( rule1 = x > 1

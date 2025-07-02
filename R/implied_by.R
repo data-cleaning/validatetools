@@ -1,6 +1,8 @@
-#' Find which rule(s) make rule_name redundant
+#' Find which rule(s) imply a rule
 #' 
 #' Find out which rules are causing rule_name(s) to be redundant.
+#' A rule set can contain rules that are implied by the other rules, so it is
+#' superfluous, see examples.
 #' @example ./examples/redundancy.R
 #' @export
 #' @param x [validate::validator()] object with rule

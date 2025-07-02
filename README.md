@@ -29,18 +29,18 @@ issues.
 install.packages("validatetools")
 ```
 
-The latest beta version of `validatetools` can be installed with
-
-``` r
-install.packages("validatetools", repos = "https://data-cleaning.github.io/drat")
-```
-
 The adventurous can install an (unstable) development version of
 `validatetools` from github with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("data-cleaning/validatetools")
+```
+
+or use
+
+``` r
+install.packages('validatetools', repos = c('https://data-cleaning.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Example
@@ -87,7 +87,12 @@ rules <- validator(
   rule2 = if (job == "yes") income == 0
 )
     
-
+is_infeasible(rules, verbose=TRUE)
+#> The rule set is feasible,
+#>   but may contain contradictions in conditional if-rules.
+#>   use `detect_contradicting_if_rules()` to find out whether there are 
+#>   contradictions in the if-clauses.
+#> [1] FALSE
 conflicts <- detect_contradicting_if_rules(rules, verbose=TRUE)
 #> 1 contradiction(s) with if clauses found:
 #> When income > 0:

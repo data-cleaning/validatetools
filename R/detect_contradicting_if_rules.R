@@ -1,16 +1,16 @@
 #' Detect contradictory if-rules
 #' 
-#' Detect whether conditions in if-rules may generate contradictions. Strictly
+#' Detect whether conditions in conditional if-rules may generate contradictions. Strictly
 #' speaking these rules do not make the rule set infeasible but rather make
 #' the if-condition unsatisfiable. 
 #' Semantically speaking these rules are 
 #' contradicting, because the writer of the rule set did not have the intention 
 #' to make the condition forbidden.
 #' 
-#' In general it detects cases where:
+#' In general it detects (variations on) cases where:
 #' 
-#' - `if (A) B` and `if (A) !B`, which probably is not intended, but strictly speaking equals `!A`.
-#' - `if (A) B` and `if (B) !A`, which probably is not intended but strictly speaking equals `!A`. 
+#' - `if (A) B` and `if (A) !B`, which probably is not intended, but logically equals `!A`.
+#' - `if (A) B` and `if (B) !A`, which probably is not intended but logically equals `!A`. 
 #' 
 #' See examples for more details.
 #' 
@@ -83,7 +83,7 @@ check_condition <- function(cond_expr, x){
   for (i in seq_along(cond)){
     cd <- cond[-i]
     v <- x + do.call(validate::validator, cd)
-    if (is_feasible(v)){
+    if (is_feasible(v, verbose=FALSE)){
       next
     }
     v1 <- is_contradicted_by(v, names(cd), verbose = FALSE)

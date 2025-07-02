@@ -2,7 +2,7 @@
 % Please edit documentation in R/categorical.R
 \name{is_categorical}
 \alias{is_categorical}
-\title{Check if rules are categorical}
+\title{Check whether rules are categorical}
 \usage{
 is_categorical(x, ...)
 }
@@ -15,7 +15,7 @@ is_categorical(x, ...)
 logical indicating which rules are purely categorical/logical
 }
 \description{
-Check if rules are categorical
+Check whether rules are categorical
 }
 \examples{
 v <- validator( A \%in\% c("a1", "a2")

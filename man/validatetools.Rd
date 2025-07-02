@@ -19,7 +19,9 @@ issues.
 The following methods allow for problem detection:
 
 \itemize{
-\item \code{\link[=is_infeasible]{is_infeasible()}} checks a rule set for feasibility. An infeasible system must be corrected to be useful.
+\item \code{\link[=is_infeasible]{is_infeasible()}} checks a rule set for feasibility, i.e.
+if it contains contradicting rules making it infeasible. An infeasible system must be corrected to be useful, because
+it means that no record can satisfy all rules.
 \item \code{\link[=detect_infeasible_rules]{detect_infeasible_rules()}} detects which rules cause infeasibility.
 \item \code{\link[=detect_contradicting_if_rules]{detect_contradicting_if_rules()}} detects which \code{if} rules are conflicting.
 \item \code{\link[=detect_boundary_num]{detect_boundary_num()}} shows for each numerical variable the allowed range of values.

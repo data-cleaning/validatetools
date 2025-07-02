@@ -15,7 +15,7 @@ simplify_conditional(x, ...)
 \code{\link[validate:validator]{validate::validator()}} simplified rule set.
 }
 \description{
-Conditional rules may be constrained by the others rules in a validation rule set.
+Conditional rules (if-rules) may be constrained by the others rules in a validation rule set.
 This procedure tries to simplify conditional statements.
 }
 \examples{

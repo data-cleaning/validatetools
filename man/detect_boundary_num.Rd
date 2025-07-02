@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_boundary.R
 \name{detect_boundary_num}
 \alias{detect_boundary_num}
-\title{Detect the range for numerical variables}
+\title{Detect the allowed range for numerical variables}
 \usage{
 detect_boundary_num(x, eps = 1e-08, ...)
 }
@@ -17,7 +17,8 @@ detect_boundary_num(x, eps = 1e-08, ...)
 \code{\link[=data.frame]{data.frame()}} with columns "variable", "lowerbound", "upperbound".
 }
 \description{
-Detect for each numerical variable in a validation rule set, what its maximum and minimum values are.
+Detect for each numerical variable in a validation rule set, what its maximum and minimum allowed values are.
+The rule set may constrain numerical variables to a subset of their values.
 This allows for manual rule set checking: does rule set \code{x} overly constrain numerical values?
 }
 \details{

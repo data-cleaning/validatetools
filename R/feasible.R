@@ -1,23 +1,47 @@
 #' Check the feasibility of a rule set
 #' 
 #' An infeasible rule set cannot be satisfied by any data because of internal 
-#' contradictions. This function checks whether the record-wise linear,
+#' contradictions: the combination of the rules make it inconsistent.
+#' This function checks whether the record-wise linear,
 #' categorical and conditional rules in a rule set are consistent.
-#' Note that is it always wise to also check `detect_contradicting_if_rules()`.
+#' Note that is it wise to also check `detect_contradicting_if_rules()`: 
+#' conditional If-rules
+#' may not be strictly inconsistent, but can be semantically inconsistent.
 #'  
 #' @example ./examples/feasible.R
 #' @param x `validator` object with validation rules.
 #' @param ... not used
+#' @param verbose if `TRUE` print information to the console
 #' @family feasibility
 #' @return TRUE or FALSE
 #' @export
-is_infeasible <- function(x, ...){
+is_infeasible <- function(x, ..., verbose = interactive()){
   lp <- to_lp(x) # TODO find out how to treat eps for linear inequalities...
   lpSolveAPI::lp.control(lp, presolve="rows", break.at.first = TRUE)
   res <- solve(lp)
   # any of the following means that there is a solution found by lpSolveAPI:
   # TODO generate errors if the lpSolveAPI gives other return values...
-  !(res %in% c(0,1,4,12))
+  i <- !(res %in% c(0,1,4,12))
+  
+  if (isTRUE(verbose)){
+    if (i){
+      message(
+        "The rule set is infeasible:\n",
+        "  use `detect_infeasible_rules()` and `is_contradicted_by` to find out\n",
+        "  which rules are causing infeasibility.",
+        "  or `make_feasible()` to make the rule set feasible."
+      )
+    } else {
+      message(
+        "The rule set is feasible,\n",
+        "  but may contain contradictions in conditional if-rules.\n",
+        "  use `detect_contradicting_if_rules()` to find out whether there are \n",
+        "  contradictions in the if-clauses."
+      )
+    }
+  }
+  
+  i
 }
 
 is_feasible <- function(x, ...){
@@ -70,7 +94,7 @@ make_feasible <- function(x, ..., verbose = interactive()){
 #' @return `character` with the names of the rules that are causing infeasibility.
 detect_infeasible_rules <- function(x, weight = numeric(), ..., verbose = interactive()){
   # browser()
-  if (!is_infeasible(x)){
+  if (!is_infeasible(x, verbose=FALSE)){
     return(character())
   }
   # browser()

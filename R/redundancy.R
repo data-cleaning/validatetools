@@ -3,7 +3,6 @@
 #' Detect redundancies in a rule set, but do not remove the rules.
 #' A rule in a ruleset can be redundant if it is implied by another rule
 #' or by a combination of rules. See the examples for more information.
-#' 
 #' @note For removal of duplicate rules, simplify
 #' @example ./examples/redundancy.R
 #' @param x [validate::validator()] object with the validation rules.
@@ -91,7 +90,7 @@ is_redundant <- function(dnf_set, i, ...){
   #     print(get(n))
   #   }
   # }
-  is_infeasible(test_rules)
+  is_infeasible(test_rules, verbose = FALSE)
 }
 
 # x <- validator( rule1 = x > 1

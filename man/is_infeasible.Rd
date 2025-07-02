@@ -4,21 +4,26 @@
 \alias{is_infeasible}
 \title{Check the feasibility of a rule set}
 \usage{
-is_infeasible(x, ...)
+is_infeasible(x, ..., verbose = interactive())
 }
 \arguments{
 \item{x}{\code{validator} object with validation rules.}
 
 \item{...}{not used}
+
+\item{verbose}{if \code{TRUE} print information to the console}
 }
 \value{
 TRUE or FALSE
 }
 \description{
 An infeasible rule set cannot be satisfied by any data because of internal
-contradictions. This function checks whether the record-wise linear,
+contradictions: the combination of the rules make it inconsistent.
+This function checks whether the record-wise linear,
 categorical and conditional rules in a rule set are consistent.
-Note that is it always wise to also check \code{detect_contradicting_if_rules()}.
+Note that is it wise to also check \code{detect_contradicting_if_rules()}:
+conditional If-rules
+may not be strictly inconsistent, but can be semantically inconsistent.
 }
 \examples{
 rules <- validator( x > 0)

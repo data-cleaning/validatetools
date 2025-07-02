@@ -16,6 +16,7 @@ detect_fixed_variables(x, eps = x$options("lin.eq.eps"), ...)
 \description{
 Detects variables that are constrained by the rule set to have one fixed value.
 To simplify a rule set, these variables can be substituted with their value.
+See examples.
 }
 \examples{
 library(validate)

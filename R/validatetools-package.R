@@ -12,7 +12,9 @@
 #' The following methods allow for problem detection:
 #' 
 #' \itemize{
-#'   \item [is_infeasible()] checks a rule set for feasibility. An infeasible system must be corrected to be useful.
+#'   \item [is_infeasible()] checks a rule set for feasibility, i.e. 
+#'   if it contains contradicting rules making it infeasible. An infeasible system must be corrected to be useful, because 
+#'   it means that no record can satisfy all rules.
 #'   \item [detect_infeasible_rules()] detects which rules cause infeasibility.
 #'   \item [detect_contradicting_if_rules()] detects which `if` rules are conflicting.
 #'   \item [detect_boundary_num()] shows for each numerical variable the allowed range of values.

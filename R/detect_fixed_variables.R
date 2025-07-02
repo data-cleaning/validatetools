@@ -2,6 +2,7 @@
 #' 
 #' Detects variables that are constrained by the rule set to have one fixed value.
 #' To simplify a rule set, these variables can be substituted with their value.
+#' See examples.
 #' @example ./examples/detect_fixed_variables.R
 #' @seealso [simplify_fixed_variables()]
 #' @param x [validate::validator()] object with the validation rules.
