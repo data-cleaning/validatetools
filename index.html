@@ -106,21 +106,26 @@
 <span><span class="co">#&gt; Found: </span></span>
 <span><span class="co">#&gt;   rule1: x &gt; 0</span></span>
 <span><span class="co">#&gt; [1] "rule1"</span></span>
-<span><span class="fu"><a href="reference/make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Found: </span></span>
-<span><span class="co">#&gt;   rule1: x &gt; 0</span></span>
-<span><span class="co">#&gt; Dropping rule(s): "rule1"</span></span>
-<span><span class="co">#&gt; Object of class 'validator' with 1 elements:</span></span>
-<span><span class="co">#&gt;  rule2: x &lt; 0</span></span>
-<span><span class="co">#&gt; Rules are evaluated using locally defined options</span></span>
-<span></span>
 <span><span class="co"># find out the conflict with this rule</span></span>
 <span><span class="fu"><a href="reference/is_contradicted_by.html">is_contradicted_by</a></span><span class="op">(</span><span class="va">rules</span>, <span class="st">"rule1"</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rule(s): </span></span>
 <span><span class="co">#&gt;  rule1: x &gt; 0</span></span>
 <span><span class="co">#&gt; contradicted by:</span></span>
 <span><span class="co">#&gt;  rule2: x &lt; 0</span></span>
-<span><span class="co">#&gt; [1] "rule2"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "rule2"</span></span>
+<span></span>
+<span><span class="co"># we prefer to keep rule1, so we can give rule1 Inf weight</span></span>
+<span><span class="fu"><a href="reference/detect_infeasible_rules.html">detect_infeasible_rules</a></span><span class="op">(</span><span class="va">rules</span>, weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rule1 <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Found: </span></span>
+<span><span class="co">#&gt;   rule2: x &lt; 0</span></span>
+<span><span class="co">#&gt; [1] "rule2"</span></span>
+<span><span class="fu"><a href="reference/make_feasible.html">make_feasible</a></span><span class="op">(</span><span class="va">rules</span>, weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rule1<span class="op">=</span><span class="cn">Inf</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Found: </span></span>
+<span><span class="co">#&gt;   rule2: x &lt; 0</span></span>
+<span><span class="co">#&gt; Dropping rule(s): "rule2"</span></span>
+<span><span class="co">#&gt; Object of class 'validator' with 1 elements:</span></span>
+<span><span class="co">#&gt;  rule1: x &gt; 0</span></span>
+<span><span class="co">#&gt; Rules are evaluated using locally defined options</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="finding-contradicting-if-rules">Finding contradicting if rules<a class="anchor" aria-label="anchor" href="#finding-contradicting-if-rules"></a>
