@@ -99,10 +99,12 @@ The function `simplify_rules` combines most simplification methods of `validatet
 For example, it reduces the following rule set to a simpler form:
 
 ```{r}
-rules <- validator( rule1 = if (age < 16) income == 0
-                  , rule2 = job %in% c("yes", "no")
-                  , rule3 = if (job == "yes") income > 0
-                  )
+rules <- validator(
+  rule1 = if (age < 16) income == 0,
+  rule2 = job %in% c("yes", "no"),
+  rule3 = if (job == "yes") income > 0
+)
+
 simplify_rules(rules, age = 13)
 #or 
 simplify_rules(rules, job = "yes")
@@ -114,11 +116,12 @@ simplify_rules(rules, job = "yes")
 ### Value substitution
 
 ```{r}
-rules <- validator( rule1 = height > 4
-                  , rule2 = height <= max_height
-                  , rule3 = if (gender == "male") weight > 100
-                  , rule4 = gender %in% c("male", "female")
-                  )
+rules <- validator( 
+  rule1 = height > 4,
+  rule2 = height <= max_height,
+  rule3 = if (gender == "male") weight > 100,
+  rule4 = gender %in% c("male", "female")
+)
 substitute_values(rules, max_height = 6, gender = "male")
 ```
 
