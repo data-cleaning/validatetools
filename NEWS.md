@@ -7,6 +7,9 @@ Romina Filippini and Simona Toti for reporting.
   It detects all rules that are not satisfiable together with the if condition.
   Thanks to Romina Filippini and Simona Toti for the suggestion.
   
+* added a `verbose` argument to most functions, which allows to print more information
+  about the detection or simplification process.
+  
 * fix for `is_contradicted_by` and `detect_infeasible_rules` when the rules contained 
 if statements.
   
