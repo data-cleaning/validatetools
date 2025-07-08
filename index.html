@@ -227,7 +227,20 @@
 <h3 id="simplifying-conditional-statements">Simplifying conditional statements<a class="anchor" aria-label="anchor" href="#simplifying-conditional-statements"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># non-relaxing clause</span></span>
+<code class="sourceCode R"><span><span class="co"># superfluous conditions</span></span>
+<span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">18</span><span class="op">)</span> <span class="va">age</span> <span class="op">&lt;=</span> <span class="fl">67</span>,</span>
+<span>  r2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">1000</span><span class="op">)</span> <span class="va">job</span> <span class="op">==</span> <span class="cn">TRUE</span> </span>
+<span><span class="op">)</span></span>
+<span><span class="co"># implies that age always is &lt;= 67</span></span>
+<span><span class="fu"><a href="reference/simplify_conditional.html">simplify_conditional</a></span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Object of class 'validator' with 2 elements:</span></span>
+<span><span class="co">#&gt;  r1: age &lt;= 67</span></span>
+<span><span class="co">#&gt;  r2: income &lt;= 1000 | (job == TRUE)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="co"># non-relaxing clause</span></span>
 <span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> </span>
 <span>  r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">16</span>,</span>
 <span>  r2 <span class="op">=</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">12</span></span>
