@@ -83,6 +83,18 @@ This procedure tries to simplify conditional statements.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/data-cleaning/validate" class="external-link">validate</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># superfluous conditions</span></span></span>
+<span class="r-in"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/validate/man/validator.html" class="external-link">validator</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  r2 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="va">y</span> <span class="op">&gt;</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># r1 means that x &gt; 0 is superfluous</span></span></span>
+<span class="r-in"><span><span class="co"># r2 means that x &gt; 0 is superfluous</span></span></span>
+<span class="r-in"><span><span class="fu">simplify_conditional</span><span class="op">(</span><span class="va">rules</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Object of class 'validator' with 2 elements:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  r1: x &lt; 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  r2: x &lt;= 1</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># non-relaxing clause</span></span></span>
 <span class="r-in"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/validate/man/validator.html" class="external-link">validator</a></span><span class="op">(</span> r1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="va">y</span> <span class="op">&gt;</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span>                  , r2 <span class="op">=</span> <span class="va">y</span> <span class="op">&lt;</span> <span class="fl">2</span></span></span>
