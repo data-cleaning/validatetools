@@ -9,6 +9,8 @@ Romina Filippini and Simona Toti for reporting.
   
 * fix for `is_contradicted_by` and `detect_infeasible_rules` when the rules contained 
 if statements.
+
+* added extra simplification for conditional statements (issue #10)
   
 # validatetools 0.5.2
 

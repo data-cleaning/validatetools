@@ -15,10 +15,16 @@ simplify_conditional <- function(x, ...){
   vals <- to_exprs(x)
   for (i in which(is_cond)){
     cond <- vals[[i]]
+    
+    cond <- simplify_dnf(cond, vals[-i])
+    vals[[i]] <- cond
+
     cond <- simplify_non_constraining(cond, vals)
     vals[[i]] <- cond
+    
     cond <- simplify_non_relaxing(cond, vals)
     vals[[i]] <- cond
+    
   }
   # TODO set meta data correctly for the resulting rule set
   do.call(validate::validator, vals)
@@ -46,6 +52,30 @@ simplify_non_constraining <- function(cond_expr, vals){
     if (is_infeasible(test_rules, verbose=FALSE)){
       return(clause)
     }
+  }
+  cond_expr
+}
+
+simplify_dnf <- function(cond_expr, vals){
+  clauses <- as_dnf(cond_expr)
+  rm <- integer()
+  for (i in seq_along(clauses)){
+    clause_neg <- invert_or_negate(clauses[[i]])
+    for (j in seq_along(clauses)){
+      
+      if (i == j || j %in% rm){
+        next
+      }
+      
+      test_rules <- do.call(validate::validator,c(clauses[j], clause_neg))
+      if (is_infeasible(test_rules, verbose=FALSE)){
+        rm <- c(rm, j)
+        next
+      }
+    }
+  }
+  if (length(rm)){
+    return(as.expression.dnf(clauses[-rm], as_if = TRUE)[[1]])
   }
   cond_expr
 }
