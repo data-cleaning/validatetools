@@ -113,3 +113,18 @@ test_that("a more complex if statement also works", {
   expect_equal(exprs_s$r2, exprs$r2)
   
 })
+
+test_that("simplify dnf works", {
+  rules <- validator(r1 = if (x > 0) x < 1)
+  rules_s <- simplify_conditional(rules)
+  
+  exprs_s <- to_exprs(rules_s)
+  expect_equal(exprs_s$r1, quote(x < 1))
+  
+  rules <- validator(r1 = if (x > 0 && x > 1) y > 0)
+  rules_s <- simplify_conditional(rules)
+  
+  exprs_s <- to_exprs(rules_s)
+  expect_equal(exprs_s$r1, quote(if (x > 1) y  >0))
+  
+})

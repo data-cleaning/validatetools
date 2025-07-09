@@ -21,6 +21,15 @@ This procedure tries to simplify conditional statements.
 \examples{
 library(validate)
 
+# superfluous conditions
+rules <- validator(
+  r1 = if (x > 0) x < 1,
+  r2 = if (y > 0 && y > 1) z > 0
+)
+# r1 means that x > 0 is superfluous
+# r2 means that y > 0 is superfluous
+simplify_conditional(rules)
+
 # non-relaxing clause
 rules <- validator( r1 = if (x > 1) y > 3
                   , r2 = y < 2
