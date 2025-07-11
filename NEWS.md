@@ -1,4 +1,4 @@
-# validatetools 0.6.0
+# validatetools 0.6.1
 
 * added a fix when categorical variables where used, without a rule that specified the domain. (issue #15) Thanks to
 Romina Filippini and Simona Toti for reporting. 
