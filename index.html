@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">validatetools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -164,10 +164,12 @@
 </h2>
 <p>The function <code>simplify_rules</code> combines most simplification methods of <code>validatetools</code> to simplify a rule set. For example, it reduces the following rule set to a simpler form:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">job</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
-<span>                  , rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">job</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
-<span>                  <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span></span>
+<span>  rule1 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">16</span><span class="op">)</span> <span class="va">income</span> <span class="op">==</span> <span class="fl">0</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">job</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>,</span>
+<span>  rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">job</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">)</span> <span class="va">income</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/simplify_rules.html">simplify_rules</a></span><span class="op">(</span><span class="va">rules</span>, age <span class="op">=</span> <span class="fl">13</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 3 elements:</span></span>
 <span><span class="co">#&gt;  .const_income: income == 0</span></span>
@@ -184,11 +186,12 @@
 <h3 id="value-substitution">Value substitution<a class="anchor" aria-label="anchor" href="#value-substitution"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> rule1 <span class="op">=</span> <span class="va">height</span> <span class="op">&gt;</span> <span class="fl">4</span></span>
-<span>                  , rule2 <span class="op">=</span> <span class="va">height</span> <span class="op">&lt;=</span> <span class="va">max_height</span></span>
-<span>                  , rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">100</span></span>
-<span>                  , rule4 <span class="op">=</span> <span class="va">gender</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span></span>
-<span>                  <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu">validator</span><span class="op">(</span> </span>
+<span>  rule1 <span class="op">=</span> <span class="va">height</span> <span class="op">&gt;</span> <span class="fl">4</span>,</span>
+<span>  rule2 <span class="op">=</span> <span class="va">height</span> <span class="op">&lt;=</span> <span class="va">max_height</span>,</span>
+<span>  rule3 <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">100</span>,</span>
+<span>  rule4 <span class="op">=</span> <span class="va">gender</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/substitute_values.html">substitute_values</a></span><span class="op">(</span><span class="va">rules</span>, max_height <span class="op">=</span> <span class="fl">6</span>, gender <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Object of class 'validator' with 5 elements:</span></span>
 <span><span class="co">#&gt;  rule1            : height &gt; 4</span></span>

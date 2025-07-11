@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">validatetools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -48,9 +48,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.0" id="validatetools-060">validatetools 0.6.0<a class="anchor" aria-label="anchor" href="#validatetools-060"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.1" id="validatetools-061">validatetools 0.6.1<a class="anchor" aria-label="anchor" href="#validatetools-061"></a></h2>
 <ul><li><p>added a fix when categorical variables where used, without a rule that specified the domain. (issue <a href="https://github.com/data-cleaning/validatetools/issues/15" class="external-link">#15</a>) Thanks to Romina Filippini and Simona Toti for reporting.</p></li>
 <li><p>added a new function <code>detect_contradicting_if_rules</code>. (issue <a href="https://github.com/data-cleaning/validatetools/issues/16" class="external-link">#16</a>) It detects all rules that are not satisfiable together with the if condition. Thanks to Romina Filippini and Simona Toti for the suggestion.</p></li>
+<li><p>added a <code>verbose</code> argument to most functions, which allows to print more information about the detection or simplification process.</p></li>
 <li><p>fix for <code>is_contradicted_by</code> and <code>detect_infeasible_rules</code> when the rules contained if statements.</p></li>
 <li><p>added extra simplification for conditional statements (issue <a href="https://github.com/data-cleaning/validatetools/issues/10" class="external-link">#10</a>)</p></li>
 </ul></div>
