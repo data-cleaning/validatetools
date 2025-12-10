@@ -27,7 +27,7 @@ is_contradicted_by <- function(x, rule_name, verbose = interactive()){
   contra <- detect_infeasible_rules(x, weight = weight, verbose = FALSE)
   while (length(contra) && !any(contra %in% names(weight))){
     res <- c(res, contra)
-    weight[contra] <- N
+    weight[contra] <- N 
     contra <- detect_infeasible_rules(x, weight = weight, verbose = FALSE)
   }
   if (isTRUE(verbose) && length(res)){

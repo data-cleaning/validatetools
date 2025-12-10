@@ -6,6 +6,8 @@
 [![R-CMD-check](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/data-cleaning/validatetools/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/validatetools)](https://CRAN.R-project.org/package=validatetools)
+[![CRAN
+downloads](http://cranlogs.r-pkg.org/badges/validatetools)](https://CRAN.R-project.org/package=validatetools)
 [![Mentioned in Awesome Official
 Statistics](https://awesome.re/mentioned-badge.svg)](http://www.awesomeofficialstatistics.org)
 [![Codecov test
